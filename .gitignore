@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
+*~
 
 # C extensions
 *.so
@@ -33,6 +35,7 @@ var/
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
+pip-selfcheck.json
 
 # Unit test / coverage reports
 htmlcov/
@@ -55,8 +58,26 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+#Ipython Notebook
+.ipynb_checkpoints
+
+# VirtualEnv
+bin/*
+include/*
+share/*
+
 # PyBuilder
 target/
 
-#Ipython Notebook
-.ipynb_checkpoints
+.idea
+Design
+db.sqlite3
+built/*
+node_modules/*
+static/dist/*
+
+# MEDIA
+media/*
+!media/avatars
+media/avatars/*
+!media/avatars/no-img.jpg

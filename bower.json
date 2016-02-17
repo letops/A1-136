@@ -1,0 +1,29 @@
+{
+  "name": "GRVTY",
+  "homepage": "https://github.com/letops/GRVTY",
+  "authors": [
+    "letops <daniel.ortizp91@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.14.6",
+    "jquery": "~2.2.0",
+    "bootstrap": "~3.3.6",
+    "requirejs-react-jsx": "~1.0.2"
+  }
+}
