@@ -56,30 +56,21 @@ INSTALLED_APPS = list(filter(None, [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'modelcluster',
     'compressor',
-    'taggit',
     'debug_toolbar',
     'rest_framework',
     'easy_thumbnails',
 
-    'wagtail.wagtailforms',
-    'wagtail.wagtailredirects',
-    'wagtail.wagtailembeds',
-    'wagtail.wagtailsites',
-    'wagtail.wagtailusers',
-    'wagtail.wagtailsnippets',
-    'wagtail.wagtaildocs',
-    'wagtail.wagtailimages',
-    'wagtail.wagtailsearch',
-    'wagtail.wagtailadmin',
-    'wagtail.wagtailcore',
-    'wagtail.contrib.wagtailstyleguide',
-
     'MainAPP',
-    'CMS' if CMS_APP else '',
-    'Billing' if BILLING_APP else '',
 ]))
+
+# FIXME: ANTIPATTERN
+if CMS_APP:
+    from CMS.settings import INSTALLED_APPS as CMS_INSTALLED_APPS
+    INSTALLED_APPS.extend(CMS_INSTALLED_APPS)
+if BILLING_APP:
+    from Billing.settings import INSTALLED_APPS as BILLING_INSTALLED_APPS
+    INSTALLED_APPS.extend(BILLING_INSTALLED_APPS)
 
 MIDDLEWARE_CLASSES = [
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -124,13 +115,9 @@ INTERNAL_IPS = ['127.0.0.1', ]
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.jinja2.Jinja2',
-        'DIRS': list(filter(
-            None,
-            [  # TODO: NEW APPS - ADD TEMPLATES
-                os.path.join(DJANGO_ROOT, 'CMS/templates') if CMS_APP else '',
-                os.path.join(DJANGO_ROOT, 'Billing/templates') if BILLING_APP else '',
+        'DIRS': [
                 os.path.join(DJANGO_ROOT, 'templates'),
-            ])),
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'extensions': [
@@ -145,9 +132,6 @@ TEMPLATES = [
                 'django_jinja.builtins.extensions.UrlsExtension',
                 'django_jinja.builtins.extensions.StaticFilesExtension',
                 'django_jinja.builtins.extensions.DjangoFiltersExtension',
-                'wagtail.wagtailcore.jinja2tags.core',
-                'wagtail.wagtailadmin.jinja2tags.userbar',
-                'wagtail.wagtailimages.jinja2tags.images',
                 'compressor.contrib.jinja2ext.CompressorExtension'
             ],
         },
@@ -173,6 +157,16 @@ TEMPLATES = [
     },
 ]
 
+# FIXME: ANTIPATTERN
+# TODO: NEW APPS - ADD TEMPLATES
+if CMS_APP:
+    from CMS.settings import TEMPLATES as CMS_TEMPLATES
+    TEMPLATES[0]['DIRS'].extend(CMS_TEMPLATES['DIRS'])
+    TEMPLATES[0]['OPTIONS']['extensions'].extend(CMS_TEMPLATES['extensions'])
+if BILLING_APP:
+    from Billing.settings import TEMPLATES as BILLING_TEMPLATES
+    TEMPLATES[0]['DIRS'].extend(BILLING_TEMPLATES['DIRS'])
+
 WSGI_APPLICATION = '{}.wsgi.application'.format(PROJECT_NAME)
 
 # -------------------- COMPRESSOR configuration --------------
@@ -185,6 +179,7 @@ COMPRESS_PRECOMPILERS = (
 # ------------------------------------ Database -------------------------------
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+# TODO: Import the DATABASES setting from every other APP
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -238,12 +233,18 @@ STATIC_URL = '/built/'
 
 STATIC_ROOT = os.path.join(DJANGO_ROOT, 'built')
 
-STATICFILES_DIRS = list(filter(None, [
+STATICFILES_DIRS = [
     os.path.join(DJANGO_ROOT, 'static'),
-    # TODO: NEW APPS - ADD STATIC
-    os.path.join(DJANGO_ROOT, 'Billing/static') if BILLING_APP else '',
-    os.path.join(DJANGO_ROOT, 'CMS/static') if CMS_APP else '',
-]))
+]
+
+# FIXME: ANTIPATTERN
+# TODO: NEW APPS - ADD STATIC
+if CMS_APP:
+    from CMS.settings import STATICFILES_DIRS as CMS_STATICFILES_DIRS
+    STATICFILES_DIRS.extend(CMS_STATICFILES_DIRS)
+if BILLING_APP:
+    from Billing.settings import STATICFILES_DIRS as BILLING_STATICFILES_DIRS
+    STATICFILES_DIRS.extend(BILLING_STATICFILES_DIRS)
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
