@@ -82,10 +82,16 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     #'debug_toolbar.middleware.DebugToolbarMiddleware',
-
-    'wagtail.wagtailcore.middleware.SiteMiddleware',
-    'wagtail.wagtailredirects.middleware.RedirectMiddleware',
 ]
+
+# FIXME: ANTIPATTERN
+if CMS_APP:
+    from CMS.settings import MIDDLEWARE_CLASSES as CMS_MIDDLEWARE_CLASSES
+    MIDDLEWARE_CLASSES.extend(CMS_MIDDLEWARE_CLASSES)
+if BILLING_APP:
+    from Billing.settings import MIDDLEWARE_CLASSES as BILLING_MIDDLEWARE_CLASSES
+    MIDDLEWARE_CLASSES.extend(BILLING_MIDDLEWARE_CLASSES)
+
 
 ROOT_URLCONF = '{}.urls'.format(PROJECT_NAME)
 
