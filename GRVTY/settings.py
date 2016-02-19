@@ -180,6 +180,7 @@ WSGI_APPLICATION = '{}.wsgi.application'.format(PROJECT_NAME)
 BABEL_LOCATION = '{}/node_modules/babel-cli/bin/babel.js'.format(DJANGO_ROOT)
 COMPRESS_PRECOMPILERS = (
     ('text/jsx', BABEL_LOCATION + ' {infile} --out-file {outfile} --presets react'),
+    ('text/es6', BABEL_LOCATION + ' {infile} --out-file {outfile} --presets es2015'),
 )
 
 # ------------------------------------ Database -------------------------------
