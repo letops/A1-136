@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^grvty/admin/', admin.site.urls),
     url(r'^$', TemplateView.as_view(template_name='base.html')),
     url(r'^react_test/$', TemplateView.as_view(template_name='index.html')),
+    url(r'^canvas/$', TemplateView.as_view(template_name='canvas.html')),
 ]
 
 if settings.DEBUG:

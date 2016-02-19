@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}A1-136 Canvas{% endblock %}
+
+{% block extra_css %}{% endblock %}
+
+{% block top_js %}{% endblock %}
+
+{% block content %}
+  <div id="content"></div>
+{% endblock %}
+
+{% block bottom_js %}
+  <script type="text/jsx" src="{{ static('js/knight.jsx') }}"></script>
+  <script type="text/jsx" src="{{ static('js/square.jsx') }}"></script>
+  <script type="text/jsx" src="{{ static('js/canvas.jsx') }}"></script>
+
+{% endblock %}

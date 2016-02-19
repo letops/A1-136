@@ -1,29 +1,29 @@
 {
-  "name": "GRVTY",
-  "homepage": "https://github.com/letops/GRVTY",
+  "name": "A1-136",
+  "homepage": "https://github.com/letops/A1-136",
   "authors": [
-    "letops <daniel.ortizp91@gmail.com>"
+    "letops <daniel.ortiz@grvtylabs.com>"
   ],
-  "description": "",
+  "description": "Nothing",
   "main": "",
   "moduleType": [
-    "amd",
-    "es6",
-    "globals",
-    "node"
+    "es6"
+  ],
+  "keywords": [
+    "None"
   ],
   "license": "MIT",
+  "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
+    "static/dist",
     "test",
     "tests"
   ],
   "dependencies": {
-    "react": "~0.14.6",
-    "jquery": "~2.2.0",
-    "bootstrap": "~3.3.6",
-    "requirejs-react-jsx": "~1.0.2"
+    "react": "~0.14.7",
+    "jquery": "~2.2.0"
   }
 }
