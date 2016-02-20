@@ -1,5 +1,10 @@
+var React = require('react');
+var ReactDOM = require('react-dom');
+var Board = require('./board');
 
-React.render(
-  React.createElement(Board, knightPosition=[0, 0]),
+
+ReactDOM.render(
+  <Board knightPosition={[0,0]} />,
+  //React.createElement(Board(knightPosition=[1, 1]), null),
   document.getElementById('content')
 );

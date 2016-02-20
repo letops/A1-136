@@ -1,12 +1,16 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
-var Square = require('./Square');
-var canMoveKnight = require('./Game').canMoveKnight;
-var moveKnight = require('./Game').moveKnight;
-var ItemTypes = require('./Constants').ItemTypes;
+var Square = require('./square');
+var canMoveKnight = require('./game').canMoveKnight;
+var moveKnight = require('./game').moveKnight;
+var ItemTypes = require('./constants').ItemTypes;
 var DropTarget = require('react-dnd').DropTarget;
 
 var squareTarget = {
+  canDrop: function (props) {
+    return canMoveKnight(props.x, props.y);
+  },
+
   drop: function (props) {
     moveKnight(props.x, props.y);
   }
@@ -15,7 +19,8 @@ var squareTarget = {
 function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver()
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop()
   };
 }
 
@@ -23,7 +28,23 @@ var BoardSquare = React.createClass({
   propTypes: {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
-    isOver: PropTypes.bool.isRequired
+    isOver: PropTypes.bool.isRequired,
+    canDrop: PropTypes.bool.isRequired
+  },
+
+  renderOverlay: function (color) {
+    return (
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        height: '100%',
+        width: '100%',
+        zIndex: 1,
+        opacity: 0.5,
+        backgroundColor: color,
+      }} />
+    );
   },
 
   render: function () {
@@ -42,18 +63,9 @@ var BoardSquare = React.createClass({
         <Square black={black}>
           {this.props.children}
         </Square>
-        {isOver &&
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            height: '100%',
-            width: '100%',
-            zIndex: 1,
-            opacity: 0.5,
-            backgroundColor: 'yellow',
-          }} />
-        }
+        {this.props.isOver && !this.props.canDrop && this.renderOverlay('red')}
+        {!this.props.isOver && this.props.canDrop && this.renderOverlay('yellow')}
+        {this.props.isOver && this.props.canDrop && this.renderOverlay('green')}
       </div>
     );
   }

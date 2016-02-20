@@ -1,3 +1,6 @@
+'use strict';
+
+var React = require('react');
 var PropTypes = React.PropTypes;
 
 var Square = React.createClass({
@@ -21,4 +24,4 @@ var Square = React.createClass({
   }
 });
 
-//module.exports = Square;
+module.exports = Square;

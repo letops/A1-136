@@ -61,6 +61,8 @@ INSTALLED_APPS = list(filter(None, [
     'rest_framework',
     'easy_thumbnails',
 
+    'webpack_loader',
+
     'MainAPP',
 ]))
 
@@ -138,7 +140,8 @@ TEMPLATES = [
                 'django_jinja.builtins.extensions.UrlsExtension',
                 'django_jinja.builtins.extensions.StaticFilesExtension',
                 'django_jinja.builtins.extensions.DjangoFiltersExtension',
-                'compressor.contrib.jinja2ext.CompressorExtension'
+                'compressor.contrib.jinja2ext.CompressorExtension',
+                'webpack_loader.contrib.jinja2ext.WebpackExtension'
             ],
         },
     },
@@ -181,7 +184,18 @@ BABEL_LOCATION = '{}/node_modules/babel-cli/bin/babel.js'.format(DJANGO_ROOT)
 COMPRESS_PRECOMPILERS = (
     ('text/jsx', BABEL_LOCATION + ' {infile} --out-file {outfile} --presets react'),
     ('text/es6', BABEL_LOCATION + ' {infile} --out-file {outfile} --presets es2015'),
+    ('text/st1', BABEL_LOCATION + ' {infile} --out-file {outfile} --presets stage-1'),
+    ('text/st0', BABEL_LOCATION + ' {infile} --out-file {outfile} --presets stage-0'),
 )
+
+# ------------------------ WEBPACK configuration ------------------------------
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'bundles/',
+        'STATS_FILE': 'webpack-stats.json',
+    }
+}
 
 # ------------------------------------ Database -------------------------------
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases

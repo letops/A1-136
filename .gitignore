@@ -74,7 +74,7 @@ Design
 db.sqlite3
 built/*
 node_modules/*
-static/dist/*
+bower_components/*
 
 # MEDIA
 media/*
