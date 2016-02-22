@@ -4,21 +4,21 @@ var knightPosition = [0, 0];
 var observer = null;
 
 function emitChange() {
-  observe(knightPosition);
-}
+  observer(knightPosition);
+};
 
 function observe(o) {
   if (observer) {
-    throw new Error('Multiple observers not implemented.');
+    throw new Error("Multiple observers not implemented.");
   }
 
   observer = o;
   emitChange();
 
-  return function () {
+  return function() {
     observer = null;
   };
-}
+};
 
 function canMoveKnight(toX, toY) {
   var _knightPosition = knightPosition;
@@ -29,12 +29,12 @@ function canMoveKnight(toX, toY) {
   var dy = toY - y;
 
   return Math.abs(dx) === 2 && Math.abs(dy) === 1 || Math.abs(dx) === 1 && Math.abs(dy) === 2;
-}
+};
 
 function moveKnight(toX, toY) {
   knightPosition = [toX, toY];
   emitChange();
-}
+};
 
 module.exports = {
   "observe": observe,

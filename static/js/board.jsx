@@ -37,12 +37,6 @@ var Board = React.createClass({
     }
   },
 
-  handleSquareClick: function (toX, toY) {
-    if (canMoveKnight(toX, toY)) {
-      moveKnight(toX, toY);
-    }
-  },
-
   render: function () {
     var squares = [];
     for (i = 0; i < 64; i++) {

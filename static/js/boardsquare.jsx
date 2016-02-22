@@ -22,14 +22,16 @@ function collect(connect, monitor) {
     isOver: monitor.isOver(),
     canDrop: monitor.canDrop()
   };
-}
+};
 
 var BoardSquare = React.createClass({
   propTypes: {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
     isOver: PropTypes.bool.isRequired,
-    canDrop: PropTypes.bool.isRequired
+    canDrop: PropTypes.bool.isRequired,
+    connectDropTarget: PropTypes.func.isRequired,
+    children: PropTypes.node
   },
 
   renderOverlay: function (color) {
@@ -51,6 +53,7 @@ var BoardSquare = React.createClass({
     var x = this.props.x;
     var y = this.props.y;
     var connectDropTarget = this.props.connectDropTarget;
+    var canDrop = this.props.canDrop;
     var isOver = this.props.isOver;
     var black = (x + y) % 2 === 1;
 
@@ -63,9 +66,9 @@ var BoardSquare = React.createClass({
         <Square black={black}>
           {this.props.children}
         </Square>
-        {this.props.isOver && !this.props.canDrop && this.renderOverlay('red')}
-        {!this.props.isOver && this.props.canDrop && this.renderOverlay('yellow')}
-        {this.props.isOver && this.props.canDrop && this.renderOverlay('green')}
+        {isOver && !canDrop && this.renderOverlay('red')}
+        {!isOver && canDrop && this.renderOverlay('yellow')}
+        {isOver && canDrop && this.renderOverlay('green')}
       </div>
     );
   }
