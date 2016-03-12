@@ -22,6 +22,7 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^grvty/admin/', admin.site.urls),
+    url(r'^accounts/', include('allauth.urls')),
     url(r'^$', TemplateView.as_view(template_name='base.html')),
     url(r'^react_test/$', TemplateView.as_view(template_name='index.html')),
     url(r'^canvas/$', TemplateView.as_view(template_name='canvas.html')),

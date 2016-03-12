@@ -49,6 +49,7 @@ ADMINS = (('Chuck Testa', 'nope_chuck_testa@aol.com'), )
 # ------------------------------ Application definition -----------------------
 # TODO: NEW APPS - ADD INSTALLED
 INSTALLED_APPS = list(filter(None, [
+    'django.contrib.sites',  # Django-allauth
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -61,10 +62,17 @@ INSTALLED_APPS = list(filter(None, [
     'rest_framework',
     'easy_thumbnails',
 
-    'webpack_loader',
+    'webpack_loader',  # Webpack
 
     'MainAPP',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
 ]))
+
+SITE_ID = 1  # Django-allauth
 
 # FIXME: ANTIPATTERN
 if CMS_APP:
@@ -83,7 +91,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 # FIXME: ANTIPATTERN
@@ -109,7 +117,7 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.request.RequestPanel',
     'debug_toolbar.panels.sql.SQLPanel',
     #'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-    #'debug_toolbar.panels.templates.TemplatesPanel',
+    'debug_toolbar.panels.templates.TemplatesPanel',
     'debug_toolbar.panels.cache.CachePanel',
     #'debug_toolbar.panels.signals.SignalsPanel',
     'debug_toolbar.panels.logging.LoggingPanel',
@@ -120,15 +128,17 @@ INTERNAL_IPS = ['127.0.0.1', ]
 
 # ----------------------------------- TEMPLATES -------------------------------
 
+from django_jinja.builtins import DEFAULT_EXTENSIONS
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.jinja2.Jinja2',
         'DIRS': [
                 os.path.join(DJANGO_ROOT, 'templates'),
+                os.path.join(DJANGO_ROOT, 'MainAPP/templates'),
             ],
         'APP_DIRS': True,
         'OPTIONS': {
-            'extensions': [
+            'extensions': DEFAULT_EXTENSIONS + [
                 'jinja2.ext.do',
                 'jinja2.ext.loopcontrols',
                 'jinja2.ext.with_',
@@ -256,6 +266,7 @@ STATIC_ROOT = os.path.join(DJANGO_ROOT, 'built')
 
 STATICFILES_DIRS = [
     os.path.join(DJANGO_ROOT, 'static'),
+    os.path.join(DJANGO_ROOT, 'MainAPP/static'),
 ]
 
 # FIXME: ANTIPATTERN
@@ -286,6 +297,7 @@ AUTH_USER_MODEL = 'MainAPP.CustomUser'
 
 AUTHENTICATION_BACKENDS = [
     'MainAPP.architecture.backends.CustomUserModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ] + global_settings.AUTHENTICATION_BACKENDS
 
 # -------------------- Django REST Framework configuration --------------------
