@@ -291,8 +291,9 @@ MEDIA_ROOT = os.path.join(DJANGO_ROOT,  'media')
 
 # -------------------- Custom configuration for login and avatars -------------
 
-LOGIN_URL = '/login/'
-LOGOUT_URL = '/logout/'
+# LOGIN_URL = '/login/'
+# LOGIN_REDIRECT_URL = '/'
+# LOGOUT_URL = '/logout/'
 AUTH_USER_MODEL = 'MainAPP.CustomUser'
 
 AUTHENTICATION_BACKENDS = [
