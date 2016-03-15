@@ -72,6 +72,7 @@ target/
 .idea
 Design
 db.sqlite3
+webpack-stats.json
 built/*
 node_modules/*
 bower_components/*
