@@ -7,4 +7,5 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='home.html')),
+    url(r'^canvas/$', TemplateView.as_view(template_name='canvas.html')),
 ]

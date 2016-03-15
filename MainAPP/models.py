@@ -91,3 +91,15 @@ class CustomUser(AbstractUser):
         if self.nickname is None or self.nickname == '':
             return "%s" % self.username
         return self.get_nickname()
+
+
+class Image(models):
+    pass
+
+
+class Category(models):
+    pass
+
+
+class Category(models):
+    pass
