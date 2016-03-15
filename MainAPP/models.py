@@ -45,6 +45,19 @@ class CustomUser(AbstractUser):
         null=True,
         verbose_name=_ug('Gender')
     )
+    step = models.IntegerField(
+        default=hardcode.STEP_UNKNOWN,
+        choices=hardcode.STEPS,
+        blank=False,
+        null=False,
+        verbose_name=_ug('Step')
+    )
+    occupation = models.CharField(
+        max_length=hardcode.user_occupation_length,
+        blank=True,
+        null=True,
+        verbose_name=_ug('Occupation')
+    )
     edition_date = models.DateTimeField(
         auto_now=True,
         verbose_name=_ug('Last edition date')
@@ -95,7 +108,7 @@ class CustomUser(AbstractUser):
 
 class Category(models.Model):
     name = models.CharField(
-        max_length=hardcode.category_name_length
+        max_length=hardcode.category_name_length,
         blank=False,
         null=False,
         verbose_name=_ug('Name')
@@ -129,7 +142,7 @@ class Category(models.Model):
 
 class Cluster(models.Model):
     name = models.CharField(
-        max_length=hardcode.cluster_name_length
+        max_length=hardcode.cluster_name_length,
         blank=False,
         null=False,
         verbose_name=_ug('Name')
@@ -218,7 +231,7 @@ class IsometricImage(models.Model):
 
 class Question(models.Model):
     text = models.CharField(
-        max_length=hardcode.question_text_length
+        max_length=hardcode.question_text_length,
         blank=False,
         null=False,
         verbose_name=_ug('Text')
@@ -252,7 +265,7 @@ class Question(models.Model):
 
 class Answer(models.Model):
     text = models.CharField(
-        max_length=hardcode.answer_text_length
+        max_length=hardcode.answer_text_length,
         blank=False,
         null=False,
         verbose_name=_ug('Text')

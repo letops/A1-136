@@ -4,6 +4,11 @@ from django.contrib.auth.admin import UserAdmin
 from MainAPP import models, forms
 
 admin.site.register(Permission)
+admin.site.register(models.Category)
+admin.site.register(models.Cluster)
+admin.site.register(models.IsometricImage)
+admin.site.register(models.Question)
+admin.site.register(models.Answer)
 
 
 @admin.register(models.CustomUser)
