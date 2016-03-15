@@ -128,7 +128,7 @@ INTERNAL_IPS = ['127.0.0.1', ]
 
 # ----------------------------------- TEMPLATES -------------------------------
 
-from django_jinja.builtins import DEFAULT_EXTENSIONS
+from django_jinja.builtins import DEFAULT_EXTENSIONS as DJJINJA_DEFAULT
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.jinja2.Jinja2',
@@ -138,18 +138,7 @@ TEMPLATES = [
             ],
         'APP_DIRS': True,
         'OPTIONS': {
-            'extensions': DEFAULT_EXTENSIONS + [
-                'jinja2.ext.do',
-                'jinja2.ext.loopcontrols',
-                'jinja2.ext.with_',
-                'jinja2.ext.i18n',
-                'jinja2.ext.autoescape',
-                'django_jinja.builtins.extensions.CsrfExtension',
-                'django_jinja.builtins.extensions.CacheExtension',
-                'django_jinja.builtins.extensions.TimezoneExtension',
-                'django_jinja.builtins.extensions.UrlsExtension',
-                'django_jinja.builtins.extensions.StaticFilesExtension',
-                'django_jinja.builtins.extensions.DjangoFiltersExtension',
+            'extensions': DJJINJA_DEFAULT + [
                 'compressor.contrib.jinja2ext.CompressorExtension',
                 'webpack_loader.contrib.jinja2ext.WebpackExtension'
             ],
@@ -157,7 +146,7 @@ TEMPLATES = [
     },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(DJANGO_ROOT, 'allauth_templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'debug': IN_DEVELOPMENT,
