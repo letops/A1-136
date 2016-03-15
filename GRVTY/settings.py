@@ -24,6 +24,7 @@ IN_DEVELOPMENT = True
 USE_LOCAL_DATABASE = True
 COMPRESS_ENABLED = True
 
+MAIN_APP = True
 CMS_APP = False
 BILLING_APP = False
 
@@ -116,10 +117,10 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.headers.HeadersPanel',
     'debug_toolbar.panels.request.RequestPanel',
     'debug_toolbar.panels.sql.SQLPanel',
-    #'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    # 'debug_toolbar.panels.staticfiles.StaticFilesPanel',
     'debug_toolbar.panels.templates.TemplatesPanel',
     'debug_toolbar.panels.cache.CachePanel',
-    #'debug_toolbar.panels.signals.SignalsPanel',
+    # 'debug_toolbar.panels.signals.SignalsPanel',
     'debug_toolbar.panels.logging.LoggingPanel',
     'debug_toolbar.panels.redirects.RedirectsPanel',
 ]
@@ -181,10 +182,22 @@ WSGI_APPLICATION = '{}.wsgi.application'.format(PROJECT_NAME)
 
 BABEL_LOCATION = '{}/node_modules/babel-cli/bin/babel.js'.format(DJANGO_ROOT)
 COMPRESS_PRECOMPILERS = (
-    ('text/jsx', BABEL_LOCATION + ' {infile} --out-file {outfile} --presets react'),
-    ('text/es6', BABEL_LOCATION + ' {infile} --out-file {outfile} --presets es2015'),
-    ('text/st1', BABEL_LOCATION + ' {infile} --out-file {outfile} --presets stage-1'),
-    ('text/st0', BABEL_LOCATION + ' {infile} --out-file {outfile} --presets stage-0'),
+    (
+       'text/jsx',
+       BABEL_LOCATION + ' {infile} --out-file {outfile} --presets react'
+    ),
+    (
+       'text/es6',
+       BABEL_LOCATION + ' {infile} --out-file {outfile} --presets es2015'
+    ),
+    (
+        'text/st1',
+        BABEL_LOCATION + ' {infile} --out-file {outfile} --presets stage-1'
+    ),
+    (
+        'text/st0',
+        BABEL_LOCATION + ' {infile} --out-file {outfile} --presets stage-0'
+    ),
 )
 
 # ------------------------ WEBPACK configuration ------------------------------
@@ -280,9 +293,9 @@ MEDIA_ROOT = os.path.join(DJANGO_ROOT,  'media')
 
 # -------------------- Custom configuration for login and avatars -------------
 
-# LOGIN_URL = '/login/'
-# LOGIN_REDIRECT_URL = '/'
-# LOGOUT_URL = '/logout/'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL = '/logout/'
 AUTH_USER_MODEL = 'MainAPP.CustomUser'
 
 AUTHENTICATION_BACKENDS = [
