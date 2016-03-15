@@ -91,3 +91,206 @@ class CustomUser(AbstractUser):
         if self.nickname is None or self.nickname == '':
             return "%s" % self.username
         return self.get_nickname()
+
+
+class Category(models.Model):
+    name = models.CharField(
+        max_length=hardcode.category_name_length
+        blank=False,
+        null=False,
+        verbose_name=_ug('Name')
+    )
+    edition_date = models.DateTimeField(
+        auto_now=True,
+        verbose_name=_ug('Last edition date')
+    )
+    hidden = models.BooleanField(
+        default=False,
+        blank=True,
+        null=False,
+        verbose_name=_ug('Hidden')
+    )
+
+    class Meta:
+        verbose_name = _ug('Category')
+        verbose_name_plural = _ug('Categories')
+        permissions = (
+            ('query_category', 'Can query Category'),
+            ('list_category', 'Can list Categories'),
+        )
+
+    def delete(self, *args):
+        if self.hidden is True:
+            super(Category, self).delete(*args)
+        else:
+            self.hidden = True
+            self.save()
+
+
+class Cluster(models.Model):
+    name = models.CharField(
+        max_length=hardcode.cluster_name_length
+        blank=False,
+        null=False,
+        verbose_name=_ug('Name')
+    )
+    category = models.ForeignKey(
+        Category,
+        blank=False,
+        null=False,
+        verbose_name=_ug('Category')
+    )
+    edition_date = models.DateTimeField(
+        auto_now=True,
+        verbose_name=_ug('Last edition date')
+    )
+    hidden = models.BooleanField(
+        default=False,
+        blank=True,
+        null=False,
+        verbose_name=_ug('Hidden')
+    )
+
+    class Meta:
+        verbose_name = _ug('Cluster')
+        verbose_name_plural = _ug('Clusters')
+        permissions = (
+            ('query_cluster', 'Can query Cluster'),
+            ('list_cluster', 'Can list Clusters'),
+        )
+
+    def delete(self, *args):
+        if self.hidden is True:
+            super(Cluster, self).delete(*args)
+        else:
+            self.hidden = True
+            self.save()
+
+
+class IsometricImage(models.Model):
+    image = ThumbnailerImageField(
+        upload_to=hardcode.isometric_image_upload,
+        default=hardcode.isometric_image_photo,
+        blank=False,
+        null=False,
+        verbose_name=_ug('Isometric Image')
+    )
+    cluster = models.ForeignKey(
+        Cluster,
+        blank=False,
+        null=False,
+        verbose_name=_ug('Cluster')
+    )
+    edition_date = models.DateTimeField(
+        auto_now=True,
+        verbose_name=_ug('Last edition date')
+    )
+    hidden = models.BooleanField(
+        default=False,
+        blank=True,
+        null=False,
+        verbose_name=_ug('Hidden')
+    )
+
+    class Meta:
+        verbose_name = _ug('Isometric Image')
+        verbose_name_plural = _ug('Isometric Images')
+        permissions = (
+            ('query_isometricimage', 'Can query Isometric Image'),
+            ('list_isometricimage', 'Can list Isometric Images'),
+        )
+
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            avatar = self.avatar
+            self.avatar = None
+            super(IsometricImage, self).save(*args, **kwargs)
+            self.avatar = avatar
+        super(IsometricImage, self).save(*args, **kwargs)
+
+    def delete(self, *args):
+        if self.hidden is True:
+            super(IsometricImage, self).delete(*args)
+        else:
+            self.hidden = True
+            self.save()
+
+
+class Question(models.Model):
+    text = models.CharField(
+        max_length=hardcode.question_text_length
+        blank=False,
+        null=False,
+        verbose_name=_ug('Text')
+    )
+    edition_date = models.DateTimeField(
+        auto_now=True,
+        verbose_name=_ug('Last edition date')
+    )
+    hidden = models.BooleanField(
+        default=False,
+        blank=True,
+        null=False,
+        verbose_name=_ug('Hidden')
+    )
+
+    class Meta:
+        verbose_name = _ug('Question')
+        verbose_name_plural = _ug('Questions')
+        permissions = (
+            ('query_question', 'Can query Question'),
+            ('list_question', 'Can list Questions'),
+        )
+
+    def delete(self, *args):
+        if self.hidden is True:
+            super(Question, self).delete(*args)
+        else:
+            self.hidden = True
+            self.save()
+
+
+class Answer(models.Model):
+    text = models.CharField(
+        max_length=hardcode.answer_text_length
+        blank=False,
+        null=False,
+        verbose_name=_ug('Text')
+    )
+    category = models.ForeignKey(
+        Category,
+        blank=False,
+        null=False,
+        verbose_name=_ug('Category')
+    )
+    question = models.ForeignKey(
+        Question,
+        blank=False,
+        null=False,
+        verbose_name=_ug('Question')
+    )
+    edition_date = models.DateTimeField(
+        auto_now=True,
+        verbose_name=_ug('Last edition date')
+    )
+    hidden = models.BooleanField(
+        default=False,
+        blank=True,
+        null=False,
+        verbose_name=_ug('Hidden')
+    )
+
+    class Meta:
+        verbose_name = _ug('Answer')
+        verbose_name_plural = _ug('Answers')
+        permissions = (
+            ('query_answer', 'Can query Answer'),
+            ('list_answer', 'Can list Answers'),
+        )
+
+    def delete(self, *args):
+        if self.hidden is True:
+            super(Answer, self).delete(*args)
+        else:
+            self.hidden = True
+            self.save()

@@ -81,3 +81,6 @@ media/*
 !media/avatars
 media/avatars/*
 !media/avatars/no-img.jpg
+!media/isometrics
+media/isometrics/*
+!media/isometrics/no-img.jpg

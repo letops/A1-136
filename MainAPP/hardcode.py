@@ -16,7 +16,22 @@ GENDER = (
     (GENDER_OTHER, _ug('Other'))
 )
 
+category_name_length = 50
+
+cluster_name_length = 50
+
+isometric_image_photo = "isometrics/no-img.jpg"
+
+question_text_length = 200
+
+answer_text_length = 50
+
 
 def user_avatar_upload(instance, filename):
     fn, ext = os.path.splitext(filename)
     return "avatars/{id}{ext}".format(id=instance.pk, ext=ext)
+
+
+def isometric_image_upload(instance, filename):
+    fn, ext = os.path.splitext(filename)
+    return "isometrics/{id}{ext}".format(id=instance.pk, ext=ext)
