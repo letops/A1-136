@@ -1,0 +1,6 @@
+{
+  appSecret  : a55d5c6f3a197d15b966d15d293bca52
+  appId      : '716917558445462',
+  xfbml      : true,
+  version    : 'v2.5'
+}
