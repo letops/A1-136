@@ -1,0 +1,83 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito:400,300);
+
+.login-Image {
+	-webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;	
+    background-repeat: no-repeat;
+
+    height: 979px;
+    
+}
+
+
+/*Para tablets*/
+/*768 px para ipad, pero no me funciona bn, por eso lo cambio a 769px*/
+@media screen and (max-width: 769px) {
+    .login-Image{
+    	height: 0px;
+    	width: 0px;
+    	background-size: 0%;
+    }
+
+}
+
+
+
+
+
+.titleDnD {
+	font-size: 100px;
+	margin-bottom: 50px;	
+	/*Nuevas caracteristicas*/
+	padding-left: 8%;
+	font-family: 'Nunito', sans-serif;
+	font-weight: lighter;
+
+}
+
+.formaLogin {
+	padding-top: 100px;
+	/*padding-left: 50px;*/
+	background-color: #FFFFFF;
+}
+
+.omb_btn-facebook {
+	background: #3b5998;
+	color: white;
+	/*Nueva caracteristica*/
+	width: 70%;
+  margin-left: 10%;
+  font-family: 'Nunito', sans-serif;
+}
+
+.botonFacebook {
+	margin-top: 5px;
+}
+
+.iconoFacebook {
+	padding-left: 15px;
+}
+
+#facebookLogin {
+	margin-top: 50px;	
+}
+
+.content {
+	text-align: justify;
+	/*Nuevas caracteristicas*/
+	width: 70%;
+  margin-left: 10%;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 300;
+}
+
+/*
+width: 320px;
+    margin-left: 20%;
+*/

@@ -1,0 +1,85 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% load compress %}
+{% load static %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block extra_cdn_css %}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static "css/login.css" %}">
+<style>
+.login-Image{
+  background: url("{% static "img/authorpic_bg.jpg" %}")   ;
+  -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+  -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+    background-repeat: no-repeat;
+
+    height: 979px;
+}
+@media screen and (max-width: 769px) {
+    .login-Image{
+      height: 0px;
+      width: 0px;
+      background-size: 0%;
+    }
+
+}
+</style>
+{% endblock %}
+
+{% block top_cdn_js %}{% endblock %}
+{% block top_js %}{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 col-sm-0 col-xs-0 login-Image"></div>
+        
+        <!--Forma del Login-->
+        <div class="col-md-6 col-sm-12 formaLogin">
+          <h1 class="titleDnD">Drag & Drop</h1>
+          <p class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ac mauris lacinia, luctus odio id, auctor turpis. Aliquam efficitur pharetra orci, vel ultrices nisi dapibus quis. <br><br>Nullam porttitor velit vel nibh rutrum, ac consectetur sapien iaculis. Phasellus et nibh quis lacus consequat dapibus placerat et nibh. Pellentesque viverra justo a luctus sollicitudin. Sed in ante ut lorem ultricies porta. Quisque aliquet metus varius tellus sollicitudin porta. Nullam egestas tristique eros at tincidunt. Sed et arcu tellus. Sed at elementum mauris.</p>
+          <div id="facebookLogin">
+            <a href="{% provider_login_url "facebook" %}" class="btn btn-lg  btn-block omb_btn-facebook btn-primary">
+              
+              <p class="botonFacebook">Registrarme con Facebook<i class="fa fa-facebook iconoFacebook"></i></p>
+            </a>
+          </div>
+          
+        </div>
+
+
+
+
+
+{% comment %} {# Will not be rendered, processed nor displayed #}
+  {#
+    <form class="login" method="POST" action="{% url 'account_login' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+      <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+    </form>
+  #}
+{% endcomment %}
+
+{% block bottom_cdn_js %}{% endblock %}
+{% block bottom_js %}{% endblock %}
+
+
+{% endblock %}

@@ -22,19 +22,21 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^grvty/admin/', admin.site.urls),
-    url(r'^$', TemplateView.as_view(template_name='base.html')),
-    url(r'^react_test/$', TemplateView.as_view(template_name='index.html')),
+    url(r'^accounts/', include('allauth.urls')),
 ]
 
 if settings.DEBUG:
     import debug_toolbar
     from django.conf.urls.static import static
     urlpatterns.append(url(r'^grvty/debug-tool/', debug_toolbar.urls))
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
-        static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
+    urlpatterns += static(
+            settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+        ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # TODO: NEW APPS - ADD URLS
+if settings.MAIN_APP:
+    import MainAPP.urls
+    urlpatterns += MainAPP.urls.urlpatterns
 
 if settings.CMS_APP:
     import CMS.urls

@@ -24,6 +24,7 @@ IN_DEVELOPMENT = True
 USE_LOCAL_DATABASE = True
 COMPRESS_ENABLED = True
 
+MAIN_APP = True
 CMS_APP = False
 BILLING_APP = False
 
@@ -49,6 +50,7 @@ ADMINS = (('Chuck Testa', 'nope_chuck_testa@aol.com'), )
 # ------------------------------ Application definition -----------------------
 # TODO: NEW APPS - ADD INSTALLED
 INSTALLED_APPS = list(filter(None, [
+    'django.contrib.sites',  # Django-allauth
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,30 +58,30 @@ INSTALLED_APPS = list(filter(None, [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'modelcluster',
     'compressor',
-    'taggit',
     'debug_toolbar',
     'rest_framework',
     'easy_thumbnails',
 
-    'wagtail.wagtailforms',
-    'wagtail.wagtailredirects',
-    'wagtail.wagtailembeds',
-    'wagtail.wagtailsites',
-    'wagtail.wagtailusers',
-    'wagtail.wagtailsnippets',
-    'wagtail.wagtaildocs',
-    'wagtail.wagtailimages',
-    'wagtail.wagtailsearch',
-    'wagtail.wagtailadmin',
-    'wagtail.wagtailcore',
-    'wagtail.contrib.wagtailstyleguide',
+    'webpack_loader',  # Webpack
 
     'MainAPP',
-    'CMS' if CMS_APP else '',
-    'Billing' if BILLING_APP else '',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
 ]))
+
+SITE_ID = 1  # Django-allauth
+
+# FIXME: ANTIPATTERN
+if CMS_APP:
+    from CMS.settings import INSTALLED_APPS as CMS_INSTALLED_APPS
+    INSTALLED_APPS.extend(CMS_INSTALLED_APPS)
+if BILLING_APP:
+    from Billing.settings import INSTALLED_APPS as BILLING_INSTALLED_APPS
+    INSTALLED_APPS.extend(BILLING_INSTALLED_APPS)
 
 MIDDLEWARE_CLASSES = [
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -90,11 +92,17 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
-
-    'wagtail.wagtailcore.middleware.SiteMiddleware',
-    'wagtail.wagtailredirects.middleware.RedirectMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+# FIXME: ANTIPATTERN
+if CMS_APP:
+    from CMS.settings import MIDDLEWARE_CLASSES as CMS_MIDDLEWARE_CLASSES
+    MIDDLEWARE_CLASSES.extend(CMS_MIDDLEWARE_CLASSES)
+if BILLING_APP:
+    from Billing.settings import MIDDLEWARE_CLASSES as BILLING_MIDDLEWARE_CLASSES
+    MIDDLEWARE_CLASSES.extend(BILLING_MIDDLEWARE_CLASSES)
+
 
 ROOT_URLCONF = '{}.urls'.format(PROJECT_NAME)
 
@@ -109,52 +117,37 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.headers.HeadersPanel',
     'debug_toolbar.panels.request.RequestPanel',
     'debug_toolbar.panels.sql.SQLPanel',
-    #'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-    #'debug_toolbar.panels.templates.TemplatesPanel',
+    # 'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    'debug_toolbar.panels.templates.TemplatesPanel',
     'debug_toolbar.panels.cache.CachePanel',
-    #'debug_toolbar.panels.signals.SignalsPanel',
+    # 'debug_toolbar.panels.signals.SignalsPanel',
     'debug_toolbar.panels.logging.LoggingPanel',
     'debug_toolbar.panels.redirects.RedirectsPanel',
 ]
 
-INTERNAL_IPS = ['127.0.0.1', ]
+INTERNAL_IPS = ['127.0.0.1', 'localhost', ]
 
 # ----------------------------------- TEMPLATES -------------------------------
 
+from django_jinja.builtins import DEFAULT_EXTENSIONS as DJJINJA_DEFAULT
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.jinja2.Jinja2',
-        'DIRS': list(filter(
-            None,
-            [  # TODO: NEW APPS - ADD TEMPLATES
-                os.path.join(DJANGO_ROOT, 'CMS/templates') if CMS_APP else '',
-                os.path.join(DJANGO_ROOT, 'Billing/templates') if BILLING_APP else '',
+        'DIRS': [
                 os.path.join(DJANGO_ROOT, 'templates'),
-            ])),
+                os.path.join(DJANGO_ROOT, 'MainAPP/templates'),
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
-            'extensions': [
-                'jinja2.ext.do',
-                'jinja2.ext.loopcontrols',
-                'jinja2.ext.with_',
-                'jinja2.ext.i18n',
-                'jinja2.ext.autoescape',
-                'django_jinja.builtins.extensions.CsrfExtension',
-                'django_jinja.builtins.extensions.CacheExtension',
-                'django_jinja.builtins.extensions.TimezoneExtension',
-                'django_jinja.builtins.extensions.UrlsExtension',
-                'django_jinja.builtins.extensions.StaticFilesExtension',
-                'django_jinja.builtins.extensions.DjangoFiltersExtension',
-                'wagtail.wagtailcore.jinja2tags.core',
-                'wagtail.wagtailadmin.jinja2tags.userbar',
-                'wagtail.wagtailimages.jinja2tags.images',
-                'compressor.contrib.jinja2ext.CompressorExtension'
+            'extensions': DJJINJA_DEFAULT + [
+                'compressor.contrib.jinja2ext.CompressorExtension',
+                'webpack_loader.contrib.jinja2ext.WebpackExtension'
             ],
         },
     },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(DJANGO_ROOT, 'allauth_templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'debug': IN_DEVELOPMENT,
@@ -173,18 +166,53 @@ TEMPLATES = [
     },
 ]
 
+# FIXME: ANTIPATTERN
+# TODO: NEW APPS - ADD TEMPLATES
+if CMS_APP:
+    from CMS.settings import TEMPLATES as CMS_TEMPLATES
+    TEMPLATES[0]['DIRS'].extend(CMS_TEMPLATES['DIRS'])
+    TEMPLATES[0]['OPTIONS']['extensions'].extend(CMS_TEMPLATES['extensions'])
+if BILLING_APP:
+    from Billing.settings import TEMPLATES as BILLING_TEMPLATES
+    TEMPLATES[0]['DIRS'].extend(BILLING_TEMPLATES['DIRS'])
+
 WSGI_APPLICATION = '{}.wsgi.application'.format(PROJECT_NAME)
 
-# -------------------- COMPRESSOR configuration --------------
+# ------------------------- COMPRESSOR configuration --------------------------
 
 BABEL_LOCATION = '{}/node_modules/babel-cli/bin/babel.js'.format(DJANGO_ROOT)
 COMPRESS_PRECOMPILERS = (
-    ('text/jsx', BABEL_LOCATION + ' {infile} --out-file {outfile} --presets react'),
+    (
+       'text/jsx',
+       BABEL_LOCATION + ' {infile} --out-file {outfile} --presets react'
+    ),
+    (
+       'text/es6',
+       BABEL_LOCATION + ' {infile} --out-file {outfile} --presets es2015'
+    ),
+    (
+        'text/st1',
+        BABEL_LOCATION + ' {infile} --out-file {outfile} --presets stage-1'
+    ),
+    (
+        'text/st0',
+        BABEL_LOCATION + ' {infile} --out-file {outfile} --presets stage-0'
+    ),
 )
+
+# ------------------------ WEBPACK configuration ------------------------------
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'bundles/',
+        'STATS_FILE': 'webpack-stats.json',
+    }
+}
 
 # ------------------------------------ Database -------------------------------
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+# TODO: Import the DATABASES setting from every other APP
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -238,12 +266,19 @@ STATIC_URL = '/built/'
 
 STATIC_ROOT = os.path.join(DJANGO_ROOT, 'built')
 
-STATICFILES_DIRS = list(filter(None, [
+STATICFILES_DIRS = [
     os.path.join(DJANGO_ROOT, 'static'),
-    # TODO: NEW APPS - ADD STATIC
-    os.path.join(DJANGO_ROOT, 'Billing/static') if BILLING_APP else '',
-    os.path.join(DJANGO_ROOT, 'CMS/static') if CMS_APP else '',
-]))
+    os.path.join(DJANGO_ROOT, 'MainAPP/static'),
+]
+
+# FIXME: ANTIPATTERN
+# TODO: NEW APPS - ADD STATIC
+if CMS_APP:
+    from CMS.settings import STATICFILES_DIRS as CMS_STATICFILES_DIRS
+    STATICFILES_DIRS.extend(CMS_STATICFILES_DIRS)
+if BILLING_APP:
+    from Billing.settings import STATICFILES_DIRS as BILLING_STATICFILES_DIRS
+    STATICFILES_DIRS.extend(BILLING_STATICFILES_DIRS)
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -258,12 +293,14 @@ MEDIA_ROOT = os.path.join(DJANGO_ROOT,  'media')
 
 # -------------------- Custom configuration for login and avatars -------------
 
-LOGIN_URL = '/login/'
-LOGOUT_URL = '/logout/'
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL = '/accounts/logout/'
 AUTH_USER_MODEL = 'MainAPP.CustomUser'
 
 AUTHENTICATION_BACKENDS = [
     'MainAPP.architecture.backends.CustomUserModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ] + global_settings.AUTHENTICATION_BACKENDS
 
 # -------------------- Django REST Framework configuration --------------------
@@ -339,5 +376,9 @@ THUMBNAIL_DEBUG = IN_DEVELOPMENT
 THUMBNAIL_ALIASES = {
     '': {
         '50x50': {'size': (50, 50), 'crop': True},
+        '125x125': {'size': (125, 125), 'crop': True},
+        '250x250': {'size': (250, 250), 'crop': True},
+        '250x250': {'size': (350, 350), 'crop': True},
+        '500x500': {'size': (500, 500), 'crop': True},
     },
 }
