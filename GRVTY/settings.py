@@ -125,7 +125,7 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.redirects.RedirectsPanel',
 ]
 
-INTERNAL_IPS = ['127.0.0.1', ]
+INTERNAL_IPS = ['127.0.0.1', 'localhost', ]
 
 # ----------------------------------- TEMPLATES -------------------------------
 
@@ -178,7 +178,7 @@ if BILLING_APP:
 
 WSGI_APPLICATION = '{}.wsgi.application'.format(PROJECT_NAME)
 
-# -------------------- COMPRESSOR configuration --------------
+# ------------------------- COMPRESSOR configuration --------------------------
 
 BABEL_LOCATION = '{}/node_modules/babel-cli/bin/babel.js'.format(DJANGO_ROOT)
 COMPRESS_PRECOMPILERS = (
@@ -293,9 +293,9 @@ MEDIA_ROOT = os.path.join(DJANGO_ROOT,  'media')
 
 # -------------------- Custom configuration for login and avatars -------------
 
-LOGIN_URL = '/login/'
+LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_URL = '/logout/'
+LOGOUT_URL = '/accounts/logout/'
 AUTH_USER_MODEL = 'MainAPP.CustomUser'
 
 AUTHENTICATION_BACKENDS = [
@@ -376,5 +376,9 @@ THUMBNAIL_DEBUG = IN_DEVELOPMENT
 THUMBNAIL_ALIASES = {
     '': {
         '50x50': {'size': (50, 50), 'crop': True},
+        '125x125': {'size': (125, 125), 'crop': True},
+        '250x250': {'size': (250, 250), 'crop': True},
+        '250x250': {'size': (350, 350), 'crop': True},
+        '500x500': {'size': (500, 500), 'crop': True},
     },
 }
