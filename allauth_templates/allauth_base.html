@@ -1,40 +1,53 @@
+{% load compress %}
+{% load static %}
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    
+    <!--Para moviles-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!--Estilos propios-->
+    
+    <!--FontAwesome-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <title>{% block head_title %}{% endblock %}</title>
     {% block extra_head %}
     {% endblock %}
+    {% block extra_cdn_css %}{% endblock %}
+    {% compress css %}
+      {% block extra_css %}{% endblock %}
+    {% endcompress %}
+
+    {% block top_cdn_js %}{% endblock %}
+
+    {% compress js %}
+      {% block top_js %}{% endblock %}
+    {% endcompress %}
   </head>
   <body>
     {% block body %}
 
-    {% if messages %}
-    <div>
-      <strong>Messages:</strong>
-      <ul>
-	{% for message in messages %}
-	<li>{{message}}</li>
-	{% endfor %}
-      </ul>
-    </div>
-    {% endif %}
-
-    <div>
-      <strong>Menu:</strong>
-      <ul>
-	{% if user.is_authenticated %}
-	{# <li><a href="{% url 'account_email' %}">Change E-mail</a></li> #}
-	<li><a href="{% url 'account_logout' %}">Sign Out</a></li>
-	{% else %}
-	<li><a href="{% url 'account_login' %}">Sign In</a></li>
-	{# <li><a href="{% url 'account_signup' %}">Sign Up</a></li> #}
-	{% endif %}
-      </ul>
-    </div>
-    {% block content %}
-    {% endblock %}
+   
+	
+     
+      {% block content %}
+      {% endblock %}
     {% endblock %}
     {% block extra_body %}
     {% endblock %}
+
+    {% block bottom_cdn_js %}{% endblock %}
+    {% compress js %}
+      {% block bottom_js %}{% endblock %}
+    {% endcompress %}
   </body>
 </html>
