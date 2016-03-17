@@ -185,6 +185,51 @@ class Cluster(models.Model):
         return "{name}".format(name=self.name)
 
 
+class Position(models.Model):
+    user = models.ForeignKey(
+        CustomUser,
+        related_name='positions',
+        blank=False,
+        null=False,
+        verbose_name=_ug('User')
+    )
+    isometric_image = models.ForeignKey(
+        'IsometricImage',
+        related_name='positions',
+        blank=False,
+        null=False,
+        verbose_name=_ug('Isometric Image')
+    )
+    row = models.IntegerField(
+        blank=False,
+        null=False,
+        verbose_name=_ug('Row')
+    )
+    column = models.IntegerField(
+        blank=False,
+        null=False,
+        verbose_name=_ug('Column')
+    )
+    creation_date = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name=_ug('Creation date')
+    )
+
+    class Meta:
+        verbose_name = _ug('Position')
+        verbose_name_plural = _ug('Positions')
+        permissions = (
+            ('query_position', 'Can query Position'),
+            ('list_position', 'Can list Positions'),
+        )
+
+    def __str__(self):
+        return "{user} - {isometric_image} ({column},{row})".format(
+            user=self.user, isometric_image=self.isometric_image,
+            column=self.column, row=self.row
+        )
+
+
 class IsometricImage(models.Model):
     image = ThumbnailerImageField(
         upload_to=hardcode.isometric_image_upload,
@@ -199,6 +244,12 @@ class IsometricImage(models.Model):
         blank=False,
         null=False,
         verbose_name=_ug('Cluster')
+    )
+    users = models.ManyToManyField(
+        CustomUser,
+        related_name='isometric_images',
+        through=Position,
+        verbose_name=_ug('Users')
     )
     edition_date = models.DateTimeField(
         auto_now=True,
@@ -275,17 +326,33 @@ class Question(models.Model):
         return "{text}".format(text=self.text[:80])
 
 
-class Selected(models.Model):
+class Selection(models.Model):
     user = models.ForeignKey(
-        CustomUser
+        CustomUser,
+        related_name='selections',
+        blank=False,
+        null=False,
+        verbose_name=_ug('User')
     )
     answer = models.ForeignKey(
-        'Answer'
+        'Answer',
+        related_name='selections',
+        blank=False,
+        null=False,
+        verbose_name=_ug('Answer')
     )
     creation_date = models.DateTimeField(
         auto_now_add=True,
         verbose_name=_ug('Creation date')
     )
+
+    class Meta:
+        verbose_name = _ug('Selection')
+        verbose_name_plural = _ug('Selections')
+        permissions = (
+            ('query_selection', 'Can query Selection'),
+            ('list_selection', 'Can list Selections'),
+        )
 
     def __str__(self):
         return "{user} - {answer}".format(user=self.user, answer=self.answer)
@@ -315,8 +382,8 @@ class Answer(models.Model):
     users = models.ManyToManyField(
         CustomUser,
         related_name='answers',
-        through=Selected,
-        verbose_name=_ug('Selected')
+        through=Selection,
+        verbose_name=_ug('Users')
     )
     edition_date = models.DateTimeField(
         auto_now=True,

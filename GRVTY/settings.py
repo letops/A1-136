@@ -42,7 +42,7 @@ DEBUG = IN_DEVELOPMENT
 PROJECT_NAME = 'GRVTY'
 
 # TODO: ALLOWED HOSTS - Fill with the right credentials
-ALLOWED_HOSTS = [] if IN_DEVELOPMENT else []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', ] if IN_DEVELOPMENT else []
 
 # TODO: ADMINS - Fill with the right email
 ADMINS = (('Chuck Testa', 'nope_chuck_testa@aol.com'), )
@@ -297,6 +297,12 @@ LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL = '/accounts/logout/'
 AUTH_USER_MODEL = 'MainAPP.CustomUser'
+
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_SESSION_REMEMBER = True
+SOCIALACCOUNT_QUERY_EMAIL = True
 
 AUTHENTICATION_BACKENDS = [
     'MainAPP.architecture.backends.CustomUserModelBackend',

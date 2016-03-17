@@ -41,12 +41,17 @@ class RESTEnvironment(object):
         self.permissions = []  # The list of permissions required to execute the query
 
     def load_data(self, method, **kwargs):
-        print(method)
         self.method = method
+        self.filters = kwargs.get("filters", None)
+        user = kwargs.get("user", None)
+
         if self.section == 'CanvasInfo':
-            if self.method == 'images':
-                self.filters = kwargs.get("filters", None)
-                user = kwargs.get("user", None)
+            if self.method == 'list':
                 self.serializer = serializers.CanvasCategoriesSerializer
                 self.permissions = []
-                self.query = queries.CanvasImages(user, self.filters)
+                self.query = queries.CanvasCategories(user, self.filters)
+
+            if self.method == 'cached':
+                self.serializer = serializers.CanvasUserCacheSerializer
+                self.permissions = []
+                self.query = queries.CanvasUserCache(user, self.filters)

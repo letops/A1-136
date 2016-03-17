@@ -9,6 +9,8 @@ admin.site.register(models.Cluster)
 admin.site.register(models.IsometricImage)
 admin.site.register(models.Question)
 admin.site.register(models.Answer)
+admin.site.register(models.Selection)
+admin.site.register(models.Position)
 
 
 @admin.register(models.CustomUser)

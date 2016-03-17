@@ -62,3 +62,15 @@ class CanvasCategoriesSerializer(serializers.ModelSerializer):
             'name',
             'clusters'
         )
+
+
+class CanvasUserCacheSerializer(serializers.ModelSerializer):
+    isometric_image = CanvasImagesSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = models.Position
+        fields = (
+            'column',
+            'row',
+            'isometric_image'
+        )

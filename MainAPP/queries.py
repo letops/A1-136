@@ -2,7 +2,7 @@ from . import models
 from django.db.models import Prefetch
 
 
-def CanvasImages(user, filters=None):
+def CanvasCategories(user, filters=None):
     # TODO:
     # Dado el usuario, es necesario obtener las respuestas seleccionadas para
     # poder determinar las imágenes a mostrar, pero debido a que existen
@@ -20,3 +20,13 @@ def CanvasImages(user, filters=None):
         ),
     )
     return categories
+
+
+def CanvasUserCache(user, filters=None):
+    positions = user.positions.prefetch_related(
+        Prefetch(
+           'isometric_image',
+           queryset=models.IsometricImage.objects.filter(hidden=False)
+        ),
+    )
+    return positions
