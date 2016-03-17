@@ -6,7 +6,6 @@ module.exports = {
   context: __dirname,
 
   entry: {
-        a: "./built/js/dragula-test.jsx",
         b: "./built/js/canvas.jsx",
         //c: "./built/js/test-board.js"
     },

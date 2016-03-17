@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import ugettext as _ug
 from easy_thumbnails.fields import ThumbnailerImageField
-from MainAPP import hardcode
+from . import hardcode
 
 
 # Custom user which inherits from an AbstractUser and uses the code in

@@ -65,6 +65,7 @@ docs/_build/
 bin/*
 include/*
 share/*
+Scripts/*
 
 # PyBuilder
 target/
@@ -72,6 +73,7 @@ target/
 .idea
 Design
 db.sqlite3
+webpack-stats.json
 built/*
 node_modules/*
 bower_components/*
