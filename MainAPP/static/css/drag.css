@@ -1,0 +1,169 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito:400,300);
+
+
+.dropdownStyle {
+	background: #ffffff;
+  box-shadow: 0 1px 0 0 #ff740c;
+  border: aliceblue;
+  border-radius: 0px;
+}
+
+
+.dropdownText {
+	margin-left: -10px;
+  margin-bottom: -4px;
+}
+
+
+.grid-box {
+  width: 200px !important;
+  min-height: 200px;
+  background-color: #f6f6f6;
+  border: solid 2px #ffffff;
+  text-align: center;
+  flex: inherit !important;
+}
+
+.grid-img {
+  width: 150px !important;
+  min-height: 150px;
+  background-color: #f6f6f6;
+  border: solid 2px #ffffff;
+  text-align: center;
+  flex: inherit !important;
+}
+
+
+.grid-error {
+  background-color: #f2c1c1 !important;
+}
+
+
+
+.colClass {
+	padding-top: 5% !important;
+  padding-left: 5% !important;
+}
+
+
+.colClass2 {
+  padding-top: 1% !important;
+}
+
+.description {
+  margin-top: 10%;
+  margin-bottom: 10%;
+  width: 300px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: lighter;
+  font-size: 18px
+}
+
+.title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 100;
+  font-size: 50px;
+}
+
+
+.fontText {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 100;
+
+}
+
+/*Ipad Horizontal*/
+@media screen and (max-width: 1024px) {
+    .grid-box {
+      width: 150px !important;
+      min-height: 150px;
+      background-color: #f6f6f6;
+      border: solid 2px #ffffff;
+      text-align: center;
+      flex: inherit !important;
+    }
+    .colClass {
+      padding-top: 10% !important;
+      /*padding-left: 10% !important;*/
+    }
+
+    .title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 100;
+      font-size: 40px;
+    }
+    .grid-img {
+      width: 100px !important;
+      min-height: 100px;
+      background-color: #f6f6f6;     
+    }
+
+
+}
+
+@media screen and (max-width: 645px) {
+    .grid-box {
+      width: 100px !important;
+      min-height: 100px;
+      background-color: #f6f6f6;
+      border: solid 2px #ffffff;
+      text-align: center;
+      flex: inherit !important;
+    }
+    .colClass {
+      padding-top: 5% !important;
+      padding-left: 10% !important;
+    }
+
+    .title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 100;
+      font-size: 50px;
+    }
+
+
+}
+/*Ipad vertical*/
+@media screen and (max-width: 768px) {
+    .grid-box {
+      width: 118px !important;
+      min-height: 118px;
+      background-color: #f6f6f6;
+      border: solid 2px #ffffff;
+      text-align: center;
+      flex: inherit !important;
+    }
+
+    .colClass {
+      padding-top: 8% !important;
+      padding-left: 10% !important;
+    }
+
+    .title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 100;
+      font-size: 20px;
+    }
+
+    .description {
+      width: 150px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: lighter;
+      font-size: inherit;
+    }
+
+    .grid-img {
+      width: 70px !important;
+      min-height: 70px;
+      background-color: #f6f6f6;     
+    }
+
+}
+
+
+
+/*Compus Grandes como la mia :V*/
+@media screen and (min-width: 1440px) {
+ 
+
+}
