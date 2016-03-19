@@ -5,7 +5,7 @@ var observe = require('./game').observe;
 
 observe(function (knightPosition) {
   ReactDOM.render(
-    <Board knightPosition={knightPosition} />,
+    <Board knightPosition={knightPosition}/>,
     document.getElementById('content')
   );
 });

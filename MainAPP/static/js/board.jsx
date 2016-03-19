@@ -33,7 +33,7 @@ var Board = React.createClass({
     var knightY = this.props.knightPosition[1];
 
     if (x === knightX && y === knightY) {
-      return <Knight />;
+      return <Knight/>;
     }
   },
 
@@ -45,8 +45,8 @@ var Board = React.createClass({
 
     return (
       <div style={{
-        width: '100%',
-        height: '100%',
+        width: '90%',
+        height: '90%',
         display: 'flex',
         flexWrap: 'wrap'
       }}>

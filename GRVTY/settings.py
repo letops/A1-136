@@ -205,7 +205,7 @@ COMPRESS_PRECOMPILERS = (
 WEBPACK_LOADER = {
     'DEFAULT': {
         'BUNDLE_DIR_NAME': 'bundles/',
-        'STATS_FILE': 'webpack-stats.json',
+        'STATS_FILE': os.path.join(DJANGO_ROOT, 'webpack-stats.json'),
     }
 }
 
