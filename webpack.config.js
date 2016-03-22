@@ -7,7 +7,7 @@ module.exports = {
 
   entry: {
         b: "./built/js/canvas.jsx",
-        //c: "./built/js/test-board.js"
+        //canvas_sidebar: "./built/js/sidebar.jsx"
     },
   output: {
       path: path.resolve('./built/bundles/'),

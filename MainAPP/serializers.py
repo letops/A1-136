@@ -47,6 +47,7 @@ class CanvasClustersSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Cluster
         fields = (
+            'id',
             'name',
             'isometric_images'
         )

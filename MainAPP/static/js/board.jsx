@@ -10,7 +10,7 @@ var Board = React.createClass({
   propTypes: {
     knightPosition: React.PropTypes.arrayOf(
       React.PropTypes.number.isRequired
-    ).isRequired
+    ).isRequired,
   },
 
   renderSquare: function (i) {

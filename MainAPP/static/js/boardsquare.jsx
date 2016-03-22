@@ -13,16 +13,16 @@ var squareTarget = {
 
   drop: function (props) {
     moveKnight(props.x, props.y);
-  }
+  },
 };
 
 function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
-    canDrop: monitor.canDrop()
+    canDrop: monitor.canDrop(),
   };
-};
+}
 
 var BoardSquare = React.createClass({
   propTypes: {
@@ -31,7 +31,7 @@ var BoardSquare = React.createClass({
     isOver: PropTypes.bool.isRequired,
     canDrop: PropTypes.bool.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
-    children: PropTypes.node
+    children: PropTypes.node,
   },
 
   renderOverlay: function (color) {
@@ -61,7 +61,7 @@ var BoardSquare = React.createClass({
       <div style={{
         position: 'relative',
         width: '100%',
-        height: '100%'
+        height: '100%',
       }}>
         <Square black={black}>
           {this.props.children}
@@ -71,7 +71,7 @@ var BoardSquare = React.createClass({
         {isOver && canDrop && this.renderOverlay('green')}
       </div>
     );
-  }
+  },
 });
 
 module.exports = DropTarget(ItemTypes.KNIGHT, squareTarget, collect)(BoardSquare);

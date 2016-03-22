@@ -1,3 +1,4 @@
 exports.ItemTypes = {
-  KNIGHT: 'knight'
+  KNIGHT: 'knight',
+  ISOMETRIC: 'isometric',
 };

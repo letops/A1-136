@@ -1,6 +1,5 @@
 'use strict';
 
-var knightPosition = [0, 0];
 var observer = null;
 
 function emitChange() {
@@ -31,7 +30,7 @@ function canMoveKnight(toX, toY) {
   return Math.abs(dx) === 2 && Math.abs(dy) === 1 || Math.abs(dx) === 1 && Math.abs(dy) === 2;
 }
 
-function moveKnight(toX, toY) {
+function moveIsometric(id, toX, toY) {
   knightPosition = [toX, toY];
   emitChange();
 }
