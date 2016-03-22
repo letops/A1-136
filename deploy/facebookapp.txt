@@ -3,4 +3,5 @@
   appId      : '716917558445462',
   xfbml      : true,
   version    : 'v2.5'
+  access_token : 716917558445462|GbOfKIaiA9lTWEdIbqCkUVcqgbU
 }
