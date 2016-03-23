@@ -381,10 +381,11 @@ THUMBNAIL_DEBUG = IN_DEVELOPMENT
 
 THUMBNAIL_ALIASES = {
     '': {
-        '50x50': {'size': (50, 50), 'crop': True},
-        '125x125': {'size': (125, 125), 'crop': True},
-        '250x250': {'size': (250, 250), 'crop': True},
-        '250x250': {'size': (350, 350), 'crop': True},
-        '500x500': {'size': (500, 500), 'crop': True},
+        '50px': {'size': (50, 50), 'crop': True},
+        '125px': {'size': (125, 125), 'crop': True},
+        '150px': {'size': (150, 150), 'crop': True},
+        '250px': {'size': (250, 250), 'crop': True},
+        '350px': {'size': (350, 350), 'crop': True},
+        '500px': {'size': (500, 500), 'crop': True},
     },
 }

@@ -27,17 +27,19 @@ class FullSafeUserSerializer(serializers.ModelSerializer):
 
 
 class CanvasImagesSerializer(serializers.ModelSerializer):
-    urls = serializers.SerializerMethodField('get_image_thumbnail')
+    url = serializers.SerializerMethodField('get_image_thumbnail')
 
     class Meta:
         model = models.IsometricImage
         fields = (
-            'urls',  # FIXME: Potential fix, because it displays "urls" in all images
+            'id',
+            'url',  # FIXME: Potential fix, because it displays "urls" in all images
         )
 
     def get_image_thumbnail(self, obj):
+        size = self.context.get('size', '250px')
         return {
-            alias: files.get_thumbnailer(obj.image)[alias].url for alias in files.aliases.all()
+            files.get_thumbnailer(obj.image)[size].url
         }
 
 

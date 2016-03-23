@@ -35,10 +35,10 @@ class RESTEnvironment(object):
         self.section = section
 
         self.method = None  # Http method: GET, PATCH, POST, PUT, DELETE
-        self.serializer = None  # Serializer from DjangoRestFramework to be used
-        self.query = None  # The function to be used to recover the info from the database
+        self.serializer = None  # Serializer from DjangoRestFramework used
+        self.query = None  # The function used to recover the info from the DB
         self.filters = None  # The filters to be passed to the query
-        self.permissions = []  # The list of permissions required to execute the query
+        self.permissions = []  # The list of permissions to execute the query
 
     def load_data(self, method, **kwargs):
         self.method = method

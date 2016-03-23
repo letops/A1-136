@@ -22,7 +22,9 @@ var Isometric = React.createClass({
     connectDragSource: PropTypes.func.isRequired,
     connectDragPreview: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired,
+    imageId: PropTypes.number.isRequired,
     imageUrl: PropTypes.string.isRequired,
+    imageSize: PropTypes.string.isRequired,
   },
 
   componentDidMount: function () {
@@ -38,9 +40,11 @@ var Isometric = React.createClass({
     var connectDragSource = this.props.connectDragSource;
     var isDragging = this.props.isDragging;
     var imageUrl = this.props.imageUrl;
+    var imageId = this.props.imageId;
+    var imageSize = this.props.imageSize;
 
     return connectDragSource(
-      <img src={imageUrl} width='25px' height='25px' />
+      <img key={imageId} src={imageUrl} width={imageSize} height={imageSize} />
     );
   },
 });

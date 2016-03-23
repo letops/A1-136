@@ -1,12 +1,12 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Sidebar = require('./sidebar');
+var Context = require('./context');
 
 //var observe = require('./game').observe;
 
 //observe(function (knightPosition) {
 ReactDOM.render(
-  <Sidebar source="../rest/CanvasInfo"/>,
+  <Context imageSize="150px"/>,
   document.getElementById('content')
 );
 

@@ -13,9 +13,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gridlex/2.0.8/gridlex.min.css">
     <!---->
     <style>
-      .board {
-        width: 500px;
-        height: 500px;
+      .sidebar {
+        max-width: 35%;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 2%;
+      }
+      .grid {
+        max-width: 50%;
         display: flex;
         flex-wrap: wrap;
         padding: 2%;
@@ -70,9 +75,9 @@
         </div>
 
 
-        <div class="col-md-8  col-xs-8 colClass">
+        <div class="col-md-8 col-xs-8 colClass">
 
-          <div class="grid "> <!-- Four <div class="col"> for 4 columns in the grid -->
+          <div class="grid"> <!-- Four <div class="col"> for 4 columns in the grid -->
             <div class="col grid-box"></div>
             <div class="col grid-box"></div>
             <div class="col grid-box"></div>
@@ -82,7 +87,7 @@
           <div class="grid"> <!-- Four <div class="col"> for 4 columns in the grid -->
             <div class="col grid-box"></div>
             <div class="col grid-box"></div>
-            <div class="col grid-box grid-error "></div>
+            <div class="col grid-box grid-error"></div>
             <div class="col grid-box"></div>
           </div>
 
@@ -106,7 +111,7 @@
       </div>
     </div>
 
-    <div id="content" class="board"></div>
+    <div id="content"></div>
 {% endblock %}
 
 
