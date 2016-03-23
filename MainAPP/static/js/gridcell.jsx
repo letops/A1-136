@@ -33,6 +33,7 @@ var gridTarget = {
 
 function collect(connect, monitor) {
   return {
+    isOver: monitor.isOver(),
     connectDropTarget: connect.dropTarget(),
   };
 }
