@@ -41,7 +41,8 @@ def canvas(request):
 
 @login_required()
 def share(request):
-    result = ''
+    result = queries.Share(user=request.user)
+
     return render(
         request,
         'share.html',

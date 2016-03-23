@@ -5,7 +5,10 @@ var DragSource = require('react-dnd').DragSource;
 
 var isometricSource = {
   beginDrag: function (props) {
-    return {};
+    return {
+      imageId: props.imageId,
+      imageUrl: props.imageUrl,
+    };
   },
 };
 

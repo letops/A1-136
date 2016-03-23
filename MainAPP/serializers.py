@@ -38,9 +38,7 @@ class CanvasImagesSerializer(serializers.ModelSerializer):
 
     def get_image_thumbnail(self, obj):
         size = self.context.get('size', '250px')
-        return {
-            files.get_thumbnailer(obj.image)[size].url
-        }
+        return files.get_thumbnailer(obj.image)[size].url
 
 
 class CanvasClustersSerializer(serializers.ModelSerializer):

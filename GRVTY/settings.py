@@ -381,11 +381,20 @@ THUMBNAIL_DEBUG = IN_DEVELOPMENT
 
 THUMBNAIL_ALIASES = {
     '': {
+        # ------------------- ISOMETRICS -------------------
         '50px': {'size': (50, 50), 'crop': True},
         '125px': {'size': (125, 125), 'crop': True},
         '150px': {'size': (150, 150), 'crop': True},
+        '200px': {'size': (200, 200), 'crop': True},
         '250px': {'size': (250, 250), 'crop': True},
         '350px': {'size': (350, 350), 'crop': True},
         '500px': {'size': (500, 500), 'crop': True},
+        # -------------------- RENDERS ---------------------
+        '600px': {'size': (600, 600), 'crop': True},
+        '800px': {'size': (800, 800), 'crop': True},
+        '1000px': {'size': (1000, 1000), 'crop': True},
+        '1400px': {'size': (1400, 1400), 'crop': True},
+        '1400px': {'size': (1400, 1400), 'crop': True},
+        '2000px': {'size': (2000, 2000), 'crop': True},
     },
 }

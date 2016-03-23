@@ -1,5 +1,6 @@
-from . import models
 from django.db.models import Prefetch
+from . import models
+# import Image as PillowImaging
 
 
 def CanvasCategories(user, filters=None):
@@ -30,3 +31,14 @@ def CanvasUserCache(user, filters=None):
         ),
     )
     return positions
+
+
+def Share(user):
+    # TODO!!
+    positions = user.positions
+    if len(positions) > 0:
+        pass
+    else:
+        pass
+    result = ''
+    return result

@@ -26,23 +26,25 @@ class CanvasInfo(apiViews.WebAPIView):
                 self.environment.query,
                 many=True,
                 read_only=True,
-                context={'size': filters.get("size", "250px")})
+                context={'size': filters.get("size", "200px")})
             return Response(serial.data, status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
     @list_route(methods=['get', 'post'])
     def cached(self, request, format=None):
+        filters = request.data.get("filters", dict())
         self.environment.load_data(
             'cached',
             user=request.user,
-            filters=request.data.get("filters", None))
+            filters=filters)
         if len(self.environment.permissions) == 0 or \
                 request.user.has_perms(self.environment.permissions):
             serial = self.environment.serializer(
                 self.environment.query,
                 many=True,
-                read_only=True)
+                read_only=True,
+                context={'size': filters.get("size", "200px")})
             return Response(serial.data, status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)

@@ -210,9 +210,9 @@ class Position(models.Model):
         null=False,
         verbose_name=_ug('Column')
     )
-    creation_date = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name=_ug('Creation date')
+    edition_date = models.DateTimeField(
+        auto_now=True,
+        verbose_name=_ug('Last edition date')
     )
 
     class Meta:
@@ -274,7 +274,7 @@ class IsometricImage(models.Model):
         if self.pk is None:
             image = self.image
             self.image = None
-            super(IsometricImage, self).save(*args, **kwargs)
+            super(IsometricImage, self).save(commit=False, *args, **kwargs)
             self.image = image
         super(IsometricImage, self).save(*args, **kwargs)
 

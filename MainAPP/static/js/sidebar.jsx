@@ -58,7 +58,6 @@ var Sidebar = React.createClass({
       dataType: 'json',
       data: JSON.stringify({ filters: filtersvar }),
       success: function (result) {
-        console.log(result);
         this.setState({
           categories: result,
         });
@@ -106,7 +105,7 @@ var Sidebar = React.createClass({
       });
 
       return (
-        <div className='sidebar'>{CategoryNodes}</div>
+        <div className='react-sidebar'>{CategoryNodes}</div>
       );
     }
   },
