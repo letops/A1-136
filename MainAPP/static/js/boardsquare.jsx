@@ -6,6 +6,7 @@ var moveKnight = require('./game').moveKnight;
 var ItemTypes = require('./constants').ItemTypes;
 var DropTarget = require('react-dnd').DropTarget;
 
+// x, y, imageurl, idimage
 var squareTarget = {
   canDrop: function (props) {
     return canMoveKnight(props.x, props.y);
