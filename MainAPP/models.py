@@ -274,7 +274,7 @@ class IsometricImage(models.Model):
         if self.pk is None:
             image = self.image
             self.image = None
-            super(IsometricImage, self).save(commit=False, *args, **kwargs)
+            super(IsometricImage, self).save(*args, **kwargs)
             self.image = image
         super(IsometricImage, self).save(*args, **kwargs)
 

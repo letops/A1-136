@@ -5,7 +5,7 @@ var DropTarget = require('react-dnd').DropTarget;
 var Cell = require('./cells');
 
 var gridTarget = {
-  
+
   drop: function (props, monitor, component) {
     if (monitor.didDrop()) {
       // If you want, you can check whether some nested
@@ -18,10 +18,10 @@ var gridTarget = {
 
     // You can do something with it
     // ChessActions.movePiece(item.fromPosition, props.position);
-    console.log("item");
-    console.log(item.imageUrl);
+    console.log(item);
     component.setState({
-      imageUrl : item.imageUrl
+      imageUrl: item.imageUrl,
+      imageId: item.imageId,
     });
 
     // You can also do nothing and return a drop result,
@@ -39,17 +39,19 @@ function collect(connect, monitor) {
 }
 
 var GridCell = React.createClass({
-  getInitialState : function (){
-    return{
-      imageUrl : ""
+  getInitialState: function () {
+    return {
+      imageUrl: '',
     };
   },
+
   propTypes: {
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
     children: PropTypes.node,
     imageUrl: PropTypes.string,
+    imageId: PropTypes.number,
     fill: PropTypes.string,
   },
 
@@ -75,7 +77,7 @@ var GridCell = React.createClass({
     var fill = this.props.fill;
     var connectDropTarget = this.props.connectDropTarget;
     var isOver = this.props.isOver;
-    if (imageUrl==""){
+    if (imageUrl == '') {
       return connectDropTarget(
         <div style = {{ position: 'relative' }}>
             <Cell internalColor = 'black'>
@@ -84,8 +86,7 @@ var GridCell = React.createClass({
             {isOver && this.renderOverlay('green')}
         </div>
       );
-    }
-    else {
+    } else {
       return connectDropTarget(
         <div style = {{ position: 'relative' }}>
             <Cell internalColor = 'black'

@@ -1,8 +1,6 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var GridCell = require('./gridcell.jsx');
-var DragDropContext = require('react-dnd').DragDropContext;
-var TouchBackend = require('react-dnd-html5-backend');
 
 var Grid = React.createClass({
   propTypes: {
