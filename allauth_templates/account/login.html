@@ -25,16 +25,33 @@
     background-size: cover; 
     background-repeat: no-repeat;
 
-    height: 979px;
+    /*height: 979px;*/
 }
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 768px) {
     .login-Image{
       height: 0px;
       width: 0px;
       background-size: 0%;
     }
 
+    .hotfix2 {
+      height: 0px !important;
+    }
+
+
 }
+
+.hotfix {
+  height: 100%;
+}
+
+.hotfix2 {
+  height: 100%;
+}
+
+
+
+
 </style>
 {% endblock %}
 
@@ -43,9 +60,9 @@
 
 {% block content %}
 
-<div class="container-fluid">
-      <div class="row">
-        <div class="col-md-6 col-sm-0 col-xs-0 login-Image"></div>
+<div class="container-fluid hotfix">
+      <div class="row hotfix2">
+        <div class="col-md-6 col-sm-0 col-xs-0 login-Image hotfix"></div>
         
         <!--Forma del Login-->
         <div class="col-md-6 col-sm-12 formaLogin">
