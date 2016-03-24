@@ -167,3 +167,45 @@
  
 
 }
+
+
+/*Pantallas ful hd*/
+@media screen and (min-width: 3200px) {
+    .grid-box {
+      width: 400px !important;
+      min-height: 400px;
+      background-color: #f6f6f6;
+      border: solid 2px #ffffff;
+      text-align: center;
+      flex: inherit !important;
+    }
+    .colClass {
+      padding-top: 5% !important;
+      padding-left: 10% !important;
+    }
+
+    .title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 100;
+      font-size: 120px;
+    }
+
+    .grid-img {
+      width: 300px !important;
+      min-height: 300px;
+      background-color: #f6f6f6;     
+    }
+    .description {
+      width: auto;
+      font-family: 'Nunito', sans-serif;
+      font-weight: lighter;
+      font-size: 40px;
+    }
+
+    .dropdownText {
+      margin-left: -10px;
+      margin-bottom: -4px;
+      font-size: 30px;
+    }
+
+}
