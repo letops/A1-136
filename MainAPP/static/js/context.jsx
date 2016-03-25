@@ -20,7 +20,7 @@ var Context = React.createClass({
   render: function () {
     var imageSize = this.props.imageSize;
     return (
-      <div className='context'>
+      <div className='row'>
         <Sidebar
           source="../rest/CanvasInfo/"
           imageSize={imageSize}

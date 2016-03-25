@@ -47,7 +47,15 @@ var Isometric = React.createClass({
     var imageSize = this.props.imageSize;
 
     return connectDragSource(
-      <img key={imageId} src={imageUrl} width={imageSize} height={imageSize} />
+      <div
+        className='col grid-img'
+        key={imageId}
+        style={{
+          backgroundImage: 'url(' + imageUrl + ')',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '100%',
+        }}
+      ></div>
     );
   },
 });
