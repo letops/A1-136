@@ -2,6 +2,7 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var ItemTypes = require('./constants').ItemTypes;
 var DropTarget = require('react-dnd').DropTarget;
+var Csrf = require('./csrf');
 
 var gridTarget = {
 
@@ -14,6 +15,38 @@ var gridTarget = {
     component.setState({
       imageUrl: item.imageUrl,
       imageId: item.imageId,
+    });
+
+    var csrftoken = Csrf.getCookie('csrftoken');
+    this.serverRequest = $.ajax({
+      beforeSend: function (xhr, settings) {
+        if (!Csrf.csrfSafeMethod(settings.type) && !this.crossDomain) {
+          xhr.setRequestHeader('X-CSRFToken', csrftoken);
+        }
+
+      },
+
+      async: 'true',
+      type: 'POST',
+      url: '../rest/CanvasInfo/save/',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      data: JSON.stringify(
+        {
+          imageId: item.imageId,
+          column: component.props.column,
+          row: component.props.row,
+        }
+      ),
+
+      // success: function (result) {
+      //   this.setState({
+      //     categories: result,
+      //   });
+      // }.bind(this),
+      // error: function (xhr, status, err) {
+      //   console.error(this.props.url, status, err.toString());
+      // }.bind(this),
     });
     return { moved: true };
   },
@@ -35,8 +68,8 @@ var GridCell = React.createClass({
   },
 
   propTypes: {
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
+    column: PropTypes.number.isRequired,
+    row: PropTypes.number.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
     children: PropTypes.node,
     imageUrl: PropTypes.string,
@@ -60,8 +93,8 @@ var GridCell = React.createClass({
   },
 
   render: function () {
-    var x = this.props.x;
-    var y = this.props.y;
+    var column = this.props.column;
+    var row = this.props.row;
     var imageUrl = this.state.imageUrl;
     var imageId = this.state.imageId;
     var fill = this.props.fill;

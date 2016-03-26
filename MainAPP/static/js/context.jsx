@@ -21,13 +21,8 @@ var Context = React.createClass({
     var imageSize = this.props.imageSize;
     return (
       <div className='row'>
-        <Sidebar
-          source="../rest/CanvasInfo/"
-          imageSize={imageSize}
-        />
-        <Grid
-          imageSize={imageSize}
-        />
+        <Sidebar imageSize={imageSize} />
+        <Grid imageSize={imageSize} />
       </div>
     );
   },

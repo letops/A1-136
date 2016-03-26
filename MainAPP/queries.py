@@ -1,5 +1,6 @@
 from django.db.models import Prefetch
 from . import models
+import sys
 # import Image as PillowImaging
 
 
@@ -31,6 +32,23 @@ def CanvasUserCache(user, filters=None):
         ),
     )
     return positions
+
+
+def CanvasUserPositionSave(user, isometric_pk, row, column):
+    print('{} {} {} {}'.format(user, isometric_pk, row, column))
+    saved = False
+    position, created = models.Position.objects.update_or_create(
+        user=user,
+        row=row,
+        column=column,
+        defaults={
+            'isometric_image': models.IsometricImage.objects.get(
+                pk=isometric_pk)
+        }
+    )
+    print('{}'.format(position))
+    position.save()
+    return True
 
 
 def Share(user):

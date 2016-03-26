@@ -27,7 +27,6 @@ var Isometric = React.createClass({
     isDragging: PropTypes.bool.isRequired,
     imageId: PropTypes.number.isRequired,
     imageUrl: PropTypes.string.isRequired,
-    imageSize: PropTypes.string.isRequired,
   },
 
   componentDidMount: function () {
@@ -44,7 +43,6 @@ var Isometric = React.createClass({
     var isDragging = this.props.isDragging;
     var imageUrl = this.props.imageUrl;
     var imageId = this.props.imageId;
-    var imageSize = this.props.imageSize;
 
     return connectDragSource(
       <div

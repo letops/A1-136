@@ -48,3 +48,19 @@ class CanvasInfo(apiViews.WebAPIView):
             return Response(serial.data, status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
+
+    @list_route(methods=['post'])
+    def save(self, request, format=None):
+        self.environment.load_data(
+            'save',
+            user=request.user,
+            imageId=request.data.get("imageId", None),
+            column=request.data.get("column", None),
+            row=request.data.get("row", None))
+        if len(self.environment.permissions) == 0 or \
+                request.user.has_perms(self.environment.permissions):
+            if self.environment.query is not True:
+                return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_403_FORBIDDEN)

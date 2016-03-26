@@ -55,3 +55,11 @@ class RESTEnvironment(object):
                 self.serializer = serializers.CanvasUserCacheSerializer
                 self.permissions = []
                 self.query = queries.CanvasUserCache(user, self.filters)
+
+            if self.method == 'save':
+                self.permissions = []
+                self.query = queries.CanvasUserPositionSave(
+                    user,
+                    kwargs.get("imageId", None),
+                    kwargs.get("row", None),
+                    kwargs.get("column", None))

@@ -14,12 +14,12 @@ var Grid = React.createClass({
   },
 
   renderCell: function (i) {
-    var x = i % 4;
-    var y = Math.floor(i / 4);
+    var column = i % 4;
+    var row = Math.floor(i / 4);
     return (
       <GridCell
-        x = {x}
-        y = {y}
+        column = {column}
+        row = {row}
         key={i}
       />
     );
