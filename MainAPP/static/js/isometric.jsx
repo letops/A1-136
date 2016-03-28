@@ -3,9 +3,12 @@ var PropTypes = React.PropTypes;
 var ItemTypes = require('./constants').ItemTypes;
 var DragSource = require('react-dnd').DragSource;
 
-var knightSource = {
+var isometricSource = {
   beginDrag: function (props) {
-    return {};
+    return {
+      imageId: props.imageId,
+      imageUrl: props.imageUrl,
+    };
   },
 };
 
@@ -17,17 +20,19 @@ function collect(connect, monitor) {
   };
 }
 
-var Knight = React.createClass({
+var Isometric = React.createClass({
   propTypes: {
     connectDragSource: PropTypes.func.isRequired,
     connectDragPreview: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired,
+    imageId: PropTypes.number.isRequired,
+    imageUrl: PropTypes.string.isRequired,
   },
 
   componentDidMount: function () {
     connectDragPreview = this.props.connectDragPreview;
     var img = new Image();
-    img.src = '/built/img/grvtyisotipo.png';
+    img.src = this.props.imageUrl;
     img.onload = function () {
       connectDragPreview(img);
     };
@@ -36,18 +41,21 @@ var Knight = React.createClass({
   render: function () {
     var connectDragSource = this.props.connectDragSource;
     var isDragging = this.props.isDragging;
+    var imageUrl = this.props.imageUrl;
+    var imageId = this.props.imageId;
 
     return connectDragSource(
-      <div style={{
-        opacity: isDragging ? 0.5 : 1,
-        fontSize: 25,
-        fontWeight: 'bold',
-        cursor: 'move',
-      }}>
-        ♘
-      </div>
+      <div
+        className='col grid-img'
+        key={imageId}
+        style={{
+          backgroundImage: 'url(' + imageUrl + ')',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '100%',
+        }}
+      ></div>
     );
   },
 });
 
-module.exports = DragSource(ItemTypes.KNIGHT, knightSource, collect)(Knight);
+module.exports = DragSource(ItemTypes.ISOMETRIC, isometricSource, collect)(Isometric);

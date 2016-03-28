@@ -1,5 +1,6 @@
-from MainAPP import models
+from . import models
 from rest_framework import serializers
+from easy_thumbnails import files
 
 
 class FullSafeUserSerializer(serializers.ModelSerializer):
@@ -16,8 +17,61 @@ class FullSafeUserSerializer(serializers.ModelSerializer):
             'birthday',
             'description',
             'gender',
+            'step',
+            'occupation',
             'edition_date',
             'is_active',
             'is_staff',
             'is_superuser',
+        )
+
+
+class CanvasImagesSerializer(serializers.ModelSerializer):
+    url = serializers.SerializerMethodField('get_image_thumbnail')
+
+    class Meta:
+        model = models.IsometricImage
+        fields = (
+            'id',
+            'url',  # FIXME: Potential fix, because it displays "urls" in all images
+        )
+
+    def get_image_thumbnail(self, obj):
+        size = self.context.get('size', '250px')
+        return files.get_thumbnailer(obj.image)[size].url
+
+
+class CanvasClustersSerializer(serializers.ModelSerializer):
+    isometric_images = CanvasImagesSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = models.Cluster
+        fields = (
+            'id',
+            'name',
+            'isometric_images'
+        )
+
+
+class CanvasCategoriesSerializer(serializers.ModelSerializer):
+    clusters = CanvasClustersSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = models.Category
+        fields = (
+            'id',
+            'name',
+            'clusters'
+        )
+
+
+class CanvasUserCacheSerializer(serializers.ModelSerializer):
+    isometric_image = CanvasImagesSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = models.Position
+        fields = (
+            'column',
+            'row',
+            'isometric_image'
         )

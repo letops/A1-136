@@ -1,45 +1,102 @@
 {% extends 'base.html' %}
+
+
+
+
 {% block title %}A1-136 Canvas{% endblock %}
 
 {% block extra_cdn_css %}
-  <style>
-    .board {
+<!--Para el Grid-->
+    <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gridlex/2.0.8/gridlex.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gridlex/2.0.8/gridlex.min.css">
+    <!---->
 
-      width: 500px;
-      height: 500px;
-      display: flex;
-      flex-wrap: wrap;
-      padding: 2%;
-    }
-  </style>
 {% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ static("css/drag.css") }}">
+{% endblock %}
+
 
 {% block top_js %}{% endblock %}
 
 {% block content %}
-  <div id="content" class="board"></div>
+  <div class="container-fluid">
+      <!-- <div class="row">
+        <div class="col-md-offset-1 col-md-3 col-xs-offset-1 col-xs-2 colClass2">
+          <h1 class="title">Drag & Drop</h1>
 
-  {{ render_bundle('b') }}
+          <p class="description">Quisque vel nisl diam sed consectetur sed magna nec<br>posuere. </p>
+
+
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle dropdownStyle" type="button" data-toggle="dropdown">
+              <p class="dropdownText fontText">Dropdown
+              <span class="caret"></span></button></p>
+              <ul class="dropdown-menu">
+                <li><a href="#">Tag1</a></li>
+                <li><a href="#">Tag2</a></li>
+                <li><a href="#">Tag3</a></li>
+              </ul>
+          </div>
+
+          <div class="grid">
+            <div class="col grid-img"></div>
+            <div class="col grid-img"></div>
+          </div>
+
+          <div class="grid">
+            <div class="col grid-img"></div>
+            <div class="col grid-img"></div>
+          </div>
+
+
+        </div>
+
+
+        <div class="col-md-8 col-xs-8 colClass">
+
+          <div class="grid">
+            <div class="col grid-box"></div>
+            <div class="col grid-box"></div>
+            <div class="col grid-box"></div>
+            <div class="col grid-box"></div>
+          </div>
+
+          <div class="grid">
+            <div class="col grid-box"></div>
+            <div class="col grid-box"></div>
+            <div class="col grid-box grid-error"></div>
+            <div class="col grid-box"></div>
+          </div>
+
+          <div class="grid">
+            <div class="col grid-box"></div>
+            <div class="col grid-box"></div>
+            <div class="col grid-box"></div>
+            <div class="col grid-box"></div>
+          </div>
+
+          <div class="grid">
+            <div class="col grid-box"></div>
+            <div class="col grid-box"></div>
+            <div class="col grid-box"></div>
+            <div class="col grid-box"></div>
+          </div>
+
+        </div>
+
+
+      </div> -->
+      <div id="content"></div>
+    </div>
+
 {% endblock %}
 
 
-{% block bottom_cdn_js %}
-
-{% endblock %}
+{% block bottom_cdn_js %}{% endblock %}
 {% block bottom_js %}
-
-  {#<script type="text/jsx" src="{{ static('js/knight.jsx') }}"></script>
-  <script type="text/jsx" src="{{ static('js/square.jsx') }}"></script>
-  <script type="text/jsx" src="{{ static('js/game.jsx') }}"></script>
-  <script type="text/jsx" src="{{ static('js/board.jsx') }}"></script>
-  <script type="text/jsx" src="{{ static('js/canvas.jsx') }}"></script>
-
-
-  <script type="text/javascript" src="{{ static('js/test-knight.js') }}"></script>
-  <script type="text/javascript" src="{{ static('js/test-constants.js') }}"></script>
-  <script type="text/javascript" src="{{ static('js/test-square.js') }}"></script>
-  <script type="text/javascript" src="{{ static('js/test-boardsquare.js') }}"></script>
-  <script type="text/javascript" src="{{ static('js/test-game.js') }}"></script>
-  <script type="text/javascript" src="{{ static('js/test-board.js') }}"></script>#}
-
+  {{ render_bundle('b') }}
 {% endblock %}

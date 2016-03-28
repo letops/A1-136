@@ -1,4 +1,4 @@
-from MainAPP import models, forms, serializers
+from . import models, forms, queries, serializers
 
 
 class Environment:
@@ -27,3 +27,39 @@ class Environment:
                 self.redirect_urlname = 'home'
                 self.permissions = []
                 self.query = None
+
+
+class RESTEnvironment(object):
+
+    def __init__(self, section):
+        self.section = section
+
+        self.method = None  # Http method: GET, PATCH, POST, PUT, DELETE
+        self.serializer = None  # Serializer from DjangoRestFramework used
+        self.query = None  # The function used to recover the info from the DB
+        self.filters = None  # The filters to be passed to the query
+        self.permissions = []  # The list of permissions to execute the query
+
+    def load_data(self, method, **kwargs):
+        self.method = method
+        self.filters = kwargs.get("filters", None)
+        user = kwargs.get("user", None)
+
+        if self.section == 'CanvasInfo':
+            if self.method == 'list':
+                self.serializer = serializers.CanvasCategoriesSerializer
+                self.permissions = []
+                self.query = queries.CanvasCategories(user, self.filters)
+
+            if self.method == 'cached':
+                self.serializer = serializers.CanvasUserCacheSerializer
+                self.permissions = []
+                self.query = queries.CanvasUserCache(user, self.filters)
+
+            if self.method == 'save':
+                self.permissions = []
+                self.query = queries.CanvasUserPositionSave(
+                    user,
+                    kwargs.get("imageId", None),
+                    kwargs.get("row", None),
+                    kwargs.get("column", None))

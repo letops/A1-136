@@ -19,6 +19,7 @@ def home(request):
         return HttpResponseRedirect(urlresolvers.reverse('share'))
 
 
+@login_required()
 def poll(request):
     result = ''
     return render(
@@ -28,6 +29,7 @@ def poll(request):
     )
 
 
+@login_required()
 def canvas(request):
     result = ''
     return render(
@@ -37,8 +39,10 @@ def canvas(request):
     )
 
 
+@login_required()
 def share(request):
-    result = ''
+    result = queries.Share(user=request.user)
+
     return render(
         request,
         'share.html',
