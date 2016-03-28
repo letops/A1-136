@@ -35,7 +35,6 @@ def CanvasUserCache(user, filters=None):
 
 
 def CanvasUserPositionSave(user, isometric_pk, row, column):
-    print('{} {} {} {}'.format(user, isometric_pk, row, column))
     saved = False
     position, created = models.Position.objects.update_or_create(
         user=user,
@@ -46,8 +45,6 @@ def CanvasUserPositionSave(user, isometric_pk, row, column):
                 pk=isometric_pk)
         }
     )
-    print('{}'.format(position))
-    position.save()
     return True
 
 
