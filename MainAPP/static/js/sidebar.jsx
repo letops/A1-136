@@ -45,7 +45,9 @@ var Sidebar = React.createClass({
     if (this.state.categories === null || this.state.categories === '') {
       return (
         <div>
-          <p className='loading'>Loading</p>
+          <p className='loading'>
+            Loading
+          </p>
         </div>
       );
     } else {
@@ -55,6 +57,7 @@ var Sidebar = React.createClass({
           <li key={category.id} ><a href="#">{category.name}</a></li>
         );
       });
+
       var CategoryNodes = this.state.categories.map(function (category) {
         var ClusterNodes = category.clusters.map(function (cluster) {
           var IsometricNodes = cluster.isometric_images.map(function (isoimage) {
@@ -84,9 +87,12 @@ var Sidebar = React.createClass({
       return (
         <div className='col-md-offset-1 col-md-3 col-xs-offset-1 col-xs-2 colClass2'>
           <h1 className="title">Drag &amp; Drop</h1>
-          <p className="description">Quisque vel nisl diam sed consectetur sed magna nec posuere.</p>
+          <p className="description">
+            Quisque vel nisl diam sed consectetur sed magna nec posuere.
+          </p>
           <div className="dropdown">
-            <button className="btn btn-default dropdown-toggle dropdownStyle" type="button" data-toggle="dropdown">
+            <button className="btn btn-default dropdown-toggle dropdownStyle"
+              type="button" data-toggle="dropdown">
               <p className="dropdownText fontText">Dropdown
                 <span className="caret"></span>
               </p>

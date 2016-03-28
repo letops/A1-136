@@ -2,7 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.core import urlresolvers
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from . import hardcode
+from . import hardcode, queries
+from .generic import messages as msg
 
 
 # Create your views here.
@@ -31,6 +32,21 @@ def poll(request):
 
 @login_required()
 def canvas(request):
+    # FIXME: Uncomment this section for validation
+    # if (request.user.step is not hardcode.STEP_CANVAS):
+    #     msg.generate_msg(
+    #         request=request, state=msg.RED,
+    #         title=msg.errors_list['title']['401'],
+    #         body=msg.errors_list['body']['missing_step'])
+    #     return HttpResponseRedirect(urlresolvers.reverse('poll'))
+
+    if request.method == 'POST':
+        if queries.CanvasFinish(request.user) is True:
+            return HttpResponseRedirect(urlresolvers.reverse('share'))
+        msg.generate_msg(
+            request=request, state=msg.RED,
+            title=msg.errors_list['title']['500'],
+            body=msg.errors_list['body']['ticket'])
     result = ''
     return render(
         request,
@@ -41,6 +57,14 @@ def canvas(request):
 
 @login_required()
 def share(request):
+    # FIXME: Uncomment this section for validation
+    # if (request.user.step is not hardcode.STEP_DONE):
+    #     msg.generate_msg(
+    #         request=request, state=msg.RED,
+    #         title=msg.errors_list['title']['401'],
+    #         body=msg.errors_list['body']['missing_step'])
+    #     return HttpResponseRedirect(urlresolvers.reverse('canvas'))
+
     result = queries.Share(user=request.user)
 
     return render(

@@ -1,5 +1,5 @@
 from django.db.models import Prefetch
-from . import models
+from . import hardcode, models
 import sys
 # import Image as PillowImaging
 
@@ -35,6 +35,7 @@ def CanvasUserCache(user, filters=None):
 
 
 def CanvasUserPositionSave(user, isometric_pk, row, column):
+    print('{} {} {} {}'.format(user, isometric_pk, row, column))
     saved = False
     position, created = models.Position.objects.update_or_create(
         user=user,
@@ -45,7 +46,18 @@ def CanvasUserPositionSave(user, isometric_pk, row, column):
                 pk=isometric_pk)
         }
     )
+    print('{}'.format(position))
+    position.save()
     return True
+
+
+def CanvasFinish(user):
+    if(user.step is hardcode.STEP_CANVAS):
+        user.step == hardcode.STEP_DONE
+        # FIXME: Uncomment to continue
+        # user.save()
+        return True
+    return False
 
 
 def Share(user):
