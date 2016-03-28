@@ -21,6 +21,13 @@ def home(request):
 
 @login_required()
 def poll(request):
+    if request.method == 'POST':
+        if queries.PollFinish(request.user) is True:
+            return HttpResponseRedirect(urlresolvers.reverse('canvas'))
+        msg.generate_msg(
+            request=request, state=msg.RED,
+            title=msg.errors_list['title']['500'],
+            body=msg.errors_list['body']['ticket'])
     result = ''
     return render(
         request,
