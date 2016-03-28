@@ -52,7 +52,7 @@ var Sidebar = React.createClass({
       var imageSize = this.props.imageSize;
       var CategoryOptions = this.state.categories.map(function (category) {
         return (
-          <li><a href="#">{category.name}</a></li>
+          <li key={category.id} ><a href="#">{category.name}</a></li>
         );
       });
       var CategoryNodes = this.state.categories.map(function (category) {
@@ -68,7 +68,7 @@ var Sidebar = React.createClass({
           });
 
           return (
-            <div  key={cluster.id}>
+            <div key={cluster.id}>
               {IsometricNodes}
             </div>
           );

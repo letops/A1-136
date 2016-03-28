@@ -80,27 +80,25 @@ var GridCell = React.createClass({
   renderOverlay: function (color) {
     return (
       <div
-          className='col grid-box'
-          style={{
-            zIndex: 1,
-            opacity: 0.5,
-            backgroundColor: color,
-            backgroundSize: '100%',
-            position: 'relative',
-          }}
-        />
+        className='col grid-box'
+        style={{
+          zIndex: 1,
+          opacity: 0.5,
+          backgroundColor: color,
+          backgroundSize: '100%',
+          position: 'relative',
+        }}
+      />
     );
   },
 
   render: function () {
     var column = this.props.column;
     var row = this.props.row;
-    var imageUrl = this.state.imageUrl;
-    var imageId = this.state.imageId;
     var fill = this.props.fill;
     var connectDropTarget = this.props.connectDropTarget;
     var isOver = this.props.isOver;
-    if (imageUrl == '') {
+    if (this.state.imageUrl == '' && this.props.imageUrl == '') {
       return connectDropTarget(
         <div className='col grid-box'
           style={{
@@ -112,6 +110,8 @@ var GridCell = React.createClass({
         </div>
       );
     } else {
+      var imageUrl = ((this.state.imageUrl != '') ? this.state.imageUrl : this.props.imageUrl);
+      var imageId = ((this.state.imageId != '') ? this.state.imageId : this.props.imageId);
       return connectDropTarget(
         <div
           className='col grid-box'
