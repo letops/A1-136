@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito:400,300);
 
-.login-Image {
+/*.login-Image {
 	-webkit-background-size: 100%;
     -moz-background-size: 100%;
     -o-background-size: 100%;
@@ -13,19 +13,18 @@
 
     height: 979px;
     
+}*/
+
+/*Test Height*/
+
+html {
+	height: 100%;
 }
 
-
-/*Para tablets*/
-/*768 px para ipad, pero no me funciona bn, por eso lo cambio a 769px*/
-@media screen and (max-width: 769px) {
-    .login-Image{
-    	height: 0px;
-    	width: 0px;
-    	background-size: 0%;
-    }
-
+body {
+	height: 100%;
 }
+
 
 
 
@@ -42,7 +41,7 @@
 }
 
 .formaLogin {
-	padding-top: 100px;
+	padding-top: 5%;
 	/*padding-left: 50px;*/
 	background-color: #FFFFFF;
 }
