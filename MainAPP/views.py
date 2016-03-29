@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.core import urlresolvers
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from . import hardcode
+from . import hardcode, queries
 
 
 # Create your views here.

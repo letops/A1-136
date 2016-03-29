@@ -1,7 +1,8 @@
 from django.db.models import Prefetch
-from . import models
+from easy_thumbnails import files
+from PIL import Image
 import sys
-# import Image as PillowImaging
+from . import models
 
 
 def CanvasCategories(user, filters=None):
@@ -52,11 +53,22 @@ def CanvasUserPositionSave(user, isometric_pk, row, column):
 
 
 def Share(user):
-    # TODO!!
-    positions = user.positions
+    size = 350
+    positions = user.positions.prefetch_related(
+        Prefetch(
+           'isometric_image',
+           queryset=models.IsometricImage.objects.filter(hidden=False)
+        ),
+    ).all()
     if len(positions) > 0:
-        pass
+        out = Image.new("RGB", (size*4, size*4), "white")
+        for position in positions:
+            out.paste(Image.open(
+                files.get_thumbnailer(position.isometric_image.image)[
+                    '{size}px'.format(size=size)
+                ]),
+                (int(position.column*size), int(position.row*size)))
+        out.save("out.png")
+        return True
     else:
-        pass
-    result = ''
-    return result
+        return False
