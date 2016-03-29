@@ -18,8 +18,7 @@ class CanvasInfo(apiViews.WebAPIView):
         self.environment.load_data(
             'list',
             user=request.user,
-            filters=filters
-        )
+            filters=filters)
         if len(self.environment.permissions) == 0 or \
                 request.user.has_perms(self.environment.permissions):
             serial = self.environment.serializer(

@@ -25,6 +25,7 @@ errors_list = {
     },
     'body': {
         'no_action': _ug('We are sorry. You are trying to execute an unknown or prohibited action.'),
+        'missing_step': _ug('We are sorry. You must complete the previous steps to execute this action.'),
         'bad_login': _ug('The user/password combination is invalid. Please try again.'),
         'no_perm': _ug('You do not have enough permissions to execute this action. If this is a mistake, '
                        'please contact the administrator.'),
