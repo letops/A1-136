@@ -72,9 +72,13 @@ var Sidebar = React.createClass({
         '' : 'hidden'
       );
       var ClusterNodes = category.clusters.map(function (cluster) {
+        var hiddenIsos = false;
         var IsometricNodes = cluster.isometric_images.map(function (isoimage) {
+          var hideMe = hiddenIsos;
+          hiddenIsos = true;
           return (
             <Isometric
+              hide = {hideMe}
               imageUrl={isoimage.url}
               key={isoimage.id}
               imageId={isoimage.id}
@@ -92,7 +96,7 @@ var Sidebar = React.createClass({
       return (
         <div
           key={category.id} id={category.id  + '-' + category.name}
-          className={'category ' + hideCategory}
+          className={'grid category ' + hideCategory}
         >
           {ClusterNodes}
         </div>
