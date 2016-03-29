@@ -10,6 +10,7 @@ var Sidebar = React.createClass({
   getInitialState: function () {
     return {
       categories: '',
+      selected: '',
     };
   },
 
@@ -33,6 +34,7 @@ var Sidebar = React.createClass({
       success: function (result) {
         this.setState({
           categories: result,
+          selected: ((result.length > 0) ? result[0].id  + '-' + result[0].name : 'select'),
         });
       }.bind(this),
       error: function (xhr, status, err) {
@@ -41,48 +43,83 @@ var Sidebar = React.createClass({
     });
   },
 
+  change: function (event) {
+    this.setState({ selected: event.target.value });
+  },
+
+  renderOptions: function () {
+    var CategoryOptions = this.state.categories.map(function (category) {
+      return (
+        <option key={category.id} value={category.id  + '-' + category.name}>
+          {category.name}
+        </option>
+      );
+    });
+
+    return (
+      <select id='category-selector' onChange={this.change} value={this.state.selected}>
+        {CategoryOptions}
+      </select>
+    );
+  },
+
+  renderNodes: function () {
+    var imageSize = this.props.imageSize;
+    var selected = this.state.selected;
+    var CategoryNodes = this.state.categories.map(function (category) {
+      var hideCategory = (
+        (selected == category.id  + '-' + category.name) ?
+        '' : 'hidden'
+      );
+      var ClusterNodes = category.clusters.map(function (cluster) {
+        var IsometricNodes = cluster.isometric_images.map(function (isoimage) {
+          return (
+            <Isometric
+              imageUrl={isoimage.url}
+              key={isoimage.id}
+              imageId={isoimage.id}
+            />
+          );
+        });
+
+        return (
+          <div key={cluster.id}>
+            {IsometricNodes}
+          </div>
+        );
+      });
+
+      return (
+        <div
+          key={category.id} id={category.id  + '-' + category.name}
+          className={'category ' + hideCategory}
+        >
+          {ClusterNodes}
+        </div>
+      );
+    });
+
+    return CategoryNodes;
+  },
+
   render: function () {
     if (this.state.categories === null || this.state.categories === '') {
       return (
-        <div>
-          <p className='loading'>
+        <div className='col-md-offset-1 col-md-3 col-xs-offset-1 col-xs-2 colClass2'>
+          <h1 className="title">Drag &amp; Drop</h1>
+          <p className="description">
+            Quisque vel nisl diam sed consectetur sed magna nec posuere.
+          </p>
+
+          <p>
             Loading
           </p>
         </div>
       );
     } else {
-      var imageSize = this.props.imageSize;
-      var CategoryOptions = this.state.categories.map(function (category) {
-        return (
-          <li key={category.id} ><a href="#">{category.name}</a></li>
-        );
-      });
 
-      var CategoryNodes = this.state.categories.map(function (category) {
-        var ClusterNodes = category.clusters.map(function (cluster) {
-          var IsometricNodes = cluster.isometric_images.map(function (isoimage) {
-            return (
-              <Isometric
-                imageUrl={isoimage.url}
-                key={isoimage.id}
-                imageId={isoimage.id}
-              />
-            );
-          });
-
-          return (
-            <div key={cluster.id}>
-              {IsometricNodes}
-            </div>
-          );
-        });
-
-        return (
-          <div key={category.id} id={category.name} className='category'>
-            {ClusterNodes}
-          </div>
-        );
-      });
+      var CategoryOptions = this.renderOptions();
+      var CategoryNodes = this.renderNodes();
 
       return (
         <div className='col-md-offset-1 col-md-3 col-xs-offset-1 col-xs-2 colClass2'>
@@ -90,17 +127,7 @@ var Sidebar = React.createClass({
           <p className="description">
             Quisque vel nisl diam sed consectetur sed magna nec posuere.
           </p>
-          <div className="dropdown">
-            <button className="btn btn-default dropdown-toggle dropdownStyle"
-              type="button" data-toggle="dropdown">
-              <p className="dropdownText fontText">Dropdown
-                <span className="caret"></span>
-              </p>
-            </button>
-            <ul className="dropdown-menu">
-              {CategoryOptions}
-            </ul>
-          </div>
+          {CategoryOptions}
           {CategoryNodes}
         </div>
       );
