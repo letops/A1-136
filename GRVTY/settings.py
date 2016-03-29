@@ -390,7 +390,7 @@ THUMBNAIL_ALIASES = {
         '350px': {'size': (350, 350), 'crop': True},
         '500px': {'size': (500, 500), 'crop': True},
         # -------------------- RENDERS ---------------------
-        '270': {'size': (270, 270), 'crop': True},
+        '270px': {'size': (270, 270), 'crop': True},
         '600px': {'size': (600, 600), 'crop': True},
         '800px': {'size': (800, 800), 'crop': True},
         '1000px': {'size': (1000, 1000), 'crop': True},
