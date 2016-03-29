@@ -33,6 +33,8 @@ cluster_name_length = 50
 
 isometric_image_photo = "isometrics/no-img.jpg"
 
+render_image_photo = "renders/no-img.jpg"
+
 question_text_length = 200
 
 answer_text_length = 50
@@ -46,3 +48,8 @@ def user_avatar_upload(instance, filename):
 def isometric_image_upload(instance, filename):
     fn, ext = os.path.splitext(filename)
     return "isometrics/{id}{ext}".format(id=instance.pk, ext=ext)
+
+
+def render_image_upload(instance, filename):
+    fn, ext = os.path.splitext(filename)
+    return "renders/{id}{ext}".format(id=instance.pk, ext=ext)

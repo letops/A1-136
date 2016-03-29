@@ -53,14 +53,16 @@ def CanvasUserPositionSave(user, isometric_pk, row, column):
 
 
 def Share(user):
-    size = 350
+    size = 270
+    render, created = models.Render.objects.get_or_create(user=user)
     positions = user.positions.prefetch_related(
         Prefetch(
            'isometric_image',
            queryset=models.IsometricImage.objects.filter(hidden=False)
         ),
     ).all()
-    if len(positions) > 0:
+    updated = positions.filter(edition_date__gt=render.edition_date)
+    if created is True or len(updated) > 0:
         out = Image.new("RGB", (size*4, size*4), "white")
         for position in positions:
             out.paste(Image.open(
@@ -68,6 +70,7 @@ def Share(user):
                     '{size}px'.format(size=size)
                 ]),
                 (int(position.column*size), int(position.row*size)))
+
         out.save("out.png")
         return True
     else:
