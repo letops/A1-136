@@ -1,7 +1,10 @@
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.db.models import Prefetch
-from . import models
+from easy_thumbnails import files
+import io
+from PIL import Image
 import sys
-# import Image as PillowImaging
+from . import models
 
 
 def CanvasCategories(user, filters=None):
@@ -52,11 +55,44 @@ def CanvasUserPositionSave(user, isometric_pk, row, column):
 
 
 def Share(user):
-    # TODO!!
-    positions = user.positions
-    if len(positions) > 0:
-        pass
+    size = 270
+    render = None
+    updated = []
+
+    render, created = models.Render.objects.get_or_create(
+        user=user
+    )
+
+    positions = user.positions.prefetch_related(
+        Prefetch(
+           'isometric_image',
+           queryset=models.IsometricImage.objects.filter(hidden=False)
+        ),
+    ).all()
+
+    if created is False:
+        updated = positions.filter(edition_date__gt=render.edition_date)
+
+    if created is True or len(updated) > 0:
+        temporal = io.BytesIO()
+        image_render = Image.new("RGB", (size*4, size*4), "white")
+
+        for position in positions:
+            image_render.paste(Image.open(
+                files.get_thumbnailer(position.isometric_image.image)[
+                    '{size}px'.format(size=size)
+                ]), (int(position.column*size), int(position.row*size))
+            )
+
+        image_render.save(temporal, format="png")  # save the content to temp
+        temporal.seek(0)
+        suf = SimpleUploadedFile('temporal',
+                                 temporal.read(),
+                                 content_type='image/png')
+        render.image.save(suf.name+'.png', suf, save=False)
+
+        render.save()
+        # image_render.save("out.png")
+        return True
     else:
-        pass
-    result = ''
-    return result
+        return False
