@@ -41,10 +41,10 @@ def canvas(request):
 
 @login_required()
 def share(request):
-    result = queries.Share(user=request.user)
+    image_render = queries.Share(user=request.user)
 
     return render(
         request,
         'share.html',
-        {"result": result}
+        {"image_render": image_render}
     )
