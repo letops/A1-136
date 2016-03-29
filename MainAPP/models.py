@@ -413,3 +413,33 @@ class Answer(models.Model):
 
     def __str__(self):
         return "{text}".format(text=self.text[:80])
+
+
+class Render(models.Model):
+    user = models.OneToOneField(
+        CustomUser,
+        related_name='render',
+        verbose_name=_ug('User')
+    )
+    image = ThumbnailerImageField(
+        upload_to=hardcode.render_image_upload,
+        default=hardcode.render_image_photo,
+        blank=False,
+        null=False,
+        verbose_name=_ug('Rendered Image')
+    )
+    edition_date = models.DateTimeField(
+        auto_now=True,
+        verbose_name=_ug('Last edition date')
+    )
+
+    class Meta:
+        verbose_name = _ug('Render')
+        verbose_name_plural = _ug('Renders')
+        permissions = (
+            ('query_render', 'Can query Render'),
+            ('list_render', 'Can list Renders'),
+        )
+
+    def __str__(self):
+        return "{user}".format(user=self.user)
