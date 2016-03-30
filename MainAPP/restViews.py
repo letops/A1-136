@@ -6,7 +6,7 @@ from rest_framework.decorators import detail_route, list_route
 from rest_framework.response import Response
 
 
-class CanvasInfo(apiViews.WebAPIView):
+class CanvasInfo(apiViews.EmptyAPIView):
     environment = RESTEnvironment('CanvasInfo')
     authentication_classes = (
         authentication.SessionAuthentication,

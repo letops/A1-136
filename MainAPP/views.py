@@ -4,6 +4,38 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from . import hardcode, queries
 
+from .generic import apiViews
+from .environments import RESTEnvironment
+from rest_framework import status, authentication, permissions
+from rest_framework.decorators import detail_route, list_route
+from rest_framework.response import Response
+
+
+def html404(request):
+    pass
+
+
+class Poll(apiViews.EmptyAPIView):
+    environment = RESTEnvironment('Poll')
+    authentication_classes = (
+        authentication.SessionAuthentication,
+    )
+    permission_classes = (permissions.IsAuthenticated, )
+
+    def list(self, request, format=None):
+        self.environment.load_data(
+            'list',
+            user=request.user)
+        serial = self.environment.serializer(
+            self.environment.query,
+            many=True,
+            read_only=True)
+        return render(
+            request,
+            'poll.html',
+            {'data': serial.data}
+        )
+
 
 # Create your views here.
 @login_required()
@@ -19,14 +51,21 @@ def home(request):
         return HttpResponseRedirect(urlresolvers.reverse('share'))
 
 
-@login_required()
-def poll(request):
-    result = ''
-    return render(
-        request,
-        'poll.html',
-        {"result": result}
-    )
+# @login_required()
+# def poll(request):
+#     if request.method == 'POST':
+#         if queries.PollFinish(request.user) is True:
+#             return HttpResponseRedirect(urlresolvers.reverse('canvas'))
+#         msg.generate_msg(
+#             request=request, state=msg.RED,
+#             title=msg.errors_list['title']['500'],
+#             body=msg.errors_list['body']['ticket'])
+#     result = ''
+#     return render(
+#         request,
+#         'poll.html',
+#         {"result": result}
+#     )
 
 
 @login_required()

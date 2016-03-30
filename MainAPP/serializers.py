@@ -26,6 +26,14 @@ class FullSafeUserSerializer(serializers.ModelSerializer):
         )
 
 
+class PollSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Question
+        fields = (
+            'id'
+        )
+
+
 class CanvasImagesSerializer(serializers.ModelSerializer):
     url = serializers.SerializerMethodField('get_image_thumbnail')
 
@@ -33,7 +41,7 @@ class CanvasImagesSerializer(serializers.ModelSerializer):
         model = models.IsometricImage
         fields = (
             'id',
-            'url',  # FIXME: Potential fix, because it displays "urls" in all images
+            'url',
         )
 
     def get_image_thumbnail(self, obj):
