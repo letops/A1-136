@@ -28,7 +28,7 @@ var gridTarget = {
 
         async: 'true',
         type: 'POST',
-        url: '../rest/CanvasInfo/save/',
+        url: 'save/',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         data: JSON.stringify(

@@ -28,7 +28,7 @@ var Sidebar = React.createClass({
       },
 
       type: 'POST',
-      url: '../rest/CanvasInfo/',
+      url: 'images/',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       data: JSON.stringify({ filters: filtersvar }),

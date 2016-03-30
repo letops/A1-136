@@ -27,7 +27,7 @@ var Grid = React.createClass({
       },
 
       type: 'POST',
-      url: '../rest/CanvasInfo/cached/',
+      url: 'cached/',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       data: JSON.stringify({ filters: filtersvar }),
