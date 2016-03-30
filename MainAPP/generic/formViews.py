@@ -8,7 +8,6 @@ from django.template import RequestContext
 from django.utils.translation import ugettext as _ug
 
 
-@login_required()
 @transaction.atomic()
 def WebFormView(request, environment, pk=None):
     environment.load_data(request.method, pk)

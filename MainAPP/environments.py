@@ -18,10 +18,10 @@ class Environment:
         self.method = method
         self.pk = pk
         if self.section == 'Poll':
-            if self.method == '':
-                self.serializer = forms.CustomUserSignUpForm
-                self.template = ''
-                self.redirect_urlname = ''
+            if self.method == 'POST':
+                self.serializer = forms.PollForm
+                self.template = 'poll.html'
+                self.redirect_urlname = 'canvas'
                 self.permissions = []
                 self.query = None
 
@@ -60,3 +60,9 @@ class RESTEnvironment(object):
                     kwargs.get("imageId", None),
                     kwargs.get("row", None),
                     kwargs.get("column", None))
+
+        if self.section == 'Poll':
+            if self.method == 'list':
+                self.serializer = serializers.PollSerializer
+                self.permissions = []
+                self.query = queries.Poll()

@@ -7,6 +7,11 @@ import sys
 from . import models
 
 
+def Poll():
+    poll = models.Question.objects.filter(hidden=False)
+    return poll
+
+
 def PollFinish(user):
     if(user.step in (hardcode.STEP_POLL, hardcode.STEP_UNKNOWN)):
         user.step == hardcode.STEP_CANVAS
