@@ -1,10 +1,11 @@
 var React = require('react');
-var Isometric = require('./isometric');
+var PropTypes = React.PropTypes;
 var Csrf = require('./csrf');
+var Cluster = require('./cluster');
 
 var Sidebar = React.createClass({
   propTypes: {
-    imageSize: React.PropTypes.string.isRequired,
+    imageSize: PropTypes.string.isRequired,
   },
 
   getInitialState: function () {
@@ -68,28 +69,16 @@ var Sidebar = React.createClass({
     var selected = this.state.selected;
     var CategoryNodes = this.state.categories.map(function (category) {
       var hideCategory = (
-        (selected == category.id  + '-' + category.name) ?
-        '' : 'hidden'
+        (selected == category.id  + '-' + category.name) ? '' : 'hidden'
       );
       var ClusterNodes = category.clusters.map(function (cluster) {
-        var hiddenIsos = false;
-        var IsometricNodes = cluster.isometric_images.map(function (isoimage) {
-          var hideMe = hiddenIsos;
-          hiddenIsos = true;
-          return (
-            <Isometric
-              hide = {hideMe}
-              imageUrl={isoimage.url}
-              key={isoimage.id}
-              imageId={isoimage.id}
-            />
-          );
-        });
-
         return (
-          <div key={cluster.id}>
-            {IsometricNodes}
-          </div>
+          <Cluster
+            key={cluster.id}
+            id={cluster.id}
+            name={cluster.name}
+            isometric_images={cluster.isometric_images}
+          />
         );
       });
 

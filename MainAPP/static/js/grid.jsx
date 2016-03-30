@@ -56,7 +56,7 @@ var Grid = React.createClass({
     var column = i % 4;
     var row = Math.floor(i / 4);
     var cached = this.state.cached;
-    if (cached != '') {
+    if (cached != '' && cached != null) {
       for (var j = 0; j < cached.length; j++) {
         if (cached[j].column == column && cached[j].row == row) {
           return (
