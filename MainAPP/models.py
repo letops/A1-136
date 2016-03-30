@@ -296,6 +296,13 @@ class Question(models.Model):
         null=False,
         verbose_name=_ug('Text')
     )
+    style = models.IntegerField(
+        default=hardcode.STYLE_RADIO,
+        choices=hardcode.STYLES,
+        blank=False,
+        null=False,
+        verbose_name=_ug('Style')
+    )
     edition_date = models.DateTimeField(
         auto_now=True,
         verbose_name=_ug('Last edition date')
