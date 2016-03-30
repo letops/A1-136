@@ -7,24 +7,21 @@ class Environment:
         self.section = section
 
         self.method = None
-        self.model = None
-        self.data_model = None
         self.serializer = None
-        self.function = None
         self.template = None
         self.redirect_urlname = None
         self.query = None
         self.permissions = []
+        self.pk = None
 
-    def load_data(self, method, **kwargs):
+    def load_data(self, method, pk, **kwargs):
         self.method = method
-        if self.section == 'customuser':
-            self.model = 'CustomUser'
-            self.data_model = models.CustomUser
-            if self.method == 'signup':
+        self.pk = pk
+        if self.section == 'Poll':
+            if self.method == '':
                 self.serializer = forms.CustomUserSignUpForm
-                self.template = 'signup.html'
-                self.redirect_urlname = 'home'
+                self.template = ''
+                self.redirect_urlname = ''
                 self.permissions = []
                 self.query = None
 
