@@ -71,7 +71,29 @@ class RESTEnvironment(object):
                 self.query = queries.CanvasFinish(user)
 
         if self.section == 'Poll':
-            if self.method == 'list':
+            self.template = 'poll.html'
+
+            if self.method == 'questions':
                 self.serializer = serializers.PollSerializer
                 self.permissions = []
                 self.query = queries.Poll()
+
+            if self.method == 'cached':
+                self.serializer = serializers.PollUserCacheSerializer
+                self.permissions = []
+                self.query = queries.PollUserCache(user)
+
+            if self.method == 'radio':
+                self.permissions = []
+                self.query = queries.PollQuestionRadioSave(
+                    user,
+                    kwargs.get("questionId", None),
+                    kwargs.get("answerId", None))
+
+            if self.method == 'priority':
+                self.permissions = []
+                self.query = queries.PollQuestionPrioritySave(
+                    user,
+                    kwargs.get("questionId", None),
+                    kwargs.get("answerId", None),
+                    kwargs.get("weight", None))

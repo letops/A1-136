@@ -10,12 +10,7 @@ if (typeof CONST_IMAGESIZE == 'undefined' || CONST_IMAGESIZE == null) {
   alert('No CONST_IMAGESIZE has been defined globally');
 }
 
-//var observe = require('./game').observe;
-
-//observe(function (knightPosition) {
 ReactDOM.render(
   <Context imageSize={CONST_IMAGESIZE}/>,
   document.getElementById('content')
 );
-
-//});
