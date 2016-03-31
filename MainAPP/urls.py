@@ -12,7 +12,7 @@ restpatterns = restRouter.urls
 
 normalRouter = routers.CustomGenericRouter()
 normalRouter.register(r'poll', views.Poll, base_name='poll')
-normalRouter.register(r'canvas', views.Canvas, base_name='Canvas')
+normalRouter.register(r'canvas', views.Canvas, base_name='canvas')
 normalpatterns = normalRouter.urls
 
 urlpatterns = [

@@ -1,10 +1,9 @@
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.db.models import Prefetch
 from easy_thumbnails import files
-import io
+from io import BytesIO
 from PIL import Image
-import sys
-from . import models
+from . import models, hardcode
 
 
 def Poll():
@@ -14,7 +13,7 @@ def Poll():
 
 def PollFinish(user):
     if(user.step in (hardcode.STEP_POLL, hardcode.STEP_UNKNOWN)):
-        user.step == hardcode.STEP_CANVAS
+        user.step = hardcode.STEP_CANVAS
         # FIXME: Uncomment to continue
         # user.save()
         return True
@@ -68,6 +67,16 @@ def CanvasUserPositionSave(user, isometric_pk, row, column):
     return True
 
 
+def CanvasFinish(user):
+    if(user.step == hardcode.STEP_CANVAS):
+        user.step = hardcode.STEP_DONE
+        # FIXME: Uncomment to continue
+        # user.save()
+        print("Changed user to: {}".format(user.step))
+        return True
+    return False
+
+
 def Share(user):
     size = 270
     render = None
@@ -88,7 +97,7 @@ def Share(user):
         updated = positions.filter(edition_date__gt=render.edition_date)
 
     if created is True or len(updated) > 0:
-        temporal = io.BytesIO()
+        temporal = BytesIO()
         image_render = Image.new("RGB", (size*4, size*4), "white")
 
         for position in positions:

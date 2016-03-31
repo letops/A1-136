@@ -53,8 +53,8 @@ var Grid = React.createClass({
   },
 
   renderCell: function (i) {
-    var column = i % 4;
-    var row = Math.floor(i / 4);
+    var column = i % CONST_GRIDSIZE;
+    var row = Math.floor(i / CONST_GRIDSIZE);
     var cached = this.state.cached;
     if (cached != '' && cached != null) {
       for (var j = 0; j < cached.length; j++) {
@@ -85,9 +85,9 @@ var Grid = React.createClass({
   render: function () {
     var rows = [];
     var cells = [];
-    for (i = 0; i < 4; i++) {
-      for (j = 0; j < 4; j++) {
-        var k = (i * 4) + j;
+    for (i = 0; i < CONST_GRIDSIZE; i++) {
+      for (j = 0; j < CONST_GRIDSIZE; j++) {
+        var k = (i * CONST_GRIDSIZE) + j;
         cells.push(this.renderCell(k));
       }
 
