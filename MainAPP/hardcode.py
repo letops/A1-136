@@ -36,6 +36,12 @@ isometric_image_photo = "isometrics/no-img.jpg"
 render_image_photo = "renders/no-img.jpg"
 
 question_text_length = 200
+STYLE_RADIO = 0
+STYLE_PRIORITY = 1
+STYLES = (
+    (STYLE_RADIO, _ug('Radio')),
+    (STYLE_PRIORITY, _ug('Priority')),
+)
 
 answer_text_length = 50
 

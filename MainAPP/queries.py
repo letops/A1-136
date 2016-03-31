@@ -1,9 +1,8 @@
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.db.models import Prefetch
 from easy_thumbnails import files
-import io
+from io import BytesIO
 from PIL import Image
-import sys
 from . import models
 
 
@@ -38,7 +37,6 @@ def CanvasUserCache(user, filters=None):
 
 
 def CanvasUserPositionSave(user, isometric_pk, row, column):
-    print('{} {} {} {}'.format(user, isometric_pk, row, column))
     saved = False
     position, created = models.Position.objects.update_or_create(
         user=user,
@@ -71,7 +69,7 @@ def Share(user):
         updated = positions.filter(edition_date__gt=render.edition_date)
 
     if created is True or len(updated) > 0:
-        temporal = io.BytesIO()
+        temporal = BytesIO()
         image_render = Image.new("RGB", (size*4, size*4), "white")
 
         for position in positions:
@@ -87,7 +85,6 @@ def Share(user):
                                  temporal.read(),
                                  content_type='image/png')
         render.image.save(suf.name+'.png', suf, save=False)
-
         render.save()
 
     return render.image.url

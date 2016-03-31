@@ -1,7 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var GridCell = require('./gridcell.jsx');
-var Csrf = require('./csrf');
+var Csrf = require('../tools/csrf');
 
 var Grid = React.createClass({
   propTypes: {
@@ -27,7 +27,7 @@ var Grid = React.createClass({
       },
 
       type: 'POST',
-      url: '../rest/CanvasInfo/cached/',
+      url: 'cached/',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       data: JSON.stringify({ filters: filtersvar }),
@@ -37,7 +37,7 @@ var Grid = React.createClass({
         });
       }.bind(this),
       error: function (xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
+        console.error('URL: cached/', status, err.toString());
       }.bind(this),
     });
   },
@@ -53,10 +53,10 @@ var Grid = React.createClass({
   },
 
   renderCell: function (i) {
-    var column = i % 4;
-    var row = Math.floor(i / 4);
+    var column = i % CONST_GRIDSIZE;
+    var row = Math.floor(i / CONST_GRIDSIZE);
     var cached = this.state.cached;
-    if (cached != '') {
+    if (cached != '' && cached != null) {
       for (var j = 0; j < cached.length; j++) {
         if (cached[j].column == column && cached[j].row == row) {
           return (
@@ -85,9 +85,9 @@ var Grid = React.createClass({
   render: function () {
     var rows = [];
     var cells = [];
-    for (i = 0; i < 4; i++) {
-      for (j = 0; j < 4; j++) {
-        var k = (i * 4) + j;
+    for (i = 0; i < CONST_GRIDSIZE; i++) {
+      for (j = 0; j < CONST_GRIDSIZE; j++) {
+        var k = (i * CONST_GRIDSIZE) + j;
         cells.push(this.renderCell(k));
       }
 
