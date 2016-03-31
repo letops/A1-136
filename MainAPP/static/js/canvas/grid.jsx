@@ -1,7 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var GridCell = require('./gridcell.jsx');
-var Csrf = require('./csrf');
+var Csrf = require('../tools/csrf');
 
 var Grid = React.createClass({
   propTypes: {
@@ -27,7 +27,7 @@ var Grid = React.createClass({
       },
 
       type: 'POST',
-      url: '../rest/CanvasInfo/cached/',
+      url: 'cached/',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       data: JSON.stringify({ filters: filtersvar }),
@@ -56,7 +56,7 @@ var Grid = React.createClass({
     var column = i % 4;
     var row = Math.floor(i / 4);
     var cached = this.state.cached;
-    if (cached != '') {
+    if (cached != '' && cached != null) {
       for (var j = 0; j < cached.length; j++) {
         if (cached[j].column == column && cached[j].row == row) {
           return (

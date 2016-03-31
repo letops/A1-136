@@ -42,8 +42,10 @@ class RESTEnvironment(object):
         self.filters = kwargs.get("filters", None)
         user = kwargs.get("user", None)
 
-        if self.section == 'CanvasInfo':
-            if self.method == 'list':
+        if self.section == 'Canvas':
+            self.template = 'canvas.html'
+
+            if self.method == 'images':
                 self.serializer = serializers.CanvasCategoriesSerializer
                 self.permissions = []
                 self.query = queries.CanvasCategories(user, self.filters)

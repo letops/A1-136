@@ -10,8 +10,6 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
   Backend = require('react-dnd-html5-backend');
 }
 
-//var Grid = require('./grid');
-
 var Context = React.createClass({
   propTypes: {
     imageSize: React.PropTypes.string.isRequired,
