@@ -30,8 +30,7 @@ class Poll(apiViews.EmptyAPIView):
                 request.user.has_perms(self.environment.permissions):
             return render(
                 request,
-                self.environment.template,
-            )
+                self.environment.template)
         else:
             return html404(request=request)
 
@@ -55,8 +54,8 @@ class Poll(apiViews.EmptyAPIView):
         self.environment.load_data(
             'radio',
             user=request.user,
-            questionId=request.data.get("questionId", None),
-            answerId=request.data.get("answerId", None))
+            questionId=request.data.get('questionId', None),
+            answerId=request.data.get('answerId', None))
         if len(self.environment.permissions) == 0 or \
                 request.user.has_perms(self.environment.permissions):
             if self.environment.query is not True:
@@ -70,9 +69,9 @@ class Poll(apiViews.EmptyAPIView):
         self.environment.load_data(
             'priority',
             user=request.user,
-            questionId=request.data.get("questionId", None),
-            answerId=request.data.get("answerId", None),
-            weight=request.data.get("weight", None))
+            questionId=request.data.get('questionId', None),
+            answerId=request.data.get('answerId', None),
+            weight=request.data.get('weight', None))
         if len(self.environment.permissions) == 0 or \
                 request.user.has_perms(self.environment.permissions):
             if self.environment.query is not True:
@@ -81,6 +80,18 @@ class Poll(apiViews.EmptyAPIView):
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
+    @list_route(methods=['post'])
+    def finish(self, request, format=None):
+        self.environment.load_data(
+            'finish',
+            user=request.user)
+        if len(self.environment.permissions) == 0 or \
+                request.user.has_perms(self.environment.permissions):
+            if self.environment.query is not True:
+                return HttpResponseRedirect(urlresolvers.reverse('poll-list'))
+            return HttpResponseRedirect(urlresolvers.reverse('canvas-list'))
+        else:
+            return HttpResponseRedirect(urlresolvers.reverse('poll-list'))
 
 class Canvas(apiViews.EmptyAPIView):
     environment = RESTEnvironment('Canvas')
@@ -180,23 +191,6 @@ def home(request):
         return HttpResponseRedirect(urlresolvers.reverse('share'))
     else:
         return HttpResponseRedirect(urlresolvers.reverse('share'))
-
-
-# @login_required()
-# def poll(request):
-#     if request.method == 'POST':
-#         if queries.PollFinish(request.user) is True:
-#             return HttpResponseRedirect(urlresolvers.reverse('canvas'))
-#         msg.generate_msg(
-#             request=request, state=msg.RED,
-#             title=msg.errors_list['title']['500'],
-#             body=msg.errors_list['body']['ticket'])
-#     result = ''
-#     return render(
-#         request,
-#         'poll.html',
-#         {"result": result}
-#     )
 
 
 @login_required()

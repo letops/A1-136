@@ -35,7 +35,7 @@ class AnswerSerializer(serializers.ModelSerializer):
         )
 
 
-class PollSerializer(serializers.ModelSerializer):
+class PollQuestionsSerializer(serializers.ModelSerializer):
     answers = AnswerSerializer(many=True, read_only=True)
 
     class Meta:

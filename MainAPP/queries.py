@@ -6,7 +6,7 @@ from PIL import Image
 from . import models, hardcode
 
 
-def Poll():
+def PollQuestions():
     poll = models.Question.objects.filter(hidden=False).prefetch_related(
         Prefetch(
             'answers',
@@ -17,8 +17,6 @@ def Poll():
 
 
 def PollQuestionRadioSave(user, question_pk, answer_pk):
-    print('{} - {}'.format(question_pk, answer_pk))
-    saved = False
     selection, created = models.Selection.objects.update_or_create(
         user=user,
         question=models.Question.objects.get(pk=question_pk),
@@ -32,19 +30,15 @@ def PollQuestionRadioSave(user, question_pk, answer_pk):
 
 
 def PollQuestionPrioritySave(user, question_pk, answer_pk, weight):
-    print('{} {} {} {}'.format(user, isometric_pk, row, column))
-    saved = False
-    position, created = models.Position.objects.update_or_create(
+    selection, created = models.Selection.objects.update_or_create(
         user=user,
-        row=row,
-        column=column,
+        question=models.Question.objects.get(pk=question_pk),
+        answer=models.Answer.objects.get(pk=answer_pk),
         defaults={
-            'isometric_image': models.IsometricImage.objects.get(
-                pk=isometric_pk)
+            'weight': weight
         }
     )
-    print('{}'.format(position))
-    position.save()
+    selection.save()
     return True
 
 

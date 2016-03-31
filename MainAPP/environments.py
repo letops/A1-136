@@ -73,10 +73,13 @@ class RESTEnvironment(object):
         if self.section == 'Poll':
             self.template = 'poll.html'
 
-            if self.method == 'questions':
-                self.serializer = serializers.PollSerializer
+            if self.method == 'list':
                 self.permissions = []
-                self.query = queries.Poll()
+
+            if self.method == 'questions':
+                self.serializer = serializers.PollQuestionsSerializer
+                self.permissions = []
+                self.query = queries.PollQuestions()
 
             if self.method == 'cached':
                 self.serializer = serializers.PollUserCacheSerializer
@@ -97,3 +100,7 @@ class RESTEnvironment(object):
                     kwargs.get("questionId", None),
                     kwargs.get("answerId", None),
                     kwargs.get("weight", None))
+
+            if self.method == 'finish':
+                self.permissions = []
+                self.query = queries.PollFinish(user)
