@@ -1,7 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var GridCell = require('./gridcell.jsx');
-var Csrf = require('./csrf');
+var Csrf = require('../tools/csrf');
 
 var Grid = React.createClass({
   propTypes: {

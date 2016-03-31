@@ -6,7 +6,7 @@ module.exports = {
   context: __dirname,
 
   entry: {
-    canvas: './built/js/canvas.jsx',
+    canvas: './built/js/canvas/canvas.jsx',
   },
   output: {
     path: path.resolve('./built/bundles/'),

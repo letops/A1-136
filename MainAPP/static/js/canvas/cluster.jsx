@@ -24,7 +24,7 @@ var Cluster = React.createClass({
         />
       );
     });
-    
+
     return (
       <div key={this.props.id}>
         {IsometricNodes}

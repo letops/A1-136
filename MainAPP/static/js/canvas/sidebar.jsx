@@ -1,7 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
-var Csrf = require('./csrf');
 var Cluster = require('./cluster');
+var Csrf = require('../tools/csrf');
 
 var Sidebar = React.createClass({
   propTypes: {

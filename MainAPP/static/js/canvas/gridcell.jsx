@@ -2,7 +2,7 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var ItemTypes = require('./constants').ItemTypes;
 var DropTarget = require('react-dnd').DropTarget;
-var Csrf = require('./csrf');
+var Csrf = require('../tools/csrf');
 
 var gridTarget = {
 
