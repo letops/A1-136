@@ -3,6 +3,6 @@ var ReactDOM = require('react-dom');
 var Context = require('./context');
 
 ReactDOM.render(
-  <Context imageSize="150px"/>,
+  <Context />,
   document.getElementById('content')
 );

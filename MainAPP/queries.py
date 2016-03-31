@@ -8,7 +8,12 @@ from . import models
 
 
 def Poll():
-    poll = models.Question.objects.filter(hidden=False)
+    poll = models.Question.objects.filter(hidden=False).prefetch_related(
+        Prefetch(
+            'answers',
+            queryset=models.Answer.objects.filter(hidden=False)
+        )
+    )
     return poll
 
 

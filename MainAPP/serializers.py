@@ -26,13 +26,25 @@ class FullSafeUserSerializer(serializers.ModelSerializer):
         )
 
 
+class AnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Answer
+        fields = (
+            'id',
+            'text'
+        )
+
+
 class PollSerializer(serializers.ModelSerializer):
+    answers = AnswerSerializer(many=True, read_only=True)
+
     class Meta:
         model = models.Question
         fields = (
             'id',
             'text',
             'style',
+            'answers'
         )
 
 

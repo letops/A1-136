@@ -64,7 +64,9 @@ class RESTEnvironment(object):
                     kwargs.get("column", None))
 
         if self.section == 'Poll':
-            if self.method == 'list':
+            self.template = 'poll.html'
+
+            if self.method == 'questions':
                 self.serializer = serializers.PollSerializer
                 self.permissions = []
                 self.query = queries.Poll()

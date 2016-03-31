@@ -26,15 +26,29 @@ class Poll(apiViews.EmptyAPIView):
         self.environment.load_data(
             'list',
             user=request.user)
-        serial = self.environment.serializer(
-            self.environment.query,
-            many=True,
-            read_only=True)
-        return render(
-            request,
-            'poll.html',
-            {'data': serial.data}
-        )
+        if len(self.environment.permissions) == 0 or \
+                request.user.has_perms(self.environment.permissions):
+            return render(
+                request,
+                self.environment.template,
+            )
+        else:
+            return html404(request=request)
+
+    @list_route(methods=['get'])
+    def questions(self, request, format=None):
+        self.environment.load_data(
+            'questions',
+            user=request.user)
+        if len(self.environment.permissions) == 0 or \
+                request.user.has_perms(self.environment.permissions):
+            serial = self.environment.serializer(
+                self.environment.query,
+                many=True,
+                read_only=True)
+            return Response(serial.data, status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_403_FORBIDDEN)
 
 
 class Canvas(apiViews.EmptyAPIView):
