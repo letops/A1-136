@@ -109,15 +109,28 @@ class Canvas(apiViews.EmptyAPIView):
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
+    @list_route(methods=['post'])
+    def finish(self, request, format=None):
+        self.environment.load_data(
+            'finish',
+            user=request.user)
+        if len(self.environment.permissions) == 0 or \
+                request.user.has_perms(self.environment.permissions):
+            if self.environment.query is not True:
+                return HttpResponseRedirect(urlresolvers.reverse('canvas-list'))
+            return HttpResponseRedirect(urlresolvers.reverse('share'))
+        else:
+            return HttpResponseRedirect(urlresolvers.reverse('canvas-list'))
+
 
 # Create your views here.
 @login_required()
 def home(request):
     step = request.user.step
     if step in (hardcode.STEP_UNKNOWN, hardcode.STEP_POLL):
-        return HttpResponseRedirect(urlresolvers.reverse('poll'))
+        return HttpResponseRedirect(urlresolvers.reverse('poll-list'))
     elif step == hardcode.STEP_CANVAS:
-        return HttpResponseRedirect(urlresolvers.reverse('canvas'))
+        return HttpResponseRedirect(urlresolvers.reverse('canvas-list'))
     elif step == hardcode.STEP_DONE:
         return HttpResponseRedirect(urlresolvers.reverse('share'))
     else:
@@ -137,16 +150,6 @@ def home(request):
 #     return render(
 #         request,
 #         'poll.html',
-#         {"result": result}
-#     )
-
-
-# @login_required()
-# def canvas(request):
-#     result = ''
-#     return render(
-#         request,
-#         'canvas.html',
 #         {"result": result}
 #     )
 

@@ -45,6 +45,9 @@ class RESTEnvironment(object):
         if self.section == 'Canvas':
             self.template = 'canvas.html'
 
+            if self.method == 'list':
+                self.permissions = []
+
             if self.method == 'images':
                 self.serializer = serializers.CanvasCategoriesSerializer
                 self.permissions = []
@@ -62,6 +65,10 @@ class RESTEnvironment(object):
                     kwargs.get("imageId", None),
                     kwargs.get("row", None),
                     kwargs.get("column", None))
+
+            if self.method == 'finish':
+                self.permissions = []
+                self.query = queries.CanvasFinish(user)
 
         if self.section == 'Poll':
             if self.method == 'list':
