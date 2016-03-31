@@ -20,7 +20,7 @@
 {% block content %}
   <div class="container-fluid">
     <div id="content"></div>
-    <form method="post">
+    <form method="post" action={{ url('canvas-finish')}}>
       <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
       <button type="submit">Guardar</button>
     </form>
@@ -30,5 +30,9 @@
 
 {% block bottom_cdn_js %}{% endblock %}
 {% block bottom_js %}
+  <script>
+    var CONST_IMAGESIZE = '{{ CONST_IMAGESIZE }}';
+    var CONST_GRIDSIZE = {{ CONST_GRIDSIZE }};
+  </script>
   {{ render_bundle('canvas') }}
 {% endblock %}

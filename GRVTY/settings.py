@@ -62,6 +62,7 @@ INSTALLED_APPS = list(filter(None, [
     'debug_toolbar',
     'rest_framework',
     'easy_thumbnails',
+    'django_jinja',
 
     'webpack_loader',  # Webpack
 
@@ -132,17 +133,25 @@ INTERNAL_IPS = ['127.0.0.1', 'localhost', ]
 from django_jinja.builtins import DEFAULT_EXTENSIONS as DJJINJA_DEFAULT
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'BACKEND': 'django_jinja.backend.Jinja2',
         'DIRS': [
+                # NOTE: Not used, thanks to this asshole: django_jinja
                 os.path.join(DJANGO_ROOT, 'templates'),
                 os.path.join(DJANGO_ROOT, 'MainAPP/templates'),
             ],
         'APP_DIRS': True,
         'OPTIONS': {
+            "match_extension": ".html",
+            "match_regex": r"^(?!debug_toolbar/|admin/|account/|openid/|socialaccount/).*",
+            "app_dirname": "templates",
             'extensions': DJJINJA_DEFAULT + [
                 'compressor.contrib.jinja2ext.CompressorExtension',
                 'webpack_loader.contrib.jinja2ext.WebpackExtension'
             ],
+            'constants': {
+                'CONST_GRIDSIZE': 4,
+                'CONST_IMAGESIZE': '150px',
+            }
         },
     },
     {

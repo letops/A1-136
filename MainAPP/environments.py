@@ -7,24 +7,21 @@ class Environment:
         self.section = section
 
         self.method = None
-        self.model = None
-        self.data_model = None
         self.serializer = None
-        self.function = None
         self.template = None
         self.redirect_urlname = None
         self.query = None
         self.permissions = []
+        self.pk = None
 
-    def load_data(self, method, **kwargs):
+    def load_data(self, method, pk, **kwargs):
         self.method = method
-        if self.section == 'customuser':
-            self.model = 'CustomUser'
-            self.data_model = models.CustomUser
-            if self.method == 'signup':
-                self.serializer = forms.CustomUserSignUpForm
-                self.template = 'signup.html'
-                self.redirect_urlname = 'home'
+        self.pk = pk
+        if self.section == 'Poll':
+            if self.method == 'POST':
+                self.serializer = forms.PollForm
+                self.template = 'poll.html'
+                self.redirect_urlname = 'canvas'
                 self.permissions = []
                 self.query = None
 
@@ -45,8 +42,13 @@ class RESTEnvironment(object):
         self.filters = kwargs.get("filters", None)
         user = kwargs.get("user", None)
 
-        if self.section == 'CanvasInfo':
+        if self.section == 'Canvas':
+            self.template = 'canvas.html'
+
             if self.method == 'list':
+                self.permissions = []
+
+            if self.method == 'images':
                 self.serializer = serializers.CanvasCategoriesSerializer
                 self.permissions = []
                 self.query = queries.CanvasCategories(user, self.filters)
@@ -63,3 +65,35 @@ class RESTEnvironment(object):
                     kwargs.get("imageId", None),
                     kwargs.get("row", None),
                     kwargs.get("column", None))
+
+            if self.method == 'finish':
+                self.permissions = []
+                self.query = queries.CanvasFinish(user)
+
+        if self.section == 'Poll':
+            self.template = 'poll.html'
+
+            if self.method == 'questions':
+                self.serializer = serializers.PollSerializer
+                self.permissions = []
+                self.query = queries.Poll()
+
+            if self.method == 'cached':
+                self.serializer = serializers.PollUserCacheSerializer
+                self.permissions = []
+                self.query = queries.PollUserCache(user)
+
+            if self.method == 'radio':
+                self.permissions = []
+                self.query = queries.PollQuestionRadioSave(
+                    user,
+                    kwargs.get("questionId", None),
+                    kwargs.get("answerId", None))
+
+            if self.method == 'priority':
+                self.permissions = []
+                self.query = queries.PollQuestionPrioritySave(
+                    user,
+                    kwargs.get("questionId", None),
+                    kwargs.get("answerId", None),
+                    kwargs.get("weight", None))

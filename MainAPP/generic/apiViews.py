@@ -17,11 +17,13 @@ class UnsafeSessionAuthentication(SessionAuthentication):
         return
 
 
-class WebAPIView(viewsets.ViewSet):
+class EmptyAPIView(viewsets.ViewSet):
     environment = None
     authentication_classes = (UnsafeSessionAuthentication, )
     permission_classes = (permissions.AllowAny, )
 
+
+class WebAPIView(EmptyAPIView):
     # Get the list of objects
     def list(self, request, format=None):
         self.environment.load_data(method='list', filters=request.data.get("filters", None))
