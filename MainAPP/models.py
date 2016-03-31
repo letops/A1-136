@@ -341,12 +341,24 @@ class Selection(models.Model):
         null=False,
         verbose_name=_ug('User')
     )
+    question = models.ForeignKey(
+        Question,
+        related_name='selections',
+        blank=False,
+        null=False,
+        verbose_name=_ug('Question')
+    )
     answer = models.ForeignKey(
         'Answer',
         related_name='selections',
         blank=False,
         null=False,
         verbose_name=_ug('Answer')
+    )
+    weight = models.IntegerField(
+        blank=False,
+        null=False,
+        verbose_name=_ug('Weight')
     )
     creation_date = models.DateTimeField(
         auto_now_add=True,

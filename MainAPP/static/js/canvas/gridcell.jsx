@@ -8,8 +8,6 @@ var gridTarget = {
 
   drop: function (props, monitor, component) {
     var item = monitor.getItem();
-    console.log(item);
-    console.log(component.state);
     if (item.imageId != component.state.imageId) {
 
       component.setState({

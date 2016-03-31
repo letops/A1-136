@@ -6,9 +6,13 @@
 {% block top_js %}{% endblock %}
 
 {% block content %}
-  <div id="content">Howdy partner. Poll.</div>
+  <div class="container-fluid">
+    <div id="content">Howdy partner. Poll.</div>
+  </div>
 {% endblock %}
 
 
 {% block bottom_cdn_js %}{% endblock %}
-{% block bottom_js %}{% endblock %}
+{% block bottom_js %}
+  {{ render_bundle('poll') }}
+{% endblock %}

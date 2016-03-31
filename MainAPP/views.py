@@ -50,6 +50,37 @@ class Poll(apiViews.EmptyAPIView):
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
+    @list_route(methods=['post'])
+    def radio(self, request, format=None):
+        self.environment.load_data(
+            'radio',
+            user=request.user,
+            questionId=request.data.get("questionId", None),
+            answerId=request.data.get("answerId", None))
+        if len(self.environment.permissions) == 0 or \
+                request.user.has_perms(self.environment.permissions):
+            if self.environment.query is not True:
+                return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+    @list_route(methods=['post'])
+    def priority(self, request, format=None):
+        self.environment.load_data(
+            'priority',
+            user=request.user,
+            questionId=request.data.get("questionId", None),
+            answerId=request.data.get("answerId", None),
+            weight=request.data.get("weight", None))
+        if len(self.environment.permissions) == 0 or \
+                request.user.has_perms(self.environment.permissions):
+            if self.environment.query is not True:
+                return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
 
 class Canvas(apiViews.EmptyAPIView):
     environment = RESTEnvironment('Canvas')

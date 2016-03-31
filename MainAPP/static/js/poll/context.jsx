@@ -1,8 +1,7 @@
 var React = require('react');
 var DragDropContext = require('react-dnd').DragDropContext;
 var Backend = null;
-var SideQuestionbar = require('./question');
-var Csrf = require('../tools/csrf');
+var Question = require('./question');
 
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
   Backend = require('react-dnd-touch-backend');
@@ -18,15 +17,8 @@ var Context = React.createClass({
   },
 
   componentWillMount: function () {
-    var csrftoken = Csrf.getCookie('csrftoken');
     this.serverRequest = $.ajax({
-      beforeSend: function (xhr, settings) {
-        if (!Csrf.csrfSafeMethod(settings.type) && !this.crossDomain) {
-          xhr.setRequestHeader('X-CSRFToken', csrftoken);
-        }
-      },
-
-      type: 'POST',
+      type: 'GET',
       url: 'questions/',
       success: function (result) {
         this.setState({
@@ -48,9 +40,21 @@ var Context = React.createClass({
         </div>
       );
     } else {
+      var QuestionNodes = this.state.questions.map(function (question) {
+        return (
+          <Question
+            key={question.id}
+            id={question.id}
+            text={question.text}
+            style={question.style}
+            answers={question.answers}
+          />
+        );
+      });
+
       return (
-        <div className='row'>
-          <Question />
+        <div className='col-xs-8 col-xs-offset-2'>
+          {QuestionNodes}
         </div>
       );
     }

@@ -3,6 +3,6 @@ var ReactDOM = require('react-dom');
 var Context = require('./context');
 
 ReactDOM.render(
-  <Context />,
+  <div className='row'><Context /></div>,
   document.getElementById('content')
 );

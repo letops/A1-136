@@ -17,6 +17,38 @@ def Poll():
     return poll
 
 
+def PollQuestionRadioSave(user, question_pk, answer_pk):
+    print('{} - {}'.format(question_pk, answer_pk))
+    saved = False
+    selection, created = models.Selection.objects.update_or_create(
+        user=user,
+        question=models.Question.objects.get(pk=question_pk),
+        defaults={
+            'answer': models.Answer.objects.get(pk=answer_pk),
+            'weight': 1
+        }
+    )
+    selection.save()
+    return True
+
+
+def PollQuestionPrioritySave(user, question_pk, answer_pk, weight):
+    print('{} {} {} {}'.format(user, isometric_pk, row, column))
+    saved = False
+    position, created = models.Position.objects.update_or_create(
+        user=user,
+        row=row,
+        column=column,
+        defaults={
+            'isometric_image': models.IsometricImage.objects.get(
+                pk=isometric_pk)
+        }
+    )
+    print('{}'.format(position))
+    position.save()
+    return True
+
+
 def PollFinish(user):
     if(user.step in (hardcode.STEP_POLL, hardcode.STEP_UNKNOWN)):
         user.step == hardcode.STEP_CANVAS
@@ -57,7 +89,6 @@ def CanvasUserCache(user, filters=None):
 
 
 def CanvasUserPositionSave(user, isometric_pk, row, column):
-    print('{} {} {} {}'.format(user, isometric_pk, row, column))
     saved = False
     position, created = models.Position.objects.update_or_create(
         user=user,
@@ -111,7 +142,6 @@ def Share(user):
         render.image.save(suf.name+'.png', suf, save=False)
 
         render.save()
-        # image_render.save("out.png")
         return True
     else:
         return False
