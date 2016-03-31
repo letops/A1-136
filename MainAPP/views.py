@@ -49,6 +49,21 @@ class Poll(apiViews.EmptyAPIView):
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
+    @list_route(methods=['get', 'post'])
+    def cached(self, request, format=None):
+        self.environment.load_data(
+            'cached',
+            user=request.user)
+        if len(self.environment.permissions) == 0 or \
+                request.user.has_perms(self.environment.permissions):
+            serial = self.environment.serializer(
+                self.environment.query,
+                many=True,
+                read_only=True)
+            return Response(serial.data, status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
     @list_route(methods=['post'])
     def radio(self, request, format=None):
         self.environment.load_data(
@@ -92,6 +107,7 @@ class Poll(apiViews.EmptyAPIView):
             return HttpResponseRedirect(urlresolvers.reverse('canvas-list'))
         else:
             return HttpResponseRedirect(urlresolvers.reverse('poll-list'))
+
 
 class Canvas(apiViews.EmptyAPIView):
     environment = RESTEnvironment('Canvas')

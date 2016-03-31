@@ -31,7 +31,8 @@ class AnswerSerializer(serializers.ModelSerializer):
         model = models.Answer
         fields = (
             'id',
-            'text'
+            'text',
+            'weight',
         )
 
 
@@ -44,7 +45,7 @@ class PollQuestionsSerializer(serializers.ModelSerializer):
             'id',
             'text',
             'style',
-            'answers'
+            'answers',
         )
 
 

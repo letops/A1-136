@@ -8,6 +8,10 @@
 {% block content %}
   <div class="container-fluid">
     <div id="content">Howdy partner. Poll.</div>
+    <form method="post" action={{ url('poll-finish')}}>
+      <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+      <button type="submit">Guardar</button>
+    </form>
   </div>
 {% endblock %}
 

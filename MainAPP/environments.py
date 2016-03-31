@@ -82,7 +82,7 @@ class RESTEnvironment(object):
                 self.query = queries.PollQuestions()
 
             if self.method == 'cached':
-                self.serializer = serializers.PollUserCacheSerializer
+                self.serializer = serializers.PollQuestionsSerializer
                 self.permissions = []
                 self.query = queries.PollUserCache(user)
 

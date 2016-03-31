@@ -16,6 +16,10 @@ def PollQuestions():
     return poll
 
 
+def PollUserCache(user):
+    pass
+
+
 def PollQuestionRadioSave(user, question_pk, answer_pk):
     selection, created = models.Selection.objects.update_or_create(
         user=user,
