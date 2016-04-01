@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var Csrf = require('../tools/csrf');
+var AnswersContainer = require('./answers-container');
 
 var Question = React.createClass({
   propTypes: {
@@ -39,8 +40,8 @@ var Question = React.createClass({
     var changeRadio = this.changeRadio;
     var AnswerNodes = this.props.answers.map(function (answer) {
       return (
-        <div className='row'>
-          <label key={answer.id}>
+        <div className='row' key={answer.id}>
+          <label>
             {answer.text}:
             <input
               type='radio'
@@ -59,7 +60,7 @@ var Question = React.createClass({
   renderAsPriority: function () {
     var questionId = this.props.id;
     return (
-      <div>Empty!</div>
+      <AnswersContainer key={questionId}/>
     );
   },
 

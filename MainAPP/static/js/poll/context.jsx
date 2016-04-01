@@ -1,13 +1,5 @@
 var React = require('react');
-var DragDropContext = require('react-dnd').DragDropContext;
-var Backend = null;
 var Question = require('./question');
-
-if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-  Backend = require('react-dnd-touch-backend');
-} else {
-  Backend = require('react-dnd-html5-backend');
-}
 
 var Context = React.createClass({
   getInitialState: function () {
@@ -61,4 +53,4 @@ var Context = React.createClass({
   },
 });
 
-module.exports = DragDropContext(Backend)(Context);
+module.exports = Context;

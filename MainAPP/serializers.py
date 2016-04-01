@@ -32,7 +32,6 @@ class AnswerSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'text',
-            'weight',
         )
 
 
