@@ -84,9 +84,7 @@ class Poll(apiViews.EmptyAPIView):
         self.environment.load_data(
             'priority',
             user=request.user,
-            questionId=request.data.get('questionId', None),
-            answerId=request.data.get('answerId', None),
-            weight=request.data.get('weight', None))
+            answers=request.data)
         if len(self.environment.permissions) == 0 or \
                 request.user.has_perms(self.environment.permissions):
             if self.environment.query is not True:

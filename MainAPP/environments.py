@@ -90,16 +90,14 @@ class RESTEnvironment(object):
                 self.permissions = []
                 self.query = queries.PollQuestionRadioSave(
                     user,
-                    kwargs.get("questionId", None),
-                    kwargs.get("answerId", None))
+                    kwargs.get('questionId', None),
+                    kwargs.get('answerId', None))
 
             if self.method == 'priority':
                 self.permissions = []
                 self.query = queries.PollQuestionPrioritySave(
                     user,
-                    kwargs.get("questionId", None),
-                    kwargs.get("answerId", None),
-                    kwargs.get("weight", None))
+                    kwargs.get('answers', []))
 
             if self.method == 'finish':
                 self.permissions = []

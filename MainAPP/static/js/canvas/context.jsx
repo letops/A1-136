@@ -3,8 +3,9 @@ var DragDropContext = require('react-dnd').DragDropContext;
 var Backend = null;
 var Sidebar = require('./sidebar');
 var Grid = require('./grid');
+var isMobile = require('../tools/mobile').isMobile;
 
-if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+if (isMobile()) {
   Backend = require('react-dnd-touch-backend');
 } else {
   Backend = require('react-dnd-html5-backend');

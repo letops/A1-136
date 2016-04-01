@@ -20,6 +20,6 @@ function csrfSafeMethod(method) {
 }
 
 module.exports = {
-  'getCookie': getCookie,
-  'csrfSafeMethod': csrfSafeMethod,
+  getCookie: getCookie,
+  csrfSafeMethod: csrfSafeMethod,
 };

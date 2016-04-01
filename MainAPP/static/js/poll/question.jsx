@@ -59,8 +59,13 @@ var Question = React.createClass({
 
   renderAsPriority: function () {
     var questionId = this.props.id;
+    var answers = this.props.answers;
     return (
-      <AnswersContainer key={questionId}/>
+      <AnswersContainer
+        key={questionId}
+        answers={answers}
+        questionId={questionId}
+      />
     );
   },
 
@@ -71,7 +76,7 @@ var Question = React.createClass({
     return (
       <div className='row'>
         <div className='col-xs-10 col-xs-offset-1'>
-          <form>
+          <form action='#'>
             <div className='row'>
               {this.props.text}
             </div>

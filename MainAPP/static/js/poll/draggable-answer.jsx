@@ -5,7 +5,7 @@ var ItemTypes = require('./constants').ItemTypes;
 var DragSource = require('react-dnd').DragSource;
 var DropTarget = require('react-dnd').DropTarget;
 
-var cardSource = {
+var answerSource = {
   beginDrag: function (props) {
     return {
       id: props.id,
@@ -21,7 +21,7 @@ function collectSource(connect, monitor) {
   };
 };
 
-var cardTarget = {
+var answerTarget = {
   hover: function (props, monitor, component) {
     var dragIndex = monitor.getItem().index;
     var hoverIndex = props.index;
@@ -58,7 +58,7 @@ var cardTarget = {
     }
 
     // Time to actually perform the action
-    props.moveCard(dragIndex, hoverIndex);
+    props.moveAnswer(dragIndex, hoverIndex);
 
     // Note: we're mutating the monitor item here!
     // Generally it's better to avoid mutations,
@@ -82,7 +82,7 @@ var DragAnswer = React.createClass({
     isDragging: PropTypes.bool.isRequired,
     id: PropTypes.any.isRequired,
     text: PropTypes.string.isRequired,
-    moveCard: PropTypes.func.isRequired,
+    moveAnswer: PropTypes.func.isRequired,
   },
 
   render: function () {
@@ -104,6 +104,6 @@ var DragAnswer = React.createClass({
   },
 });
 
-var DragSourceDecorator = DragSource(ItemTypes.DRAGANSWER, cardSource, collectSource);
-var DropTargetDecorator = DropTarget(ItemTypes.DRAGANSWER, cardTarget, collectTarget);
-module.exports = DropTarget(ItemTypes.DRAGANSWER, cardTarget, collectTarget)(DragSource(ItemTypes.DRAGANSWER, cardSource, collectSource)(DragAnswer));
+var DragSourceDecorator = DragSource(ItemTypes.DRAGANSWER, answerSource, collectSource);
+var DropTargetDecorator = DropTarget(ItemTypes.DRAGANSWER, answerTarget, collectTarget);
+module.exports = DropTargetDecorator(DragSourceDecorator(DragAnswer));

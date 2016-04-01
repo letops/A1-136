@@ -33,16 +33,21 @@ def PollQuestionRadioSave(user, question_pk, answer_pk):
     return True
 
 
-def PollQuestionPrioritySave(user, question_pk, answer_pk, weight):
-    selection, created = models.Selection.objects.update_or_create(
-        user=user,
-        question=models.Question.objects.get(pk=question_pk),
-        answer=models.Answer.objects.get(pk=answer_pk),
-        defaults={
-            'weight': weight
-        }
-    )
-    selection.save()
+def PollQuestionPrioritySave(user, answers):
+    for answer in answers:
+        question_pk = answer.get('questionId', None)
+        answer_pk = answer.get('answerId', None)
+        weight = answer.get('weight', None)
+
+        selection, created = models.Selection.objects.update_or_create(
+            user=user,
+            question=models.Question.objects.get(pk=question_pk),
+            answer=models.Answer.objects.get(pk=answer_pk),
+            defaults={
+                'weight': weight
+            }
+        )
+        selection.save()
     return True
 
 
