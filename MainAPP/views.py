@@ -3,7 +3,6 @@ from django.core import urlresolvers
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from . import hardcode, queries
-
 from .generic import apiViews
 from .environments import RESTEnvironment
 from rest_framework import status, authentication, permissions
@@ -187,10 +186,12 @@ class Canvas(apiViews.EmptyAPIView):
         if len(self.environment.permissions) == 0 or \
                 request.user.has_perms(self.environment.permissions):
             if self.environment.query is not True:
-                return HttpResponseRedirect(urlresolvers.reverse('canvas-list'))
+                return HttpResponseRedirect(
+                    urlresolvers.reverse('canvas-list'))
             return HttpResponseRedirect(urlresolvers.reverse('share'))
         else:
-            return HttpResponseRedirect(urlresolvers.reverse('canvas-list'))
+            return HttpResponseRedirect(
+                urlresolvers.reverse('canvas-list'))
 
 
 # Create your views here.
