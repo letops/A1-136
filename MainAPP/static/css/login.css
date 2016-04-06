@@ -8,11 +8,11 @@
 	-webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;	
+    background-size: cover;
     background-repeat: no-repeat;
 
     height: 979px;
-    
+
 }*/
 
 /*Test Height*/
@@ -31,10 +31,11 @@ body {
 
 
 .titleDnD {
-	font-size: 100px;
-	margin-bottom: 50px;	
+	font-size: 7.1em;
+	margin-bottom: 50px;
 	/*Nuevas caracteristicas*/
-	padding-left: 8%;
+  padding-left: 8%;
+	padding-right: 8%;
 	font-family: 'Nunito', sans-serif;
 	font-weight: lighter;
 
@@ -64,7 +65,7 @@ body {
 }
 
 #facebookLogin {
-	margin-top: 50px;	
+	margin-top: 50px;
 }
 
 .content {
