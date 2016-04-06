@@ -119,10 +119,7 @@ def Share(user):
     render = None
     updated = []
 
-    render, created = models.Render.objects.get_or_create(
-        user=user
-    )
-
+    render, created = models.Render.objects.get_or_create(user=user)
     positions = user.positions.prefetch_related(
         Prefetch(
            'isometric_image',
@@ -150,8 +147,6 @@ def Share(user):
                                  temporal.read(),
                                  content_type='image/png')
         render.image.save(suf.name+'.png', suf, save=False)
-
         render.save()
-        return True
-    else:
-        return False
+
+    return render.image.url
