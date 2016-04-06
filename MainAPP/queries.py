@@ -101,7 +101,6 @@ def CanvasUserPositionSave(user, isometric_pk, row, column):
                 pk=isometric_pk)
         }
     )
-    print('{}'.format(position))
     position.save()
     return True
 
@@ -111,7 +110,6 @@ def CanvasFinish(user):
         user.step = hardcode.STEP_DONE
         # FIXME: Uncomment to continue
         # user.save()
-        print("Changed user to: {}".format(user.step))
         return True
     return False
 

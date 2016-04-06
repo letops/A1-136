@@ -128,7 +128,7 @@ class Canvas(apiViews.EmptyAPIView):
 
     @list_route(methods=['get', 'post'])
     def images(self, request, format=None):
-        filters = request.data.get("filters", dict())
+        filters = request.data.get('filters', dict())
         self.environment.load_data(
             'images',
             user=request.user,
@@ -139,14 +139,14 @@ class Canvas(apiViews.EmptyAPIView):
                 self.environment.query,
                 many=True,
                 read_only=True,
-                context={'size': filters.get("size", "200px")})
+                context={'size': filters.get('size', '200px')})
             return Response(serial.data, status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
     @list_route(methods=['get', 'post'])
     def cached(self, request, format=None):
-        filters = request.data.get("filters", dict())
+        filters = request.data.get('filters', dict())
         self.environment.load_data(
             'cached',
             user=request.user,
@@ -157,7 +157,7 @@ class Canvas(apiViews.EmptyAPIView):
                 self.environment.query,
                 many=True,
                 read_only=True,
-                context={'size': filters.get("size", "200px")})
+                context={'size': filters.get('size', '200px')})
             return Response(serial.data, status=status.HTTP_200_OK)
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
@@ -167,9 +167,9 @@ class Canvas(apiViews.EmptyAPIView):
         self.environment.load_data(
             'save',
             user=request.user,
-            imageId=request.data.get("imageId", None),
-            column=request.data.get("column", None),
-            row=request.data.get("row", None))
+            imageId=request.data.get('imageId', None),
+            column=request.data.get('column', None),
+            row=request.data.get('row', None))
         if len(self.environment.permissions) == 0 or \
                 request.user.has_perms(self.environment.permissions):
             if self.environment.query is not True:
