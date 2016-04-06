@@ -57,24 +57,13 @@ var Sidebar = React.createClass({
       );
     });
 
+    // Bootstrap won't work with a combo, because it reads the DOM and overwrites
+    // the section with its own JS. The render overwrites this section after the initial
+    // load, so Bootstrap will flunk.
     return (
-      <div>
-        <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle"
-            type="button" id="dropdownMenu1" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false"
-          >
-            Dropdown
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            {CategoryOptions}
-          </ul>
-        </div>
-        <select id='category-selector' onChange={this.change} value={this.state.selected}>
-          {CategoryOptions}
-        </select>
-      </div>
+      <select id='category-selector' onChange={this.change} value={this.state.selected}>
+        {CategoryOptions}
+      </select>
     );
   },
 
