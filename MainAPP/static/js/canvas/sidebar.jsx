@@ -58,9 +58,23 @@ var Sidebar = React.createClass({
     });
 
     return (
-      <select id='category-selector' onChange={this.change} value={this.state.selected}>
-        {CategoryOptions}
-      </select>
+      <div>
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle"
+            type="button" id="dropdownMenu1" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false"
+          >
+            Dropdown
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            {CategoryOptions}
+          </ul>
+        </div>
+        <select id='category-selector' onChange={this.change} value={this.state.selected}>
+          {CategoryOptions}
+        </select>
+      </div>
     );
   },
 

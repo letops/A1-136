@@ -142,7 +142,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'match_extension': '.html',
-            'match_regex': r'^(?!debug_toolbar/|admin/|account/|openid/|socialaccount/).*',
+            'match_regex': r'^(?!debug_toolbar/|admin/|registration/|account/|openid/|socialaccount/).*',
             'app_dirname': 'templates',
             'extensions': DJJINJA_DEFAULT + [
                 'compressor.contrib.jinja2ext.CompressorExtension',

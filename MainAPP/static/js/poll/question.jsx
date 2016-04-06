@@ -40,7 +40,7 @@ var Question = React.createClass({
     var changeRadio = this.changeRadio;
     var AnswerNodes = this.props.answers.map(function (answer) {
       return (
-        <div className='row' key={answer.id}>
+        <div key={answer.id}>
           <label>
             {answer.text}:
             <input
@@ -77,10 +77,10 @@ var Question = React.createClass({
       <div className='row'>
         <div className='col-xs-10 col-xs-offset-1'>
           <form action='#'>
-            <div className='row'>
+            <div>
               {this.props.text}
             </div>
-            <div className='row'>
+            <div>
               {AnswerNodes}
             </div>
           </form>
