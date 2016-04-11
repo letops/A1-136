@@ -1,4 +1,4 @@
-from MainAPP import models
+from . import models
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, ReadOnlyPasswordHashField
 
@@ -6,8 +6,10 @@ from django.utils.translation import ugettext as _ug
 
 
 class CustomUserSignUpForm(UserCreationForm):
-    password1 = forms.CharField(label=_ug('Password'), widget=forms.PasswordInput)
-    password2 = forms.CharField(label=_ug('Password confirmation'), widget=forms.PasswordInput)
+    password1 = forms.CharField(
+        label=_ug('Password'), widget=forms.PasswordInput)
+    password2 = forms.CharField(
+        label=_ug('Password confirmation'), widget=forms.PasswordInput)
 
     class Meta(UserCreationForm.Meta):
         model = models.CustomUser
@@ -19,14 +21,16 @@ class CustomUserSignUpForm(UserCreationForm):
             models.CustomUser.objects.get(username=username)
         except models.CustomUser.DoesNotExist:
             return username
-        raise forms.ValidationError(_ug("A user with that username already exists."))
+        raise forms.ValidationError(
+            _ug("A user with that username already exists."))
 
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
 
         if not password1 or not password2 or password1 != password2:
-            raise forms.ValidationError(_ug("The two password fields didn't match."))
+            raise forms.ValidationError(
+                _ug("The two password fields didn't match."))
         return password2
 
     def save(self, commit=True):
@@ -39,8 +43,9 @@ class CustomUserSignUpForm(UserCreationForm):
 
 class CustomUserChangeForm(UserChangeForm):
 
-    fields = ('username', 'email', 'password', 'first_name', 'middle_name', 'last_name', 'mothers_name',
-              'nickname', 'avatar', 'birthday', 'gender', 'last_login', 'edition_date', 'date_joined')
+    fields = ('username', 'email', 'password', 'first_name', 'middle_name',
+              'last_name', 'mothers_name', 'nickname', 'avatar', 'birthday',
+              'gender', 'last_login', 'edition_date', 'date_joined')
 
     class Meta(UserChangeForm.Meta):
         model = models.CustomUser
@@ -53,4 +58,5 @@ class CustomUserChangeForm(UserChangeForm):
                 return username
         except models.CustomUser.DoesNotExist:
             return username
-        raise forms.ValidationError(_ug("A user with that username already exists."))
+        raise forms.ValidationError(
+            _ug("A user with that username already exists."))

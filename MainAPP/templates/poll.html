@@ -2,13 +2,36 @@
 {% block title %}A1-136 Poll{% endblock %}
 
 {% block extra_cdn_css %}{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ static("css/poll.css") }}">
+{% endblock %}
 
+{% block top_cdn_js %}{% endblock %}
 {% block top_js %}{% endblock %}
 
 {% block content %}
-  <div id="content">Howdy partner. Poll.</div>
+  <div class="container">
+    <div id="titlePoll">
+      Drag &amp; Drop
+    </div>
+    <div id="subtitlePoll">
+      Quisque vel nisl diam. Sed consectetur sed magna nec posuere.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </div>
+
+    <div id="content" class="contentPoll"></div>
+
+    <div>
+      <form method="post" action={{ url('poll-finish')}}>
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        <button type="submit">Guardar</button>
+      </form>
+    </div>
+  </div>
 {% endblock %}
 
 
 {% block bottom_cdn_js %}{% endblock %}
-{% block bottom_js %}{% endblock %}
+{% block bottom_js %}
+  {{ render_bundle('poll') }}
+{% endblock %}

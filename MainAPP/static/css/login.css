@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito:400,300);
 
-.login-Image {
+/*.login-Image {
 	-webkit-background-size: 100%;
     -moz-background-size: 100%;
     -o-background-size: 100%;
@@ -8,41 +8,36 @@
 	-webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;	
+    background-size: cover;
     background-repeat: no-repeat;
 
     height: 979px;
-    
+
+}*/
+
+/*Test Height*/
+
+html {
+	height: 100%;
 }
 
-
-/*Para tablets*/
-/*768 px para ipad, pero no me funciona bn, por eso lo cambio a 769px*/
-@media screen and (max-width: 769px) {
-    .login-Image{
-    	height: 0px;
-    	width: 0px;
-    	background-size: 0%;
-    }
-
+body {
+	height: 100%;
 }
-
-
-
-
 
 .titleDnD {
-	font-size: 100px;
-	margin-bottom: 50px;	
+	font-size: 6em;
+	margin-bottom: 50px;
 	/*Nuevas caracteristicas*/
-	padding-left: 8%;
+  padding-left: 8%;
+	padding-right: 8%;
 	font-family: 'Nunito', sans-serif;
 	font-weight: lighter;
 
 }
 
 .formaLogin {
-	padding-top: 100px;
+	padding-top: 5%;
 	/*padding-left: 50px;*/
 	background-color: #FFFFFF;
 }
@@ -65,7 +60,7 @@
 }
 
 #facebookLogin {
-	margin-top: 50px;	
+	margin-top: 50px;
 }
 
 .content {

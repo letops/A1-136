@@ -42,7 +42,7 @@ DEBUG = IN_DEVELOPMENT
 PROJECT_NAME = 'GRVTY'
 
 # TODO: ALLOWED HOSTS - Fill with the right credentials
-ALLOWED_HOSTS = [] if IN_DEVELOPMENT else []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', ] if IN_DEVELOPMENT else []
 
 # TODO: ADMINS - Fill with the right email
 ADMINS = (('Chuck Testa', 'nope_chuck_testa@aol.com'), )
@@ -62,6 +62,7 @@ INSTALLED_APPS = list(filter(None, [
     'debug_toolbar',
     'rest_framework',
     'easy_thumbnails',
+    'django_jinja',
 
     'webpack_loader',  # Webpack
 
@@ -132,17 +133,25 @@ INTERNAL_IPS = ['127.0.0.1', 'localhost', ]
 from django_jinja.builtins import DEFAULT_EXTENSIONS as DJJINJA_DEFAULT
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'BACKEND': 'django_jinja.backend.Jinja2',
         'DIRS': [
+                # NOTE: Not used, thanks to this asshole: django_jinja
                 os.path.join(DJANGO_ROOT, 'templates'),
                 os.path.join(DJANGO_ROOT, 'MainAPP/templates'),
             ],
         'APP_DIRS': True,
         'OPTIONS': {
+            'match_extension': '.html',
+            'match_regex': r'^(?!debug_toolbar/|admin/|registration/|account/|openid/|socialaccount/).*',
+            'app_dirname': 'templates',
             'extensions': DJJINJA_DEFAULT + [
                 'compressor.contrib.jinja2ext.CompressorExtension',
                 'webpack_loader.contrib.jinja2ext.WebpackExtension'
             ],
+            'constants': {
+                'CONST_GRIDSIZE': 4,
+                'CONST_IMAGESIZE': '150px',
+            }
         },
     },
     {
@@ -205,7 +214,7 @@ COMPRESS_PRECOMPILERS = (
 WEBPACK_LOADER = {
     'DEFAULT': {
         'BUNDLE_DIR_NAME': 'bundles/',
-        'STATS_FILE': 'webpack-stats.json',
+        'STATS_FILE': os.path.join(DJANGO_ROOT, 'webpack-stats.json'),
     }
 }
 
@@ -298,6 +307,12 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL = '/accounts/logout/'
 AUTH_USER_MODEL = 'MainAPP.CustomUser'
 
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_SESSION_REMEMBER = True
+SOCIALACCOUNT_QUERY_EMAIL = True
+
 AUTHENTICATION_BACKENDS = [
     'MainAPP.architecture.backends.CustomUserModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
@@ -375,10 +390,21 @@ THUMBNAIL_DEBUG = IN_DEVELOPMENT
 
 THUMBNAIL_ALIASES = {
     '': {
-        '50x50': {'size': (50, 50), 'crop': True},
-        '125x125': {'size': (125, 125), 'crop': True},
-        '250x250': {'size': (250, 250), 'crop': True},
-        '250x250': {'size': (350, 350), 'crop': True},
-        '500x500': {'size': (500, 500), 'crop': True},
+        # ------------------- ISOMETRICS -------------------
+        '50px': {'size': (50, 50), 'crop': True},
+        '125px': {'size': (125, 125), 'crop': True},
+        '150px': {'size': (150, 150), 'crop': True},
+        '200px': {'size': (200, 200), 'crop': True},
+        '250px': {'size': (250, 250), 'crop': True},
+        '350px': {'size': (350, 350), 'crop': True},
+        '500px': {'size': (500, 500), 'crop': True},
+        # -------------------- RENDERS ---------------------
+        '270px': {'size': (270, 270), 'crop': True},
+        '600px': {'size': (600, 600), 'crop': True},
+        '800px': {'size': (800, 800), 'crop': True},
+        '1000px': {'size': (1000, 1000), 'crop': True},
+        '1400px': {'size': (1400, 1400), 'crop': True},
+        '1400px': {'size': (1400, 1400), 'crop': True},
+        '2000px': {'size': (2000, 2000), 'crop': True},
     },
 }
