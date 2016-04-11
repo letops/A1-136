@@ -3,6 +3,8 @@ var PropTypes = React.PropTypes;
 var GridCell = require('./gridcell.jsx');
 var Csrf = require('../tools/csrf');
 
+
+
 var Grid = React.createClass({
   propTypes: {
     imageSize: React.PropTypes.string.isRequired,
@@ -16,6 +18,32 @@ var Grid = React.createClass({
 
   componentWillMount: function () {
     var csrftoken = Csrf.getCookie('csrftoken');
+    document.getElementById("button-submit").addEventListener("click", function(event){
+      event.preventDefault();
+      gridElements = document.getElementsByClassName("grid-box");
+      var nonImageCounter = 0;
+      for (i=0 ; i < 16 ; i++){
+        console.log("element "+i);
+        if (gridElements[i].hasAttribute("data-image-id")){
+          gridElements[i].className = "col grid-box";
+        }
+        else{
+          gridElements[i].className += " grid-error";
+          nonImageCounter++;
+        }
+
+        // gridElements[i].style.backgroundColor = 'red';
+      }
+      console.log(nonImageCounter);
+      if(nonImageCounter != 0){
+        alert("not finished yet");
+      }
+      if(nonImageCounter==0){
+        document.getElementById("form-submit").submit();
+      }
+
+
+    });
     var filtersvar = {
       size: this.props.imageSize,
     };

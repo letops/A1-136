@@ -20,9 +20,9 @@
 {% block content %}
   <div class="container-fluid">
     <div id="content"></div>
-    <form method="post" action={{ url('canvas-finish')}}>
+    <form method="post" id="form-submit" action={{ url('canvas-finish')}}>
       <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-      <button type="submit">Guardar</button>
+      <button type="submit" id="button-submit">Guardar</button>
     </form>
   </div>
 
