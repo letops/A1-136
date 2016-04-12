@@ -118,7 +118,7 @@ var Sidebar = React.createClass({
       var CategoryNodes = this.renderNodes();
 
       return (
-        <div className='col-md-offset-1 col-md-3 col-xs-offset-1 col-xs-2 colClass2'>
+        <div className='col-md-offset-1 col-md-3 col-xs-offset-1 col-xs-2 colClass2 hidden-sm hidden-xs'>
           <h1 className="title">Drag &amp; Drop</h1>
           <p className="description">
             Quisque vel nisl diam sed consectetur sed magna nec posuere.

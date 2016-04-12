@@ -84,8 +84,8 @@ var GridCell = React.createClass({
           zIndex: 1,
           opacity: 0.5,
           backgroundColor: color,
-          backgroundSize: '100%',
-          position: 'relative',
+          backgroundSize: '100% 100%',
+          position: 'absolute',
         }}
       />
     );
