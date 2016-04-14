@@ -16,18 +16,18 @@ var Sidebar = React.createClass({
   },
 
   componentDidUpdate(prevProps, prevState) {
-    isoimages = document.getElementsByClassName("col grid-img");
-    for(i = 0 ; i<isoimages.length ; i++){
-      console.log(isoimages[i])
-      jQuery(isoimages[i]).fadeIn("slow");
+    isoimages = document.getElementsByClassName('col grid-img');
+    for (i = 0; i < isoimages.length; i++) {
+      console.log(isoimages[i]);
+      jQuery(isoimages[i]).fadeIn('slow');
     }
   },
 
   componentWillUpdate(nextProps, nextState) {
-    isoimages = document.getElementsByClassName("col grid-img");
-    for(i = 0 ; i<isoimages.length ; i++){
-      console.log(isoimages[i])
-      jQuery(isoimages[i]).fadeIn("slow");
+    isoimages = document.getElementsByClassName('col grid-img');
+    for (i = 0; i < isoimages.length; i++) {
+      console.log(isoimages[i]);
+      jQuery(isoimages[i]).fadeIn('slow');
     }
   },
 
@@ -118,8 +118,8 @@ var Sidebar = React.createClass({
     if (this.state.categories === null || this.state.categories === '') {
       return (
         <div className='col-md-offset-1 col-md-3 col-xs-offset-1 col-xs-2 colClass2'>
-          <h1 className="title">Drag &amp; Drop</h1>
-          <p className="description">
+          <h1 className='title'>{ CONST_SYSTEM_NAME }</h1>
+          <p className='description'>
             Quisque vel nisl diam sed consectetur sed magna nec posuere.
           </p>
 
@@ -129,14 +129,13 @@ var Sidebar = React.createClass({
         </div>
       );
     } else {
-      
       var CategoryOptions = this.renderOptions();
       var CategoryNodes = this.renderNodes();
 
       return (
-        <div className='col-md-offset-1 col-md-3 col-xs-offset-1 col-xs-2 colClass2 hidden-sm hidden-xs'>
-          <h1 className="title">Drag &amp; Drop</h1>
-          <p className="description">
+        <div className='col-md-3 col-xs-offset-1 col-xs-2 colClass2 hidden-sm hidden-xs'>
+          <h1 className='title'>{ CONST_SYSTEM_NAME }</h1>
+          <p className='description'>
             Quisque vel nisl diam sed consectetur sed magna nec posuere.
           </p>
           {CategoryOptions}

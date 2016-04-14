@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}A1-136 Poll{% endblock %}
+{% block title %}{{ CONST_SYSTEM_NAME }} Poll{% endblock %}
 
 {% block extra_cdn_css %}{% endblock %}
 {% block extra_css %}
@@ -12,7 +12,7 @@
 {% block content %}
   <div class="container">
     <div id="titlePoll" class="titlePoll">
-      Drag &amp; Drop
+      {{ CONST_SYSTEM_NAME }}
     </div>
     <div id="subtitlePoll" class="subtitle">
       Quisque vel nisl diam. Sed consectetur sed magna nec posuere.
