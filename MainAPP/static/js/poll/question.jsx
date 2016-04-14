@@ -6,7 +6,9 @@ var AnswersContainer = require('./answers-container');
 var Question = React.createClass({
   propTypes: {
     id: PropTypes.number.isRequired,
+    number: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
     style: PropTypes.number.isRequired,
     answers: PropTypes.array.isRequired,
   },
@@ -70,7 +72,6 @@ var Question = React.createClass({
 
   render: function () {
     var style = this.props.style;
-    var questionId = this.props.id;
     var AnswerNodes = ((style == 0) ? this.renderAsRadio() : this.renderAsPriority());
 
     return (
@@ -78,9 +79,12 @@ var Question = React.createClass({
         <div className='col-xs-offset-1'>
           <form action='#'>
             <div className='questionText'>
-              <span className='spanID'>{this.props.id}</span>
+              <span className='spanID'>{this.props.number}</span>
               <i className="fa fa-long-arrow-right customArrow" aria-hidden="true"></i>
               {this.props.text}
+            </div>
+            <div className='questionDesc'>
+              {this.props.description}
             </div>
             <div>
               {AnswerNodes}
