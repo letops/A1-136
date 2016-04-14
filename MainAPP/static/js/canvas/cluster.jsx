@@ -21,7 +21,9 @@ var Cluster = React.createClass({
   },
   toggleHidden: function() {
     if(this.state.selected=='not-selected'){
-      imagesToFade = document.getElementsByClassName("cluster-images");
+      category = document.getElementById("category-selector").value;
+      console.log(category);
+      imagesToFade = document.getElementById(category).getElementsByClassName("cluster-images");
       for(i = 0 ; i< imagesToFade.length ; i++){
         imagesToFade[i].className = "cluster-images not-selected inactive";
       }
@@ -44,8 +46,11 @@ var Cluster = React.createClass({
     }
     else{
       var hiddenIsos = false;
+      var isoNumber = 0;
       selected = this.state.selected;
       var IsometricNodes = this.props.isometric_images.map(function (isoimage) {
+        var number = isoNumber;
+        isoNumber ++;
         var hideMe = hiddenIsos;
         if(selected == 'not-selected'){
           hiddenIsos = true;
@@ -54,15 +59,14 @@ var Cluster = React.createClass({
         else
           selectMe = true;
         return (
-          <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionAppearTimeout={500} transitionEnterTimeout={300} transitionLeaveTimeout={500}>
             <Isometric 
               hide = {hideMe}
+              listNumber = {number}
               selected = {selectMe}
               imageUrl={isoimage.url}
               key={isoimage.id}
               imageId={isoimage.id}
             />
-          </ReactCSSTransitionGroup>
         );
       });
       className = "cluster-images " + this.state.selected;

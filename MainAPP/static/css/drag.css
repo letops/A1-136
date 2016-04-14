@@ -194,3 +194,18 @@ body{
  -moz-transition: all 1s ease;
  -webkit-transition: all 1s ease;
 }
+
+.grid-img {
+  opacity: 0;
+  transition: all 1s ease;
+ -moz-transition: all 1s ease;
+ -webkit-transition: all 1s ease;
+}
+
+.absolute-image{
+  position: absolute;
+  transition: all 1s ease;
+ -moz-transition: all 1s ease;
+ -webkit-transition: all 1s ease;
+
+}
