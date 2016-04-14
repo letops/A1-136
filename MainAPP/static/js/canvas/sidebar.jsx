@@ -77,7 +77,12 @@ var Sidebar = React.createClass({
     // the section with its own JS. The render overwrites this section after the initial
     // load, so Bootstrap will flunk.
     return (
-      <select id='category-selector' onChange={this.change} value={this.state.selected}>
+      <select
+        id='category-selector'
+        className='dropdownStyle'
+        onChange={this.change}
+        value={this.state.selected}
+      >
         {CategoryOptions}
       </select>
     );
