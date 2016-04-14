@@ -296,6 +296,12 @@ class Question(models.Model):
         null=False,
         verbose_name=_ug('Text')
     )
+    description = models.CharField(
+        max_length=hardcode.question_description_length,
+        blank=True,
+        null=True,
+        verbose_name=_ug('Description')
+    )
     style = models.IntegerField(
         default=hardcode.STYLE_RADIO,
         choices=hardcode.STYLES,

@@ -32,12 +32,14 @@ var Context = React.createClass({
         </div>
       );
     } else {
-      var QuestionNodes = this.state.questions.map(function (question) {
+      var QuestionNodes = this.state.questions.map(function (question, index) {
         return (
           <Question
-            key={question.id}
+            key={index}
+            number={index}
             id={question.id}
             text={question.text}
+            description={question.description}
             style={question.style}
             answers={question.answers}
           />
