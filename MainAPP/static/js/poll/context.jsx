@@ -45,7 +45,7 @@ var Context = React.createClass({
       });
 
       return (
-        <div className='col-xs-8 col-xs-offset-2'>
+        <div className='col-xs-12'>
           {QuestionNodes}
         </div>
       );

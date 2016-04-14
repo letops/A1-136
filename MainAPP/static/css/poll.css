@@ -1,3 +1,147 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito:400,300);
+
 .contentPoll {
   padding-top: 3%;
+}
+
+.titlePoll{
+	font-family: 'Nunito', sans-serif;
+  font-weight: 100;
+  font-size: 5em;
+  margin-top: 1.1em;
+}
+
+.subtitle{
+	margin-top: 5%;
+  font-family: 'Nunito', sans-serif;
+  font-weight: lighter;
+  font-size: 1.5em;
+}
+
+.questionText{
+	margin-top: 5%;
+	margin-bottom: 2%;
+	font-size: 1.5em;
+}
+
+.questionRow{
+	
+
+}
+
+.radioAnswers{
+	font-family: 'Nunito', sans-serif;
+	margin-left: 5.7em;
+}
+
+.customArrow{
+	margin-right: 1.1em;
+	margin-left: 1.1em;
+	color: #ff740c;
+}
+
+.radioLabels span{
+	vertical-align: -webkit-baseline-middle;
+	margin-left: 1em;
+	font-weight: lighter !important;
+}
+
+.questionNumber{
+	color: #ff740c;
+}
+
+.spanID{
+	color: #ff740c;
+}
+
+/*Checkboxes*/
+/* checkbox aspect */
+input[type=checkbox] {
+    position: relative;
+    visibility: hidden;
+    cursor: pointer;
+    
+}
+
+
+
+input[type=checkbox]:after {
+    
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*right: -30px;*/
+    visibility: visible;
+    /*height: 30px;*/
+    /*line-height: 30px;*/
+    /*width: 50px;*/
+    width: 1em;
+    height: 1em;
+    border-style: solid;
+    border-color: #ff740c;
+    content: ' ';
+    background-color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    transform: scale(1);
+    padding-bottom: 1.1em;
+    padding-right: 0.9em;
+    padding-left: 0.3em;
+}
+
+input[type=checkbox]:checked:after {
+    content: "X";
+    color: #ffffff;
+    background-color:  #ff740c;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    padding-bottom: 1.1em;
+    padding-right: 0.9em;
+    padding-left: 0.3em;
+}
+
+.botonIngles{
+	visibility: hidden;
+}
+
+/*Drag questions*/
+
+.dragQuestions{
+	font-family: 'Nunito', sans-serif;
+	margin-left: 3.6em;
+}
+
+.dragIcon{
+	margin-right: 1.1em;
+	margin-left: 1.1em;
+	color: #ff740c;
+}
+
+/*Boton*/
+
+
+.btn {
+    padding: 14px 24px;
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    
+}
+ 
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+ 
+.btn-primary {
+    background: #ff740c;
+    color: #ffffff;
+}
+ 
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #F38630;
+}
+ 
+.btn-primary:active, .btn-primary.active {
+    background: #FA6900 !important;
+    box-shadow: none;
 }
