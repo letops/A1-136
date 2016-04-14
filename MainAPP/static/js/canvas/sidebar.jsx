@@ -15,6 +15,22 @@ var Sidebar = React.createClass({
     };
   },
 
+  componentDidUpdate(prevProps, prevState) {
+    isoimages = document.getElementsByClassName("col grid-img");
+    for(i = 0 ; i<isoimages.length ; i++){
+      console.log(isoimages[i])
+      jQuery(isoimages[i]).fadeIn("slow");
+    }
+  },
+
+  componentWillUpdate(nextProps, nextState) {
+    isoimages = document.getElementsByClassName("col grid-img");
+    for(i = 0 ; i<isoimages.length ; i++){
+      console.log(isoimages[i])
+      jQuery(isoimages[i]).fadeIn("slow");
+    }
+  },
+
   componentWillMount: function () {
     var csrftoken = Csrf.getCookie('csrftoken');
     var filtersvar = {
@@ -113,7 +129,7 @@ var Sidebar = React.createClass({
         </div>
       );
     } else {
-
+      
       var CategoryOptions = this.renderOptions();
       var CategoryNodes = this.renderNodes();
 

@@ -28,6 +28,7 @@ var Isometric = React.createClass({
     imageId: PropTypes.number.isRequired,
     imageUrl: PropTypes.string.isRequired,
     hide: PropTypes.bool.isRequired,
+    selected: PropTypes.bool.isRequired,
   },
 
   componentDidMount: function () {
@@ -45,10 +46,11 @@ var Isometric = React.createClass({
     var imageUrl = this.props.imageUrl;
     var imageId = this.props.imageId;
     var hide = this.props.hide;
+    var selected = this.props.selected;
 
     return connectDragSource(
       <div
-        className={'col grid-img ' + ((hide == true) ? 'hidden' : '')}
+        className={'col grid-img ' + ((hide == true) ? 'hidden' : '') + ((selected==true && hide!=true) ? ' selected' : ' not-selected')}
         key={imageId}
         style={{
           backgroundImage: 'url(' + imageUrl + ')',

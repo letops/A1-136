@@ -22,7 +22,7 @@
     <div id="content" class="contentPoll"></div>
 
     <div>
-      <form method="post" action={{ url('poll-finish')}}>
+      <form method="post" id="form-submit" action={{ url('poll-finish')}}>
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
         <button type="submit">Guardar</button>
       </form>
