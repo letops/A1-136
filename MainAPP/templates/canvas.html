@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 
-{% block title %}A1-136 Canvas{% endblock %}
+{% block title %}{{ CONST_SYSTEM_NAME }} Canvas{% endblock %}
 
 {% block extra_cdn_css %}
 <!--Para el Grid-->
@@ -36,6 +36,7 @@
 {% block bottom_cdn_js %}{% endblock %}
 {% block bottom_js %}
   <script>
+    var CONST_SYSTEM_NAME = '{{ CONST_SYSTEM_NAME|safe }}';
     var CONST_IMAGESIZE = '{{ CONST_IMAGESIZE }}';
     var CONST_GRIDSIZE = {{ CONST_GRIDSIZE }};
   </script>

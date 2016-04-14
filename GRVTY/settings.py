@@ -149,6 +149,7 @@ TEMPLATES = [
                 'webpack_loader.contrib.jinja2ext.WebpackExtension'
             ],
             'constants': {
+                'CONST_SYSTEM_NAME': 'Drag & Drop',
                 'CONST_GRIDSIZE': 4,
                 'CONST_IMAGESIZE': '150px',
             }
