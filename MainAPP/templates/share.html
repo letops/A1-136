@@ -1,13 +1,45 @@
 {% extends 'base.html' %}
 {% block title %}A1-136 Share{% endblock %}
 
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ static("css/share.css") }}">
+{% endblock %}
+
 {% block extra_cdn_css %}{% endblock %}
 
-{% block top_js %}{% endblock %}
+{% block top_js %}
+
+{% endblock %}
+
 
 {% block content %}
-  <div id="content">Howdy partner. Share.</div>
-  <img src={{ image_render }}>
+  <div class="container-fluid">
+    <div id="content"></div>
+    <div class="row">
+	  	<div class="col-sm-1"></div>
+	  	<div class="col-sm-3">
+    		<h1>Drag and Drop</h1>
+	  	</div>
+    </div>
+    	<div class="row">
+	  		<div class="col-sm-1"></div>
+	  		<div class="col-sm-4">
+	  			<div class="title">
+	    			<h3>¡Gracias!</h3>
+	  			</div>
+					<p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis imperdiet gravida. Nunc hendrerit accumsan nisi, a lacinia lectus pharetra et. Duis iaculis elementum sodales. Donec bibendum sagittis enim, dapibus accumsan leo porttitor ut. Nullam tempor dolor nec orci pulvinar sollicitudin.</p>
+					<a href="{{image_render}}" download>
+						<div id="button-download">Descargar</div>
+					</a>
+	  		</div>
+	  		<div class="col-sm-6">
+	  			<img class="resize" src={{ image_render }}>
+	  		</div>
+	  		<div class="col-sm-1"></div>
+    	</div>
+  	</div>
+  </div>
 {% endblock %}
 
 

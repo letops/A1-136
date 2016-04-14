@@ -1,0 +1,27 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito:400,300);
+
+.resize{
+	width: 100vh;
+	height: 80vh;
+	text-align: center;
+}
+
+.title{
+	margin-bottom: 5%;
+	font-family: 'Nunito', sans-serif;
+	text-align: center;
+}
+
+.description{
+  font-family: 'Nunito', sans-serif;
+}
+
+#button-download{
+	width: 100%;
+	padding: 20px;
+	margin-bottom: 50px;
+	background: black;
+	color: white;
+	text-align: center;
+	cursor: pointer;
+}
