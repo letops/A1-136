@@ -45,7 +45,7 @@ var Question = React.createClass({
         <div key={answer.id} className="radioAnswers">
           <label className='radioLabels'>
             <input
-              type='checkbox'
+              type='radio'
               name={'question-' + questionId}
               value={answer.id}
               onChange={changeRadio}
@@ -76,17 +76,21 @@ var Question = React.createClass({
 
     return (
       <div className='questionRow'>
-        <div className='col-xs-offset-1'>
+        <div className='col-xs-offset-2 col-xs-7'>
           <form action='#'>
-            <div className='questionText'>
-              <span className='spanID'>{this.props.number}</span>
-              <i className="fa fa-long-arrow-right customArrow" aria-hidden="true"></i>
-              {this.props.text}
+            <div className='row'>
+              <div className='questionText col-xs-12'>
+                <span className='spanID'>{this.props.number}</span>
+                <i className="fa fa-long-arrow-right customArrow" aria-hidden="true"></i>
+                {this.props.text}
+              </div>
             </div>
-            <div className='questionDesc'>
-              {this.props.description}
+            <div className='row'>
+              <div className='questionDesc col-xs-11'>
+                {this.props.description.toUpperCase()}
+              </div>
             </div>
-            <div>
+            <div className='row'>
               {AnswerNodes}
             </div>
           </form>

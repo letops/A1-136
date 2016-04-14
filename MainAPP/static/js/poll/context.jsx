@@ -33,10 +33,11 @@ var Context = React.createClass({
       );
     } else {
       var QuestionNodes = this.state.questions.map(function (question, index) {
+        var number = index + 1;
         return (
           <Question
-            key={index}
-            number={index}
+            key={number}
+            number={number}
             id={question.id}
             text={question.text}
             description={question.description}

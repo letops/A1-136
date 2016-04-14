@@ -8,30 +8,40 @@
 	font-family: 'Nunito', sans-serif;
   font-weight: 100;
   font-size: 5em;
-  margin-top: 1.1em;
+  margin-top: 0.2em;
+  color: #000;
 }
 
 .subtitle{
-	margin-top: 5%;
+	margin-top: 1em;
   font-family: 'Nunito', sans-serif;
-  font-weight: lighter;
-  font-size: 1.5em;
+  font-weight: 100;
+  font-size: 1.3em;
+  color: #a0a0a0;
 }
 
 .questionText{
 	margin-top: 5%;
-	margin-bottom: 2%;
-	font-size: 1.5em;
+  font-size: 1.8rem;
+	font-weight: 100 !important;
 }
 
-.questionRow{
-	
-
+.questionDesc{
+  color: #8e8e8e;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.9px;
+  margin-bottom: 1.5em;
+  margin-left: 7em;
+  margin-top: 0.5em;
 }
+
+/*.questionRow{}*/
 
 .radioAnswers{
 	font-family: 'Nunito', sans-serif;
-	margin-left: 5.7em;
+  margin-left: 5.7em;
+	margin-top: 0.25em;
 }
 
 .customArrow{
@@ -40,10 +50,12 @@
 	color: #ff740c;
 }
 
-.radioLabels span{
-	vertical-align: -webkit-baseline-middle;
+.radioLabels {
+	vertical-align: middle;
+  /*-webkit-baseline-middle:*/
 	margin-left: 1em;
-	font-weight: lighter !important;
+	font-weight: 100 !important;
+  font-size: 1.8rem;
 }
 
 .questionNumber{
@@ -56,48 +68,45 @@
 
 /*Checkboxes*/
 /* checkbox aspect */
-input[type=checkbox] {
-    position: relative;
-    visibility: hidden;
-    cursor: pointer;
-    
+input[type=radio] {
+  position: relative;
+  visibility: hidden;
+  cursor: pointer;
+  margin: 0;
 }
 
-
-
-input[type=checkbox]:after {
-    
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*right: -30px;*/
-    visibility: visible;
-    /*height: 30px;*/
-    /*line-height: 30px;*/
-    /*width: 50px;*/
-    width: 1em;
-    height: 1em;
-    border-style: solid;
-    border-color: #ff740c;
-    content: ' ';
-    background-color: #ffffff;
-    cursor: pointer;
-    display: inline-block;
-    transform: scale(1);
-    padding-bottom: 1.1em;
-    padding-right: 0.9em;
-    padding-left: 0.3em;
+input[type=radio]:after {
+  background-color: #ffffff;
+  border-color: #ff740c;
+  border-radius: 1em;
+  border-style: solid;
+  content: ' ';
+  cursor: pointer;
+  display: inline-block;
+  height: 1.3em;
+  left: -1em;
+  top: -0.25em;
+  /*transform: scale(1);*/
+  /*padding-bottom: 1.1em;*/
+  /*padding-right: 0.9em;*/
+  /*padding-left: 0.3em;*/
+  position: absolute;
+  width: 1.3em;
+  visibility: visible;
 }
 
-input[type=checkbox]:checked:after {
-    content: "X";
-    color: #ffffff;
-    background-color:  #ff740c;
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    padding-bottom: 1.1em;
-    padding-right: 0.9em;
-    padding-left: 0.3em;
+input[type=radio]:checked:after {
+  background-color:  #ff740c;
+  content: ' ';
+  color: #ffffff;
+  display: inline-block;
+  height: 1.3em;
+  /*padding-bottom: 1.1em;*/
+  /*padding-right: 0.9em;*/
+  /*padding-left: 0.3em;*/
+  text-align: center;
+  width: 1.3em;
+  vertical-align: middle;
 }
 
 .botonIngles{
@@ -106,14 +115,20 @@ input[type=checkbox]:checked:after {
 
 /*Drag questions*/
 
-.dragQuestions{
-	font-family: 'Nunito', sans-serif;
+.draggableAnswer{
+  background-color: white;
+  cursor: move;
+  font-family: 'Nunito', sans-serif;
+	font-size: 1.3em;
+  font-weight: 100;
+  /*margin-bottom: .5em;*/
 	margin-left: 3.6em;
+  padding: 0.5em 1em;
 }
 
 .dragIcon{
-	margin-right: 1.1em;
-	margin-left: 1.1em;
+	margin-right: 0.6em;
+	/*margin-left: 1.1em;*/
 	color: #ff740c;
 }
 
@@ -121,27 +136,27 @@ input[type=checkbox]:checked:after {
 
 
 .btn {
-    padding: 14px 24px;
-    border: 0 none;
-    font-weight: 700;
-    letter-spacing: 1px;
-    
+  padding: 14px 24px;
+  border: 0 none;
+  font-weight: 700;
+  letter-spacing: 1px;
+
 }
- 
+
 .btn:focus, .btn:active:focus, .btn.active:focus {
-    outline: 0 none;
+  outline: 0 none;
 }
- 
+
 .btn-primary {
-    background: #ff740c;
-    color: #ffffff;
+  background: #ff740c;
+  color: #ffffff;
 }
- 
+
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
-    background: #F38630;
+  background: #F38630;
 }
- 
+
 .btn-primary:active, .btn-primary.active {
-    background: #FA6900 !important;
-    box-shadow: none;
+  background: #FA6900 !important;
+  box-shadow: none;
 }

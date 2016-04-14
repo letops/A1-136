@@ -102,7 +102,7 @@ var AnswersContainer = React.createClass({
     return (
       <div>
         {AnswerNodes}
-        <button type="button" className='botonIngles' onClick={saveAnswers}>Save</button>
+        <button className="btn pull-right" type="button" onClick={saveAnswers}>Next</button>
       </div>
     );
   },
