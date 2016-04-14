@@ -20,9 +20,14 @@
 {% block content %}
   <div class="container-fluid">
     <div id="content"></div>
+    <div class="row">
+      <div class="col-sm-12 col-xs-12 hidden-md hidden-lg">
+        <p class="error_message">Utiliza una resolución mas grande para visualizar el contenido</p>
+      </div>
+    </div>
     <form method="post" id="form-submit" action={{ url('canvas-finish')}}>
       <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-      <button type="submit" id="button-submit">Guardar</button>
+      <button type="submit" id="button-submit" class="hidden-sm hidden-xs">Guardar</button>
     </form>
   </div>
 

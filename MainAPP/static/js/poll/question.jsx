@@ -40,15 +40,14 @@ var Question = React.createClass({
     var changeRadio = this.changeRadio;
     var AnswerNodes = this.props.answers.map(function (answer) {
       return (
-        <div key={answer.id}>
-          <label>
-            {answer.text}:
+        <div key={answer.id} className="radioAnswers">
+          <label className='radioLabels'>
             <input
-              type='radio'
+              type='checkbox'
               name={'question-' + questionId}
               value={answer.id}
               onChange={changeRadio}
-            />
+            />{answer.text}:
           </label>
         </div>
       );
@@ -71,13 +70,16 @@ var Question = React.createClass({
 
   render: function () {
     var style = this.props.style;
+    var questionId = this.props.id;
     var AnswerNodes = ((style == 0) ? this.renderAsRadio() : this.renderAsPriority());
 
     return (
-      <div className='row'>
-        <div className='col-xs-10 col-xs-offset-1'>
+      <div className='questionRow'>
+        <div className='col-xs-offset-1'>
           <form action='#'>
-            <div>
+            <div className='questionText'>
+              <span className='spanID'>{this.props.id}</span>
+              <i className="fa fa-long-arrow-right customArrow" aria-hidden="true"></i>
               {this.props.text}
             </div>
             <div>

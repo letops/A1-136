@@ -124,7 +124,7 @@ var Grid = React.createClass({
     }
 
     return (
-      <div className='col-md-8 col-xs-8 colClass'>
+      <div className='col-md-8 col-xs-8 colClass hidden-sm hidden-xs'>
         {rows}
       </div>
     );
