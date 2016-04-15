@@ -18,7 +18,6 @@ var Sidebar = React.createClass({
   componentDidUpdate(prevProps, prevState) {
     isoimages = document.getElementsByClassName('col grid-img');
     for (i = 0; i < isoimages.length; i++) {
-      console.log(isoimages[i]);
       jQuery(isoimages[i]).fadeIn('slow');
     }
   },
@@ -26,7 +25,6 @@ var Sidebar = React.createClass({
   componentWillUpdate(nextProps, nextState) {
     isoimages = document.getElementsByClassName('col grid-img');
     for (i = 0; i < isoimages.length; i++) {
-      console.log(isoimages[i]);
       jQuery(isoimages[i]).fadeIn('slow');
     }
   },
@@ -95,13 +93,17 @@ var Sidebar = React.createClass({
       var hideCategory = (
         (selected == category.id  + '-' + category.name) ? '' : 'hidden'
       );
+      firstImage = 'left';
       var ClusterNodes = category.clusters.map(function (cluster) {
+        first = firstImage;
+        firstImage = (firstImage=='left') ? 'right' : 'left';
         return (
-          <Cluster
+          <Cluster className={first}
             key={cluster.id}
             id={cluster.id}
             name={cluster.name}
             isometric_images={cluster.isometric_images}
+            firstImage = {first}
           />
         );
       });
