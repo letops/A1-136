@@ -54,17 +54,17 @@ var Isometric = React.createClass({
     return connectDragSource(
       <div
         className={'col grid-img ' + ((hide == true) ? 'hidden' : '')
-                   + ((selected==true && hide!=true) ? ' selected' : ' not-selected')
-                   + ((listNumber==0)? ' ': ' absolute-image image ')
-                   +  listNumber + "-" + imageLoc}
+                   + ((selected == true && hide != true) ? ' selected' : ' not-selected')
+                   + ((listNumber == 0) ? ' ' : ' absolute-image image ')
+                   +  listNumber + '-' + imageLoc}
         key={imageId}
         style={{
           backgroundImage: 'url(' + imageUrl + ')',
           backgroundRepeat: 'no-repeat',
           backgroundSize: '100%',
-          left: (((imageLoc=='left' && listNumber==3)
-                  || (imageLoc=='right' && listNumber%2==1))?1:0)*150+'px',
-          marginTop: ((listNumber==1)? '-150px':''),
+          left: (((imageLoc == 'left' && listNumber == 3)
+                  || (imageLoc == 'right' && listNumber % 2 == 1)) ? 1 : 0) * 150 + 'px',
+          marginTop: ((listNumber == 1) ? '-150px' : ''),
         }}
       ></div>
     );

@@ -3,8 +3,6 @@ var PropTypes = React.PropTypes;
 var GridCell = require('./gridcell.jsx');
 var Csrf = require('../tools/csrf');
 
-
-
 var Grid = React.createClass({
   propTypes: {
     imageSize: React.PropTypes.string.isRequired,
@@ -13,37 +11,48 @@ var Grid = React.createClass({
   getInitialState: function () {
     return {
       cached: '',
+      finished: undefined,
     };
   },
 
-  componentWillMount: function () {
-    var csrftoken = Csrf.getCookie('csrftoken');
-    document.getElementById("button-submit").addEventListener("click", function(event){
+  submitCanvas: function (event) {
+    event.preventDefault();
+    gridElements = document.getElementsByClassName('canvas-box');
+    var nonImageCounter = 0;
+    for (i = 0; i < (CONST_GRIDSIZE * CONST_GRIDSIZE); i++) {
+      console.log(gridElements[i]);
+      if (gridElements[i].hasAttribute('data-image-id')) {
+        gridElements[i].className = 'canvas-box col-xs-3';
+      } else {
+        gridElements[i].className += ' grid-error';
+        nonImageCounter++;
+      }
+
+    }
+
+    console.log(nonImageCounter);
+    if (nonImageCounter != 0) {
+      alert('not finished yet');
+    }
+
+    if (nonImageCounter == 0) {
+      document.getElementById('form-submit').submit();
+    }
+  },
+
+  submitReact: function (event) {
+    this.updateCache();
+    if (this.state.cached == undefined || this.state.cached == null ||
+        this.state.cached.length != (CONST_GRIDSIZE * CONST_GRIDSIZE)) {
       event.preventDefault();
-      gridElements = document.getElementsByClassName("grid-box");
-      var nonImageCounter = 0;
-      for (i=0 ; i < 16 ; i++){
-        console.log("element "+i);
-        if (gridElements[i].hasAttribute("data-image-id")){
-          gridElements[i].className = "col grid-box";
-        }
-        else{
-          gridElements[i].className += " grid-error";
-          nonImageCounter++;
-        }
+      this.setState({
+        finished: false,
+      });
+    }
+  },
 
-        // gridElements[i].style.backgroundColor = 'red';
-      }
-      console.log(nonImageCounter);
-      if(nonImageCounter != 0){
-        alert("not finished yet");
-      }
-      if(nonImageCounter==0){
-        document.getElementById("form-submit").submit();
-      }
-
-
-    });
+  updateCache: function () {
+    var csrftoken = Csrf.getCookie('csrftoken');
     var filtersvar = {
       size: this.props.imageSize,
     };
@@ -70,10 +79,14 @@ var Grid = React.createClass({
     });
   },
 
+  componentWillMount: function () {
+    this.updateCache();
+  },
+
   renderRow: function (i, cells) {
     return (
       <div
-        className="grid"
+        className='row'
         key={i}>
           {cells}
       </div>
@@ -111,8 +124,14 @@ var Grid = React.createClass({
   },
 
   render: function () {
+    var csrftoken = Csrf.getCookie('csrftoken');
     var rows = [];
     var cells = [];
+    var warningMessage = ((this.state.finished == false) ?
+      <button type="button" className="btn btn-danger btn-block disabled">
+        <span className="warning-message"></span> NO!
+      </button> : ''
+    );
     for (i = 0; i < CONST_GRIDSIZE; i++) {
       for (j = 0; j < CONST_GRIDSIZE; j++) {
         var k = (i * CONST_GRIDSIZE) + j;
@@ -124,8 +143,30 @@ var Grid = React.createClass({
     }
 
     return (
-      <div className='col-md-8 col-xs-8 colClass hidden-sm hidden-xs'>
+      <div className='col-md-8 col-xs-10 hidden-sm hidden-xs canvas-draw'>
         {rows}
+        <div className='row'>
+          <form method='post' id='form-submit' action={CONST_URL_FINISH}>
+            <div className='col-xs-7'>
+              {warningMessage}
+            </div>
+            <div className='col-xs-3'>
+              <input
+                type='hidden'
+                name='csrfmiddlewaretoken'
+                value={csrftoken}
+              />
+              <button
+                type='submit'
+                id='button-submit'
+                className='btn btn-default btn-block hidden-sm hidden-xs'
+                onClick={this.submitReact}
+              >
+                ENVIAR
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     );
   },

@@ -75,14 +75,16 @@ var Sidebar = React.createClass({
     // the section with its own JS. The render overwrites this section after the initial
     // load, so Bootstrap will flunk.
     return (
-      <select
-        id='category-selector'
-        className='dropdownStyle'
-        onChange={this.change}
-        value={this.state.selected}
-      >
-        {CategoryOptions}
-      </select>
+      <label className='selectLabel'>
+        <select
+          id='category-selector'
+          className='dropdownStyle'
+          onChange={this.change}
+          value={this.state.selected}
+        >
+          {CategoryOptions}
+        </select>
+      </label>
     );
   },
 
@@ -96,7 +98,7 @@ var Sidebar = React.createClass({
       firstImage = 'left';
       var ClusterNodes = category.clusters.map(function (cluster) {
         first = firstImage;
-        firstImage = (firstImage=='left') ? 'right' : 'left';
+        firstImage = (firstImage == 'left') ? 'right' : 'left';
         return (
           <Cluster className={first}
             key={cluster.id}
@@ -124,7 +126,7 @@ var Sidebar = React.createClass({
   render: function () {
     if (this.state.categories === null || this.state.categories === '') {
       return (
-        <div className='col-md-offset-1 col-md-3 col-xs-offset-1 col-xs-2 colClass2'>
+        <div className='col-md-offset-1 col-md-3 col-xs-offset-0 col-xs-2 hidden-sm hidden-xs canvas-sidebar'>
           <h1 className='title'>{ CONST_SYSTEM_NAME }</h1>
           <p className='description'>
             Quisque vel nisl diam sed consectetur sed magna nec posuere.
@@ -140,7 +142,7 @@ var Sidebar = React.createClass({
       var CategoryNodes = this.renderNodes();
 
       return (
-        <div className='col-md-3 col-xs-offset-1 col-xs-2 colClass2 hidden-sm hidden-xs'>
+        <div className='col-md-offset-1 col-md-3 col-xs-offset-0 col-xs-2 hidden-sm hidden-xs canvas-sidebar'>
           <h1 className='title'>{ CONST_SYSTEM_NAME }</h1>
           <p className='description'>
             Quisque vel nisl diam sed consectetur sed magna nec posuere.
