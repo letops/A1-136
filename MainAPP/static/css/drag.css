@@ -132,7 +132,17 @@ fieldset[disabled] .btn-danger:hover {
 
 .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
   cursor: default !important;
+}
+
+.appear {
   opacity: 1 !important;
+  transition: all 0.5s ease;
+ -moz-transition: all 0.5s ease;
+ -webkit-transition: all 0.5s ease;
+}
+
+.disappear {
+  opacity: 0 !important;
 }
 
 .warning-message:after {
@@ -140,7 +150,7 @@ fieldset[disabled] .btn-danger:hover {
   font-family: FontAwesome;
 }
 
-.grid-img {
+.sidebar-img {
   background-color: #f6f6f6;
   border: solid 2px #ffffff;
   flex: inherit !important;
@@ -150,17 +160,12 @@ fieldset[disabled] .btn-danger:hover {
   width: 150px !important;
 }
 
-.grid-error {
+.canvas-error {
   background-color: #f2c1c1 !important;
-}
-
-.colClass {
-	padding-top: 2% !important;
-  padding-left: 5% !important;
-}
-
-.colClass2 {
-  padding-top: 1% !important;
+  opacity: 1 !important;
+  transition: all 0.5s ease;
+ -moz-transition: all 0.5s ease;
+ -webkit-transition: all 0.5s ease;
 }
 
 .description {
@@ -187,10 +192,10 @@ fieldset[disabled] .btn-danger:hover {
 
 /*****/
 
-.error_message{
+.error-message{
   font-family: 'Nunito', sans-serif;
   font-weight: 100;
-  font-size: 4em;
+  font-size: 3em;
   padding-top: 45%;
   text-align: center;
 }
@@ -200,12 +205,6 @@ fieldset[disabled] .btn-danger:hover {
   body{
     background-color: #ffffff;
     z-index: 1;
-  }
-  .colClass {
-    visibility: hidden;
-  }
-  .colClass2 {
-    visibility: hidden;
   }
   .description {
     visibility: hidden;
@@ -222,10 +221,10 @@ fieldset[disabled] .btn-danger:hover {
   .canvas-box {
     visibility: hidden;
   }
-  .grid-error {
+  .canvas-error {
     visibility: hidden;
   }
-  .grid-img {
+  .sidebar-img {
     visibility: hidden;
   }
   .title {
@@ -273,21 +272,21 @@ fieldset[disabled] .btn-danger:hover {
 }
 
 
-.grid-img.selected:hover{
+.sidebar-img.selected:hover{
   opacity: 1;
   transition: all 1s ease;
  -moz-transition: all 1s ease;
  -webkit-transition: all 1s ease;
 }
 
-.grid-img.selected {
+.sidebar-img.selected {
   opacity: .5;
   transition: all 1s ease;
  -moz-transition: all 1s ease;
  -webkit-transition: all 1s ease;
 }
 
-.grid-img {
+.sidebar-img {
   opacity: 0;
   transition: all 1s ease;
  -moz-transition: all 1s ease;

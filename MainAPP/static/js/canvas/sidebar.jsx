@@ -16,14 +16,14 @@ var Sidebar = React.createClass({
   },
 
   componentDidUpdate(prevProps, prevState) {
-    isoimages = document.getElementsByClassName('col grid-img');
+    isoimages = document.getElementsByClassName('col sidebar-img');
     for (i = 0; i < isoimages.length; i++) {
       jQuery(isoimages[i]).fadeIn('slow');
     }
   },
 
   componentWillUpdate(nextProps, nextState) {
-    isoimages = document.getElementsByClassName('col grid-img');
+    isoimages = document.getElementsByClassName('col sidebar-img');
     for (i = 0; i < isoimages.length; i++) {
       jQuery(isoimages[i]).fadeIn('slow');
     }

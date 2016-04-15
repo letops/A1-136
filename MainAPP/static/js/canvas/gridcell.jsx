@@ -56,6 +56,7 @@ var GridCell = React.createClass({
     row: PropTypes.number.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
     isOver: PropTypes.bool.isRequired,
+    errorOverlay: PropTypes.bool,
     imageUrl: PropTypes.string,
     imageId: PropTypes.number,
   },
@@ -102,8 +103,9 @@ var GridCell = React.createClass({
                           this.state.imageUrl == undefined ||
                           this.state.imageUrl == null) ? true : false);
     if (stateUrlEmpty == true) {
+      var errorOverlay = (this.props.errorOverlay == true) ? 'canvas-error' : '';
       return connectDropTarget(
-        <div className='canvas-box col-xs-3'>
+        <div className={'canvas-box col-xs-3 ' + errorOverlay}>
           {isOver && this.renderOverlay('green')}
         </div>
       );

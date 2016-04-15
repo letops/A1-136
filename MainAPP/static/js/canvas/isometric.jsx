@@ -53,7 +53,7 @@ var Isometric = React.createClass({
     var imageLoc = this.props.imageLoc;
     return connectDragSource(
       <div
-        className={'col grid-img ' + ((hide == true) ? 'hidden' : '')
+        className={'col sidebar-img ' + ((hide == true) ? 'hidden' : '')
                    + ((selected == true && hide != true) ? ' selected' : ' not-selected')
                    + ((listNumber == 0) ? ' ' : ' absolute-image image ')
                    +  listNumber + '-' + imageLoc}

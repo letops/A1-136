@@ -97,6 +97,7 @@ var Grid = React.createClass({
     var column = i % CONST_GRIDSIZE;
     var row = Math.floor(i / CONST_GRIDSIZE);
     var cached = this.state.cached;
+    var redOverlay = (this.state.finished == false) ? true : false;
     if (cached != '' && cached != null) {
       for (var j = 0; j < cached.length; j++) {
         if (cached[j].column == column && cached[j].row == row) {
@@ -118,6 +119,7 @@ var Grid = React.createClass({
         column = {column}
         row = {row}
         key={i}
+        errorOverlay={redOverlay}
       />
     );
 
@@ -128,9 +130,7 @@ var Grid = React.createClass({
     var rows = [];
     var cells = [];
     var warningMessage = ((this.state.finished == false) ?
-      <button type="button" className="btn btn-danger btn-block disabled">
-        <span className="warning-message"></span> NO!
-      </button> : ''
+      'appear' : 'disappear'
     );
     for (i = 0; i < CONST_GRIDSIZE; i++) {
       for (j = 0; j < CONST_GRIDSIZE; j++) {
@@ -148,7 +148,11 @@ var Grid = React.createClass({
         <div className='row'>
           <form method='post' id='form-submit' action={CONST_URL_FINISH}>
             <div className='col-xs-7'>
-              {warningMessage}
+              <button
+                type="button"
+                className={'btn btn-danger btn-block disabled ' + warningMessage}>
+                <span className="warning-message"></span> ¡RELLENA TODOS LOS BLOQUES!
+              </button>
             </div>
             <div className='col-xs-3'>
               <input
