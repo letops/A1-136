@@ -57,6 +57,7 @@ INSTALLED_APPS = list(filter(None, [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_social_share',
 
     'compressor',
     'debug_toolbar',

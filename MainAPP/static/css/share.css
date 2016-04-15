@@ -16,7 +16,7 @@
   font-family: 'Nunito', sans-serif;
 }
 
-#button-download{
+#button-download, #button-share{
 	width: 100%;
 	padding: 20px;
 	margin-bottom: 50px;

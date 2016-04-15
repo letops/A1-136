@@ -14,8 +14,10 @@
 
 
 {% block content %}
+
   <div class="container-fluid">
     <div id="content"></div>
+
     <div class="row">
 	  	<div class="col-sm-1"></div>
 	  	<div class="col-sm-3">
@@ -31,6 +33,9 @@
 					<p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis imperdiet gravida. Nunc hendrerit accumsan nisi, a lacinia lectus pharetra et. Duis iaculis elementum sodales. Donec bibendum sagittis enim, dapibus accumsan leo porttitor ut. Nullam tempor dolor nec orci pulvinar sollicitudin.</p>
 					<a href="{{image_render}}" download>
 						<div id="button-download">Descargar</div>
+					</a>
+					<a href="#" onclick="wind = window.open('{{fb.facebook_url}}','MyWindow', 'width=600,height=400'); return false;">
+						<div id="button-share">Share (facebook colors missing)</div>
 					</a>
 	  		</div>
 	  		<div class="col-sm-6">
