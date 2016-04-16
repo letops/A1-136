@@ -56,6 +56,7 @@ var GridCell = React.createClass({
     row: PropTypes.number.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
     isOver: PropTypes.bool.isRequired,
+    errorOverlay: PropTypes.bool,
     imageUrl: PropTypes.string,
     imageId: PropTypes.number,
   },
@@ -79,13 +80,15 @@ var GridCell = React.createClass({
   renderOverlay: function (color) {
     return (
       <div
-        className='col grid-box'
+        className='canvas-box'
         style={{
           zIndex: 1,
           opacity: 0.5,
           backgroundColor: color,
           backgroundSize: '100% 100%',
           position: 'absolute',
+          width: 'inherit',
+          height: 'inherit',
         }}
       />
     );
@@ -100,13 +103,9 @@ var GridCell = React.createClass({
                           this.state.imageUrl == undefined ||
                           this.state.imageUrl == null) ? true : false);
     if (stateUrlEmpty == true) {
+      var errorOverlay = (this.props.errorOverlay == true) ? 'canvas-error' : '';
       return connectDropTarget(
-        <div className='col grid-box'
-          style={{
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: '100%',
-          }}
-        >
+        <div className={'canvas-box col-xs-3 ' + errorOverlay}>
           {isOver && this.renderOverlay('green')}
         </div>
       );
@@ -115,11 +114,9 @@ var GridCell = React.createClass({
       var imageId = this.state.imageId;
       return connectDropTarget(
         <div
-          className='col grid-box'
+          className='canvas-box col-xs-3'
           style={{
             backgroundImage: 'url(' + imageUrl + ')',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: '100%',
           }}
           data-image-id={imageId}
         >
