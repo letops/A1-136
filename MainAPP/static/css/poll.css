@@ -2,6 +2,7 @@
 
 .contentPoll {
   padding-top: 3%;
+  padding-bottom: 5%;
 }
 
 .titlePoll{
@@ -163,6 +164,7 @@ input[type=radio]:checked:after {
 }
 
 
+
 /*Scroll effect*/
 
 .activeDiv {
@@ -179,4 +181,38 @@ input[type=radio]:checked:after {
 {
   padding-top: 10%;
   padding-left: 20%;
+}
+.progress{
+  background: #F38630;
+  height: 10px;
+  position: fixed;
+  transition: all 1s ease;
+ -moz-transition: all 1s ease;
+ -webkit-transition: all 1s ease;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 0;
+}
+
+.progress-cont{
+  height: 10px;
+  width: 100%;
+  position: fixed;
+  background: gray;
+  bottom: 0;
+  left: 0;
+}
+
+#poll-button {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 0;
+  height: 0;
+  left: 0;
+  transition: all 1s ease;
+ -moz-transition: all 1s ease;
+ -webkit-transition: all 1s ease;
+
+
 }

@@ -40,7 +40,11 @@
     <div>
       <form method="post" id="form-submit" action={{ url('poll-finish')}}>
         <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-        <button type="submit" class="btn btn-primary btn-lg btn-block">Guardar</button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" id="poll-button">Guardar</button>
+        
+        <div class="progress-cont">
+          <div class="progress" id="progress-bar"></div>
+        </div>
       </form>
     </div>
   </div>
