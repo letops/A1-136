@@ -75,13 +75,13 @@ var Question = React.createClass({
     var AnswerNodes = ((style == 0) ? this.renderAsRadio() : this.renderAsPriority());
 
     return (
-      <div className='questionRow'>
+      <div className='questionRow section'>
         <div className='col-xs-offset-2 col-xs-7'>
           <form action='#'>
             <div className='row'>
               <div className='questionText col-xs-12'>
                 <span className='spanID'>{this.props.number}</span>
-                <i className="fa fa-long-arrow-right customArrow" aria-hidden="true"></i>
+                <img src='/built/img/flechaNueva.svg' className="customArrow flechaNueva" />
                 {this.props.text}
               </div>
             </div>

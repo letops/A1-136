@@ -22,8 +22,9 @@ function getCurrentProgress() {
   // return getCurrentScroll()/getMaxScroll()*100;
 }
 
-function changeProgress() {
+function changeProgress(totalQuestions) {
   var newProgress = getCurrentProgress();
+  console.log("hola");
   document.getElementById("progress-bar").style.width=getCurrentProgress()+"%";
   if(newProgress == 100){
     document.getElementById("poll-button").style.height="8%";
@@ -34,6 +35,39 @@ function changeProgress() {
     document.getElementById("poll-button").style.zIndex="0";
   }
 }
+
+// function getTotalQuestions(){
+//   questions = document.getElementsByClassName("questionRow");
+//   return questions.length;
+// }
+
+// function hasClass(element, cls) {
+//     return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+// }
+
+// function getCurrentQuestion(){
+//   questions = document.getElementsByClassName("questionRow");
+//   var current = 0;
+//   while(current < questions.length){
+//     if(hasClass(questions[current],'active'))
+//       break;
+//     current++;
+//   }
+// }
+
+// jQuery(document).ready(function(){
+//   var observer = new MutationObserver(function(mutations) {
+//       mutations.forEach(function(mutationRecord) {
+          
+//          var q = getCurrentQuestion();
+//          console.log(q);
+//           console.log('scrolled');
+//       });    
+//   });
+
+//   var target = document.getElementById('fullpage');
+//   observer.observe(target, { attributes : true, attributeFilter : ['style'] });
+// });
 
 
 var Context = React.createClass({
@@ -59,7 +93,6 @@ var Context = React.createClass({
   },
 
   render: function () {
-    window.onscroll = function() {changeProgress()};
     var questions = this.state.questions;
     if (questions == '' || questions == null || questions == undefined) {
       return (
@@ -82,9 +115,10 @@ var Context = React.createClass({
           />
         );
       });
+      window.onscroll = function() {changeProgress()};
 
       return (
-        <div className='col-xs-12'>
+        <div className='col-xs-12' id='fullpage'>
           {QuestionNodes}
         </div>
       );

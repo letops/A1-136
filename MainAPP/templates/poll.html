@@ -31,9 +31,58 @@
     <script type="text/javascript">
     window.onload = function() {
       $('#fullpage').fullpage();
+
+      function getTotalQuestions(){
+        questions = document.getElementsByClassName("questionRow");
+        return questions.length;
+      }
+
+      function getCurrentQuestion(){
+        questions = document.getElementsByClassName("questionRow");
+        var current = 0;
+        while(current < questions.length){
+          if($(questions[current]).hasClass("active")){
+            break;
+          }
+          current++;
+        }
+        return current+1;
+      }
+
+      function getCurrentProgress() {
+        console.log(getCurrentQuestion());
+        console.log(getTotalQuestions());
+        scrollPercent = (getCurrentQuestion() / getTotalQuestions()) * 100;
+        var position = scrollPercent;
+        console.log(position);
+        return position;
+        // return getCurrentScroll()/getMaxScroll()*100;
+      }
+
+      function changeProgress() {
+        var newProgress = getCurrentProgress();
+        document.getElementById("progress-bar").style.width=getCurrentProgress()+"%";
+        if(newProgress == 100){
+          document.getElementById("poll-button").style.height="8%";
+          document.getElementById("poll-button").style.zIndex="2";
+        }
+        else{
+          document.getElementById("poll-button").style.height="0";
+          document.getElementById("poll-button").style.zIndex="0";
+        }
+      }
+      var observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutationRecord) {
+              
+             var q = changeProgress();
+              console.log('scrolled');
+          });    
+      });
+
+      var target = document.getElementById('fullpage');
+      observer.observe(target, { attributes : true, attributeFilter : ['style'] });
     }
     </script>
-
 
     <div id="content" class="contentPoll"></div>
 
@@ -52,13 +101,13 @@
 
 
 {% block bottom_cdn_js %}
-  
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.9/jquery.fullPage.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.9/vendors/jquery.easings.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.9/vendors/jquery.slimscroll.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.9/vendors/jquery.slimscroll.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.9/vendors/jquery.slimscroll.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.9/jquery.fullPage.min.js"></script>
+
 {% endblock %}
 
 {% block bottom_js %}
