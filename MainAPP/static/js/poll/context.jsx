@@ -1,6 +1,41 @@
 var React = require('react');
 var Question = require('./question');
 
+function getCurrentScroll() {
+  currentScroll = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+  console.log(currentScroll);
+  return currentScroll;
+}
+
+function getMaxScroll() {
+  var documentHeight = jQuery(document).height();
+  var windowHeight = jQuery(window).height();
+  height = documentHeight-windowHeight;
+  console.log(height);
+  return height;
+}
+
+function getCurrentProgress() {
+  scrollPercent = (getCurrentScroll() / getMaxScroll()) * 100;
+  var position = scrollPercent;
+  return position;
+  // return getCurrentScroll()/getMaxScroll()*100;
+}
+
+function changeProgress() {
+  var newProgress = getCurrentProgress();
+  document.getElementById("progress-bar").style.width=getCurrentProgress()+"%";
+  if(newProgress == 100){
+    document.getElementById("poll-button").style.height="8%";
+    document.getElementById("poll-button").style.zIndex="2";
+  }
+  else{
+    document.getElementById("poll-button").style.height="0";
+    document.getElementById("poll-button").style.zIndex="0";
+  }
+}
+
+
 var Context = React.createClass({
   getInitialState: function () {
     return {
@@ -24,6 +59,7 @@ var Context = React.createClass({
   },
 
   render: function () {
+    window.onscroll = function() {changeProgress()};
     var questions = this.state.questions;
     if (questions == '' || questions == null || questions == undefined) {
       return (
