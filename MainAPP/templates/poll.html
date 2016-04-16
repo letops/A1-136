@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
 {% block title %}{{ CONST_SYSTEM_NAME }} Poll{% endblock %}
 
-{% block extra_cdn_css %}{% endblock %}
+{% block extra_cdn_css %}
+  
+  
+{% endblock %}
 {% block extra_css %}
   <link rel="stylesheet" href="{{ static("css/poll.css") }}">
+  <style>
+    .imagenFlechaNueva {
+      background-image: url("{{ static("img/flechaNueva.svg") }}");
+    }
+  </style>
 {% endblock %}
 
 {% block top_cdn_js %}{% endblock %}
@@ -18,6 +26,14 @@
       Quisque vel nisl diam. Sed consectetur sed magna nec posuere.
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     </div>
+    
+    
+    <script type="text/javascript">
+    window.onload = function() {
+      $('#fullpage').fullpage();
+    }
+    </script>
+
 
     <div id="content" class="contentPoll"></div>
 
@@ -31,7 +47,16 @@
 {% endblock %}
 
 
-{% block bottom_cdn_js %}{% endblock %}
+{% block bottom_cdn_js %}
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.9/jquery.fullPage.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.9/vendors/jquery.easings.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.9/vendors/jquery.slimscroll.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.9/vendors/jquery.slimscroll.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.9/vendors/jquery.slimscroll.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.9/jquery.fullPage.min.js"></script>
+{% endblock %}
+
 {% block bottom_js %}
   {{ render_bundle('poll') }}
 {% endblock %}

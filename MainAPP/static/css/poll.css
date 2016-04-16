@@ -50,9 +50,10 @@
 	color: #ff740c;
 }
 
+
 .radioLabels {
 	vertical-align: middle;
-  /*-webkit-baseline-middle:*/
+
 	margin-left: 1em;
 	font-weight: 100 !important;
   font-size: 1.8rem;
@@ -159,4 +160,23 @@ input[type=radio]:checked:after {
 .btn-primary:active, .btn-primary.active {
   background: #FA6900 !important;
   box-shadow: none;
+}
+
+
+/*Scroll effect*/
+
+.activeDiv {
+
+  background-color: blue;
+}
+
+.inactiveDiv {
+  background-color: red;
+}
+
+/*Imagen Flecha Nueva*/
+.questionRow
+{
+  padding-top: 10%;
+  padding-left: 20%;
 }
