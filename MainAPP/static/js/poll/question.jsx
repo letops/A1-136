@@ -75,7 +75,7 @@ var Question = React.createClass({
     var AnswerNodes = ((style == 0) ? this.renderAsRadio() : this.renderAsPriority());
 
     return (
-      <div className='questionRow section'>
+      <div className='section questionRow'>
         <div className='col-xs-offset-2 col-xs-7'>
           <form action='#'>
             <div className='row'>
