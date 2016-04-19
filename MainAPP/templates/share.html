@@ -16,33 +16,56 @@
 {% block content %}
 
   <div class="container-fluid">
-    <div id="content"></div>
 
     <div class="row">
-	  	<div class="col-sm-1"></div>
-	  	<div class="col-sm-3">
-    		<h1>Drag and Drop</h1>
+	  	<div class="col-xs-offset-1 col-xs-11 title">
+        <div class="row">
+  		    <span>Drag and Drop</span>
+        </div>
 	  	</div>
     </div>
-    	<div class="row">
-	  		<div class="col-sm-1"></div>
-	  		<div class="col-sm-4">
-	  			<div class="title">
-	    			<h3>¡Gracias!</h3>
-	  			</div>
-					<p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis imperdiet gravida. Nunc hendrerit accumsan nisi, a lacinia lectus pharetra et. Duis iaculis elementum sodales. Donec bibendum sagittis enim, dapibus accumsan leo porttitor ut. Nullam tempor dolor nec orci pulvinar sollicitudin.</p>
-					<a href="{{image_render}}" download>
-						<div id="button-download">Descargar</div>
-					</a>
-					<a href="#" onclick="wind = window.open('{{fb.facebook_url}}','MyWindow', 'width=600,height=400'); return false;">
-						<div id="button-share">Share (facebook colors missing)</div>
-					</a>
-	  		</div>
-	  		<div class="col-sm-6">
-	  			<img class="resize" src={{ image_render }}>
-	  		</div>
-	  		<div class="col-sm-1"></div>
-    	</div>
+  	<div class="row">
+  		<div class="col-xs-3 col-xs-offset-1">
+        <div class="row">
+          <div class="col-xs-4 col-xs-offset-2 share-thanks">
+            <img class="img img-responsive" src="{{ image_render }}">
+          </div>
+          <div class="col-xs-4 share-thanks">
+            <img class="img img-responsive" src="{{ image_render }}">
+          </div>
+        </div>
+  			<div class="row">
+          <div class="col-xs-4 col-xs-offset-2 share-thanks">
+            <img class="img img-responsive" src="{{ image_render }}">
+          </div>
+          <div class="col-xs-4 share-thanks">
+            <img class="img img-responsive" src="{{ image_render }}">
+          </div>
+        </div>
+  			<div class="row subtitle">
+    			<span>¡Gracias!</span>
+  			</div>
+				<div class="row description">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis imperdiet gravida. Nunc hendrerit accumsan nisi, a lacinia lectus pharetra et. Duis iaculis elementum sodales.
+        </div>
+        <div class="row">
+  				<a class="btn btn-block button-download" href="{{image_render}}" download>
+  					DESCARGAR
+  				</a>
+        </div>
+        <div class="row text-center">
+          <span class="or">ó</span>
+        </div>
+        <div class="row">
+  				<a class="btn btn-block button-share" href="#"
+            onclick="wind = window.open('{{fb.facebook_url}}','MyWindow', 'width=600,height=400'); return false;">
+  					COMPARTIR EN FACEBOOK
+  				</a>
+        </div>
+  		</div>
+  		<div class="col-xs-5 col-xs-offset-1">
+  			<img class="img img-responsive" src={{ image_render }}>
+  		</div>
   	</div>
   </div>
 {% endblock %}
