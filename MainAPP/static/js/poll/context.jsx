@@ -15,16 +15,37 @@ function getMaxScroll() {
   return height;
 }
 
+
+function getTotalQuestions(){
+  questions = document.getElementsByClassName("questionRow");
+  return questions.length;
+}
+
+
+function getCurrentQuestion(){
+  questions = document.getElementsByClassName("questionRow");
+  var current = 0;
+  while(current < questions.length){
+    if($(questions[current]).hasClass("active")){
+      break;
+    }
+    current++;
+  }
+  return current+1;
+}
+
 function getCurrentProgress() {
-  scrollPercent = (getCurrentScroll() / getMaxScroll()) * 100;
+  console.log(getCurrentQuestion());
+  console.log(getTotalQuestions());
+  scrollPercent = (getCurrentQuestion() / getTotalQuestions()) * 100;
   var position = scrollPercent;
+  console.log(position);
   return position;
   // return getCurrentScroll()/getMaxScroll()*100;
 }
 
-function changeProgress(totalQuestions) {
+function changeProgress() {
   var newProgress = getCurrentProgress();
-  console.log("hola");
   document.getElementById("progress-bar").style.width=getCurrentProgress()+"%";
   if(newProgress == 100){
     document.getElementById("poll-button").style.height="8%";
@@ -36,38 +57,26 @@ function changeProgress(totalQuestions) {
   }
 }
 
-// function getTotalQuestions(){
-//   questions = document.getElementsByClassName("questionRow");
-//   return questions.length;
-// }
 
-// function hasClass(element, cls) {
-//     return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
-// }
+function loadTypeForm() {
+  $('#fullpage').fullpage();
 
-// function getCurrentQuestion(){
-//   questions = document.getElementsByClassName("questionRow");
-//   var current = 0;
-//   while(current < questions.length){
-//     if(hasClass(questions[current],'active'))
-//       break;
-//     current++;
-//   }
-// }
+  startTime = new Date().getTime();
 
-// jQuery(document).ready(function(){
-//   var observer = new MutationObserver(function(mutations) {
-//       mutations.forEach(function(mutationRecord) {
+  changeProgress();
+  
+  var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutationRecord) {
           
-//          var q = getCurrentQuestion();
-//          console.log(q);
-//           console.log('scrolled');
-//       });    
-//   });
+         var q = changeProgress();
+          console.log('scrolled');
+      });    
+  });
 
-//   var target = document.getElementById('fullpage');
-//   observer.observe(target, { attributes : true, attributeFilter : ['style'] });
-// });
+  var target = document.getElementById('fullpage');
+  observer.observe(target, { attributes : true, attributeFilter : ['style'] });
+
+}
 
 
 var Context = React.createClass({
@@ -85,6 +94,7 @@ var Context = React.createClass({
         this.setState({
           questions: result,
         });
+        loadTypeForm();
       }.bind(this),
       error: function (xhr, status, err) {
         console.error('URL: questions/', status, err.toString());
