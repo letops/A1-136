@@ -56,14 +56,13 @@ var Isometric = React.createClass({
         className={'col sidebar-img ' + ((hide == true) ? 'hidden' : '')
                    + ((selected == true && hide != true) ? ' selected' : ' not-selected')
                    + ((listNumber == 0) ? ' ' : ' absolute-image image ')
-                   +  listNumber + '-' + imageLoc}
+                   +  imageLoc}
         key={imageId}
         style={{
           backgroundImage: 'url(' + imageUrl + ')',
           backgroundRepeat: 'no-repeat',
           backgroundSize: '100%',
-          left: (((imageLoc == 'left' && listNumber == 3)
-                  || (imageLoc == 'right' && listNumber % 2 == 1)) ? 1 : 0) * 150 + 'px',
+          left: ((imageLoc == 'right') ? 1 : 0) * 150 + 'px',
           marginTop: ((listNumber == 1) ? '-150px' : ''),
         }}
       ></div>

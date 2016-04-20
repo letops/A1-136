@@ -20,18 +20,6 @@ var Cluster = React.createClass({
   changeState: function () {
     this.setState({ selected: this.state.selected === 'selected' ? 'not-selected' : 'selected' });
   },
-  unHideCluster: function() {
-    if (this.state.selected == 'not-selected') {
-      var category = document.getElementById('category-selector').value;
-      var imagesToFade = document.getElementById(category).getElementsByClassName('cluster-images');
-      for (i = 0; i < imagesToFade.length; i++) {
-        imagesToFade[i].className = 'cluster-images not-selected inactive';
-      }
-    }
-    else{
-      hideCluster();
-    }
-  },
   hideCluster: function(){
     if(this.state.selected != 'not-selected'){
       var imagesToFade = document.getElementsByClassName('cluster-images not-selected inactive');
@@ -44,6 +32,8 @@ var Cluster = React.createClass({
     var arrowId = 'back-img' + this.props.id;
 
     document.getElementById(arrowId).style.opacity = 0;
+    document.getElementById(arrowId).style.zIndex = 0;
+
     this.changeState();
   },
   toggleHidden: function () {
@@ -59,6 +49,7 @@ var Cluster = React.createClass({
       var arrowId = 'back-img' + this.props.id;
 
       document.getElementById(arrowId).style.opacity = 1;
+      document.getElementById(arrowId).style.zIndex = 1;
     }
     this.changeState();
   },
