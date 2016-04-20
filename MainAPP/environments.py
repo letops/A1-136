@@ -68,7 +68,8 @@ class RESTEnvironment(object):
 
             if self.method == 'finish':
                 self.permissions = []
-                self.query = queries.CanvasFinish(user)
+                time = kwargs.get('time', None)
+                self.query = queries.CanvasFinish(user, time)
 
         if self.section == 'Poll':
             self.template = 'poll.html'
@@ -101,4 +102,5 @@ class RESTEnvironment(object):
 
             if self.method == 'finish':
                 self.permissions = []
-                self.query = queries.PollFinish(user)
+                time = kwargs.get('time', None)
+                self.query = queries.PollFinish(user, time)

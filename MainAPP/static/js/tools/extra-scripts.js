@@ -1,4 +1,4 @@
-var startTime = 0;
+var startTime = new Date().getTime();
 
 function countTime(){
   var currentTime = new Date().getTime();
@@ -8,7 +8,7 @@ function countTime(){
 
 function submission(){
   time = countTime();
-  document.getElementById("timer").value = time + "";
+  document.getElementById("timer").value = time;
 }
 
 // function getTotalQuestions(){
