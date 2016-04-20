@@ -319,7 +319,8 @@ fieldset[disabled] .btn-danger:hover {
   transition: all 1s ease;
   -moz-transition: all 1s ease;
   -webkit-transition: all 1s ease;
-  z-index: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .back-img>div {

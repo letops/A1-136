@@ -32,10 +32,18 @@ var Cluster = React.createClass({
     }
     var arrowId = 'back-img' + this.props.unique;
     var category = document.getElementById('category-selector').value;
+    document.getElementById(arrowId).style.pointerEvents = 'none';
     document.getElementById(arrowId).style.opacity = 0;
-    document.getElementById(arrowId).style.zIndex = 0;
+    document.getElementById(arrowId).style.visibility = 'hidden';
+
+
 
     this.changeState();
+  },
+  componentDidMount() {
+    var arrowId = 'back-img' + this.props.unique;
+    var myBox = document.getElementById(arrowId);
+    myBox.addEventListener('webkitAnimationEnd',function( event ) { myBox.style.display = 'none'; }, false);  
   },
   toggleHidden: function () {
     var category = document.getElementById('category-selector').value;
@@ -49,8 +57,9 @@ var Cluster = React.createClass({
       }
       var arrowId = 'back-img' + this.props.unique;
 
+      document.getElementById(arrowId).style.pointerEvents = 'auto';
       document.getElementById(arrowId).style.opacity = 1;
-      document.getElementById(arrowId).style.zIndex = 1;
+      document.getElementById(arrowId).style.visibility = 'visible';
     }
     this.changeState();
   },
