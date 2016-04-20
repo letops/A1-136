@@ -91,14 +91,15 @@ var Sidebar = React.createClass({
   renderNodes: function () {
     var imageSize = this.props.imageSize;
     var selected = this.state.selected;
-    var CategoryNodes = this.state.categories.map(function (category) {
+    var CategoryNodes = this.state.categories.map(function (category, catIndex) {
       var hideCategory = (
         (selected == category.id  + '-' + category.name) ? '' : 'hidden'
       );
       firstImage = 'left';
-      var ClusterNodes = category.clusters.map(function (cluster) {
+      var ClusterNodes = category.clusters.map(function (cluster, clusIndex) {
         first = firstImage;
         firstImage = (firstImage == 'left') ? 'right' : 'left';
+        uni = catIndex + "-" + clusIndex;
         return (
           <Cluster className={first}
             key={cluster.id}
@@ -106,6 +107,7 @@ var Sidebar = React.createClass({
             name={cluster.name}
             isometric_images={cluster.isometric_images}
             firstImage = {first}
+            unique = {uni}
           />
         );
       });

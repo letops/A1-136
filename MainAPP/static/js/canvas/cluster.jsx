@@ -15,6 +15,7 @@ var Cluster = React.createClass({
     name: PropTypes.string.isRequired,
     isometric_images: PropTypes.array.isRequired,
     firstImage: PropTypes.string.isRequired,
+    unique: PropTypes.string.isRequired,
   },
 
   changeState: function () {
@@ -29,8 +30,8 @@ var Cluster = React.createClass({
         imagesToFade[0].className = 'cluster-images not-selected';
       }
     }
-    var arrowId = 'back-img' + this.props.id;
-
+    var arrowId = 'back-img' + this.props.unique;
+    var category = document.getElementById('category-selector').value;
     document.getElementById(arrowId).style.opacity = 0;
     document.getElementById(arrowId).style.zIndex = 0;
 
@@ -46,7 +47,7 @@ var Cluster = React.createClass({
       for (i = 0; i < imagesToFade.length; i++) {
         imagesToFade[i].className = 'cluster-images not-selected inactive';
       }
-      var arrowId = 'back-img' + this.props.id;
+      var arrowId = 'back-img' + this.props.unique;
 
       document.getElementById(arrowId).style.opacity = 1;
       document.getElementById(arrowId).style.zIndex = 1;
@@ -89,7 +90,7 @@ var Cluster = React.createClass({
           />
         );
       });
-      var arrowId = 'back-img' + this.props.id;
+      var arrowId = 'back-img' + this.props.unique;
       var className = 'cluster-images ' + this.state.selected;
       return (
         <div>
