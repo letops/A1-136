@@ -20,7 +20,7 @@ var Grid = React.createClass({
     gridElements = document.getElementsByClassName('canvas-box');
     var nonImageCounter = 0;
     for (i = 0; i < (CONST_GRIDSIZE * CONST_GRIDSIZE); i++) {
-      console.log(gridElements[i]);
+      // console.log(gridElements[i]);
       if (gridElements[i].hasAttribute('data-image-id')) {
         gridElements[i].className = 'canvas-box col-xs-3';
       } else {
@@ -30,7 +30,7 @@ var Grid = React.createClass({
 
     }
 
-    console.log(nonImageCounter);
+    // console.log(nonImageCounter);
     if (nonImageCounter != 0) {
       alert('not finished yet');
     }
@@ -48,10 +48,9 @@ var Grid = React.createClass({
       this.setState({
         finished: false,
       });
-    }
-    else{
+    } else {
       time = countTime();
-      document.getElementById("timer").value = time;
+      document.getElementById('timer').value = time;
     }
   },
 
@@ -153,9 +152,9 @@ var Grid = React.createClass({
           <form method='post' id='form-submit' action={CONST_URL_FINISH}>
             <div className='col-xs-7'>
               <button
-                type="button"
+                type='button'
                 className={'btn btn-danger btn-block disabled ' + warningMessage}>
-                <span className="warning-message"></span> ¡RELLENA TODOS LOS BLOQUES!
+                <span className='warning-message'></span> ¡RELLENA TODOS LOS BLOQUES!
               </button>
             </div>
             <div className='col-xs-3'>
@@ -164,11 +163,11 @@ var Grid = React.createClass({
                 name='csrfmiddlewaretoken'
                 value={csrftoken}
               />
-              <input 
-                type="hidden" 
-                name="time" 
-                value="0" 
-                id="timer"
+              <input
+                type='hidden'
+                name='time'
+                value='0'
+                id='timer'
               />
 
               <button

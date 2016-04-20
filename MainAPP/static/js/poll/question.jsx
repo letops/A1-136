@@ -13,6 +13,10 @@ var Question = React.createClass({
     answers: PropTypes.array.isRequired,
   },
 
+  scrollDown: function (event) {
+    $.fn.fullpage.moveSectionDown();
+  },
+
   changeRadio: function (event) {
     var csrftoken = Csrf.getCookie('csrftoken');
     this.serverRequest = $.ajax({
@@ -35,7 +39,7 @@ var Question = React.createClass({
         }
       ),
     });
-    
+
     $.fn.fullpage.moveSectionDown();
   },
 
@@ -44,7 +48,7 @@ var Question = React.createClass({
     var changeRadio = this.changeRadio;
     var AnswerNodes = this.props.answers.map(function (answer) {
       return (
-        <div key={answer.id} className="radioAnswers">
+        <div key={answer.id} className='radioAnswers'>
           <label className='radioLabels'>
             <input
               type='radio'
@@ -57,7 +61,14 @@ var Question = React.createClass({
       );
     });
 
-    return AnswerNodes;
+    return (
+      <div>
+        {AnswerNodes}
+        <button className="btn poll-next" type="button" onClick={this.scrollDown}>
+          SIGUIENTE
+        </button>
+      </div>
+    );
   },
 
   renderAsPriority: function () {
@@ -84,7 +95,7 @@ var Question = React.createClass({
             <div className='row'>
               <div className='questionText col-xs-12'>
                 <span className='spanID'>{this.props.number}</span>
-                <img src='/built/img/flechaNueva.svg' className="customArrow flechaNueva" />
+                <img src='/built/img/flechaNueva.svg' className='customArrow flechaNueva' />
                 {this.props.text}
               </div>
             </div>
