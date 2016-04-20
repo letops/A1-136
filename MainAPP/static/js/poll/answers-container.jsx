@@ -63,6 +63,7 @@ var AnswersContainer = React.createClass({
       dataType: 'json',
       data: JSON.stringify(answersJSON),
     });
+    $.fn.fullpage.moveSectionDown();
   },
 
   moveAnswer: function (dragIndex, hoverIndex) {
