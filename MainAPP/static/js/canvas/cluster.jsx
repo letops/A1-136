@@ -20,15 +20,20 @@ var Cluster = React.createClass({
   changeState: function () {
     this.setState({ selected: this.state.selected === 'selected' ? 'not-selected' : 'selected' });
   },
-
-  toggleHidden: function () {
+  unHideCluster: function() {
     if (this.state.selected == 'not-selected') {
       var category = document.getElementById('category-selector').value;
       var imagesToFade = document.getElementById(category).getElementsByClassName('cluster-images');
       for (i = 0; i < imagesToFade.length; i++) {
         imagesToFade[i].className = 'cluster-images not-selected inactive';
       }
-    } else {
+    }
+    else{
+      hideCluster();
+    }
+  },
+  hideCluster: function(){
+    if(this.state.selected != 'not-selected'){
       var imagesToFade = document.getElementsByClassName('cluster-images not-selected inactive');
       var longitud = imagesToFade.length;
       for (i = 0; i < longitud; i++) {
@@ -36,7 +41,25 @@ var Cluster = React.createClass({
         imagesToFade[0].className = 'cluster-images not-selected';
       }
     }
+    var arrowId = 'back-img' + this.props.id;
 
+    document.getElementById(arrowId).style.opacity = 0;
+    this.changeState();
+  },
+  toggleHidden: function () {
+    var category = document.getElementById('category-selector').value;
+    var imagesToFade = document.getElementById(category).getElementsByClassName('cluster-images');
+    if(this.state.selected == 'selected'){
+      return;
+    }
+    if (this.state.selected == 'not-selected') {
+      for (i = 0; i < imagesToFade.length; i++) {
+        imagesToFade[i].className = 'cluster-images not-selected inactive';
+      }
+      var arrowId = 'back-img' + this.props.id;
+
+      document.getElementById(arrowId).style.opacity = 1;
+    }
     this.changeState();
   },
 
@@ -75,11 +98,20 @@ var Cluster = React.createClass({
           />
         );
       });
-
+      var arrowId = 'back-img' + this.props.id;
       var className = 'cluster-images ' + this.state.selected;
       return (
-        <div key={this.props.id} onClick={this.toggleHidden} className={className}>
-          {IsometricNodes}
+        <div>
+          <div key={this.props.id} onClick={this.toggleHidden} className={className}>
+            {IsometricNodes}
+
+          </div>
+          <div id={arrowId} className={'back-img'} onClick={this.hideCluster}>
+            <div>
+              <div>
+              </div>
+            </div>
+          </div>
         </div>
       );
     }
