@@ -35,6 +35,8 @@ var Question = React.createClass({
         }
       ),
     });
+    
+    $.fn.fullpage.moveSectionDown();
   },
 
   renderAsRadio: function () {
@@ -73,9 +75,10 @@ var Question = React.createClass({
   render: function () {
     var style = this.props.style;
     var AnswerNodes = ((style == 0) ? this.renderAsRadio() : this.renderAsPriority());
+    var id = this.props.id;
 
     return (
-      <div className='section questionRow'>
+      <div className='section questionRow' id={this.props.id} >
         <div className='col-xs-offset-2 col-xs-7'>
           <form action='#'>
             <div className='row'>
