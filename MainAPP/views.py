@@ -99,7 +99,8 @@ class Poll(apiViews.EmptyAPIView):
     def finish(self, request, format=None):
         self.environment.load_data(
             'finish',
-            user=request.user)
+            user=request.user,
+            time=request.data.get('time', None))
         if len(self.environment.permissions) == 0 or \
                 request.user.has_perms(self.environment.permissions):
             if self.environment.query is not True:
@@ -185,7 +186,8 @@ class Canvas(apiViews.EmptyAPIView):
     def finish(self, request, format=None):
         self.environment.load_data(
             'finish',
-            user=request.user)
+            user=request.user,
+            time=request.data.get('time', None))
         if len(self.environment.permissions) == 0 or \
                 request.user.has_perms(self.environment.permissions):
             if self.environment.query is not True:

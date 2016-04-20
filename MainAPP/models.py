@@ -62,6 +62,12 @@ class CustomUser(AbstractUser):
         auto_now=True,
         verbose_name=_ug('Last edition date')
     )
+    poll_time = models.FloatField(
+        default = hardcode.DEFAULT_TIME
+    )
+    canvas_time = models.FloatField(
+        default = hardcode.DEFAULT_TIME
+    )
 
     class Meta:
         verbose_name = _ug('User')

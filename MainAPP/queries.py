@@ -50,10 +50,10 @@ def PollQuestionPrioritySave(user, answers):
         selection.save()
     return True
 
-
-def PollFinish(user):
+def PollFinish(user, time):
     if(user.step in (hardcode.STEP_POLL, hardcode.STEP_UNKNOWN)):
         user.step = hardcode.STEP_CANVAS
+        user.poll_time = float(time)
         # FIXME: Uncomment to continue
         user.save()
         return True
@@ -105,9 +105,10 @@ def CanvasUserPositionSave(user, isometric_pk, row, column):
     return True
 
 
-def CanvasFinish(user):
+def CanvasFinish(user, time):
     if(user.step == hardcode.STEP_CANVAS):
         user.step = hardcode.STEP_DONE
+        user.canvas_time = float(time)
         # FIXME: Uncomment to continue
         user.save()
         return True

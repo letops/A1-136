@@ -1,4 +1,4 @@
-var startTime = 0;
+var startTime = new Date().getTime();
 
 function countTime(){
   var currentTime = new Date().getTime();
@@ -6,11 +6,9 @@ function countTime(){
   return time/(60*60);
 }
 
-function submission(event){
-  event.preventDefault();
+function submission(){
   time = countTime();
-  // Still have to do something with the time
-  document.getElementById("form-submit").submit();
+  document.getElementById("timer").value = time;
 }
 
 // function getTotalQuestions(){

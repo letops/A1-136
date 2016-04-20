@@ -49,6 +49,10 @@ var Grid = React.createClass({
         finished: false,
       });
     }
+    else{
+      time = countTime();
+      document.getElementById("timer").value = time;
+    }
   },
 
   updateCache: function () {
@@ -160,6 +164,13 @@ var Grid = React.createClass({
                 name='csrfmiddlewaretoken'
                 value={csrftoken}
               />
+              <input 
+                type="hidden" 
+                name="time" 
+                value="0" 
+                id="timer"
+              />
+
               <button
                 type='submit'
                 id='button-submit'

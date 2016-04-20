@@ -6,6 +6,7 @@ user_mothersname_length = 45
 user_nickname_length = 45
 user_default_photo = "avatars/no-img.jpg"
 user_occupation_length = 100
+DEFAULT_TIME = 0
 GENDER_UNKNOWN = 0
 GENDER_FEMALE = 1
 GENDER_MALE = 2
