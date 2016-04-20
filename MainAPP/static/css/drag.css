@@ -332,6 +332,7 @@ fieldset[disabled] .btn-danger:hover {
   transform: rotate(180deg);
   border-radius: 100%;
   border: solid .5em #ff740c;
+  cursor: pointer;
   transition: all 1s ease;
   -moz-transition: all 1s ease;
   -webkit-transition: all 1s ease;
@@ -357,4 +358,12 @@ fieldset[disabled] .btn-danger:hover {
 .left{
   margin-right: 10px;
   margin-bottom: 10px;
+}
+
+.sidebar-img.not-selected{
+  cursor: pointer;
+}
+
+.sidebar-img.selected{
+  cursor: move;
 }
