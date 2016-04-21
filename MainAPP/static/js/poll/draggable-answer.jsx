@@ -88,16 +88,12 @@ var DragAnswer = React.createClass({
   render: function () {
     var text = this.props.text;
     var style = {
-      border: '1px dashed gray',
-      padding: '0.5rem 1rem',
-      marginBottom: '.5rem',
-      backgroundColor: 'white',
-      cursor: 'move',
       opacity: this.props.isDragging ? 0 : 1,
     };
 
     return this.props.connectDragSource(this.props.connectDropTarget(
-      <div style={style}>
+      <div style={style} className='draggableAnswer'>
+        <i className="fa fa-bars dragIcon" aria-hidden="true"></i>
         {text}
       </div>
     ));

@@ -15,6 +15,20 @@ var Sidebar = React.createClass({
     };
   },
 
+  componentDidUpdate(prevProps, prevState) {
+    isoimages = document.getElementsByClassName('col sidebar-img');
+    for (i = 0; i < isoimages.length; i++) {
+      jQuery(isoimages[i]).fadeIn('slow');
+    }
+  },
+
+  componentWillUpdate(nextProps, nextState) {
+    isoimages = document.getElementsByClassName('col sidebar-img');
+    for (i = 0; i < isoimages.length; i++) {
+      jQuery(isoimages[i]).fadeIn('slow');
+    }
+  },
+
   componentWillMount: function () {
     var csrftoken = Csrf.getCookie('csrftoken');
     var filtersvar = {
@@ -61,26 +75,39 @@ var Sidebar = React.createClass({
     // the section with its own JS. The render overwrites this section after the initial
     // load, so Bootstrap will flunk.
     return (
-      <select id='category-selector' onChange={this.change} value={this.state.selected}>
-        {CategoryOptions}
-      </select>
+      <label className='selectLabel'>
+        <select
+          id='category-selector'
+          className='dropdownStyle'
+          onChange={this.change}
+          value={this.state.selected}
+        >
+          {CategoryOptions}
+        </select>
+      </label>
     );
   },
 
   renderNodes: function () {
     var imageSize = this.props.imageSize;
     var selected = this.state.selected;
-    var CategoryNodes = this.state.categories.map(function (category) {
+    var CategoryNodes = this.state.categories.map(function (category, catIndex) {
       var hideCategory = (
         (selected == category.id  + '-' + category.name) ? '' : 'hidden'
       );
-      var ClusterNodes = category.clusters.map(function (cluster) {
+      firstImage = 'left';
+      var ClusterNodes = category.clusters.map(function (cluster, clusIndex) {
+        first = firstImage;
+        firstImage = (firstImage == 'left') ? 'right' : 'left';
+        uni = catIndex + "-" + clusIndex;
         return (
-          <Cluster
+          <Cluster className={first}
             key={cluster.id}
             id={cluster.id}
             name={cluster.name}
             isometric_images={cluster.isometric_images}
+            firstImage = {first}
+            unique = {uni}
           />
         );
       });
@@ -101,9 +128,9 @@ var Sidebar = React.createClass({
   render: function () {
     if (this.state.categories === null || this.state.categories === '') {
       return (
-        <div className='col-md-offset-1 col-md-3 col-xs-offset-1 col-xs-2 colClass2'>
-          <h1 className="title">Drag &amp; Drop</h1>
-          <p className="description">
+        <div className='col-md-offset-1 col-md-3 col-xs-offset-0 col-xs-2 hidden-sm hidden-xs canvas-sidebar'>
+          <h1 className='title'>{ CONST_SYSTEM_NAME }</h1>
+          <p className='description'>
             Quisque vel nisl diam sed consectetur sed magna nec posuere.
           </p>
 
@@ -113,14 +140,13 @@ var Sidebar = React.createClass({
         </div>
       );
     } else {
-
       var CategoryOptions = this.renderOptions();
       var CategoryNodes = this.renderNodes();
 
       return (
-        <div className='col-md-offset-1 col-md-3 col-xs-offset-1 col-xs-2 colClass2'>
-          <h1 className="title">Drag &amp; Drop</h1>
-          <p className="description">
+        <div className='col-md-offset-1 col-md-3 col-xs-offset-0 col-xs-2 hidden-sm hidden-xs canvas-sidebar'>
+          <h1 className='title'>{ CONST_SYSTEM_NAME }</h1>
+          <p className='description'>
             Quisque vel nisl diam sed consectetur sed magna nec posuere.
           </p>
           {CategoryOptions}

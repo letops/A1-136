@@ -57,6 +57,7 @@ INSTALLED_APPS = list(filter(None, [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_social_share',
 
     'compressor',
     'debug_toolbar',
@@ -149,6 +150,7 @@ TEMPLATES = [
                 'webpack_loader.contrib.jinja2ext.WebpackExtension'
             ],
             'constants': {
+                'CONST_SYSTEM_NAME': 'Drag & Drop',
                 'CONST_GRIDSIZE': 4,
                 'CONST_IMAGESIZE': '150px',
             }

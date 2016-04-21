@@ -21,7 +21,7 @@ class CustomUserAdmin(UserAdmin):
     readonly_fields = ('last_login', 'edition_date', 'date_joined')
 
     list_display = ('username', 'nickname', 'email', 'is_staff',
-                    'is_superuser', 'step')
+                    'is_superuser', 'step', 'poll_time', 'canvas_time')
     list_filter = ('is_superuser', 'is_staff', 'is_active', 'step')
 
     fieldsets = (

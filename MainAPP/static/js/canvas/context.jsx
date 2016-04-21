@@ -19,7 +19,7 @@ var Context = React.createClass({
   render: function () {
     var imageSize = this.props.imageSize;
     return (
-      <div className='row'>
+      <div>
         <Sidebar imageSize={imageSize} />
         <Grid imageSize={imageSize} />
       </div>

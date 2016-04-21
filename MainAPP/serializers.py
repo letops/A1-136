@@ -43,6 +43,7 @@ class PollQuestionsSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'text',
+            'description',
             'style',
             'answers',
         )
