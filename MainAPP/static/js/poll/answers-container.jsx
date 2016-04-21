@@ -63,6 +63,7 @@ var AnswersContainer = React.createClass({
       dataType: 'json',
       data: JSON.stringify(answersJSON),
     });
+    $.fn.fullpage.moveSectionDown();
   },
 
   moveAnswer: function (dragIndex, hoverIndex) {
@@ -102,7 +103,7 @@ var AnswersContainer = React.createClass({
     return (
       <div>
         {AnswerNodes}
-        <button type="button" onClick={saveAnswers}>Save</button>
+        <button className="btn poll-next" type="button" onClick={saveAnswers}>SIGUIENTE</button>
       </div>
     );
   },

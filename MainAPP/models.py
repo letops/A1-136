@@ -62,6 +62,12 @@ class CustomUser(AbstractUser):
         auto_now=True,
         verbose_name=_ug('Last edition date')
     )
+    poll_time = models.FloatField(
+        default = hardcode.DEFAULT_TIME
+    )
+    canvas_time = models.FloatField(
+        default = hardcode.DEFAULT_TIME
+    )
 
     class Meta:
         verbose_name = _ug('User')
@@ -295,6 +301,12 @@ class Question(models.Model):
         blank=False,
         null=False,
         verbose_name=_ug('Text')
+    )
+    description = models.CharField(
+        max_length=hardcode.question_description_length,
+        blank=True,
+        null=True,
+        verbose_name=_ug('Description')
     )
     style = models.IntegerField(
         default=hardcode.STYLE_RADIO,

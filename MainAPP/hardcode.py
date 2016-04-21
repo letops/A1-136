@@ -6,6 +6,7 @@ user_mothersname_length = 45
 user_nickname_length = 45
 user_default_photo = "avatars/no-img.jpg"
 user_occupation_length = 100
+DEFAULT_TIME = 0
 GENDER_UNKNOWN = 0
 GENDER_FEMALE = 1
 GENDER_MALE = 2
@@ -36,6 +37,7 @@ isometric_image_photo = "isometrics/no-img.jpg"
 render_image_photo = "renders/no-img.jpg"
 
 question_text_length = 200
+question_description_length = 400
 STYLE_RADIO = 0
 STYLE_PRIORITY = 1
 STYLES = (
