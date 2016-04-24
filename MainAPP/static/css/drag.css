@@ -236,6 +236,9 @@ fieldset[disabled] .btn-danger:hover {
   .title {
     visibility: hidden;
   }
+  div.hopscotch-bubble{
+    visibility: hidden;
+  }
 }
 
 
@@ -366,4 +369,25 @@ fieldset[disabled] .btn-danger:hover {
 
 .sidebar-img.selected{
   cursor: move;
+}
+
+
+#startTourBtn{
+  visibility: hidden;
+}
+
+/*Tour*/
+div.hopscotch-bubble .hopscotch-nav-button.next{
+  background-color: #ff740c  !important;
+  color:#ffffff !important;
+  background-image: none !important;
+  border-radius: 1px;
+  letter-spacing: 0.3px;
+  font-family: 'Nunito', sans-serif;
+}
+
+div.hopscotch-bubble .hopscotch-nav-button.prev{
+  border-radius: 1px;
+  letter-spacing: 0.3px;
+  font-family: 'Nunito', sans-serif;
 }

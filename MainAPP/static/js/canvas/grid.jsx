@@ -146,7 +146,7 @@ var Grid = React.createClass({
     }
 
     return (
-      <div className='col-md-8 col-xs-10 hidden-sm hidden-xs canvas-draw'>
+      <div id='canvas' data-intro='Este es el canvas' data-position='bottom' className='col-md-8 col-xs-10 hidden-sm hidden-xs canvas-draw'>
         {rows}
         <div className='row'>
           <form method='post' id='form-submit' action={CONST_URL_FINISH}>
@@ -174,6 +174,8 @@ var Grid = React.createClass({
                 type='submit'
                 id='button-submit'
                 className='btn btn-default btn-block hidden-sm hidden-xs'
+                data-intro='Al terminar, presiona este boton para guardar tus cambios' 
+                data-position='left'
                 onClick={this.submitReact}
               >
                 ENVIAR

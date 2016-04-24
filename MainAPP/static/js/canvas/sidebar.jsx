@@ -81,6 +81,8 @@ var Sidebar = React.createClass({
           className='dropdownStyle'
           onChange={this.change}
           value={this.state.selected}
+          data-intro='Este es el seleccionador de categoria, aqui puedes escoger el tipo de imagenes' 
+          data-position='top'
         >
           {CategoryOptions}
         </select>
@@ -128,7 +130,7 @@ var Sidebar = React.createClass({
   render: function () {
     if (this.state.categories === null || this.state.categories === '') {
       return (
-        <div className='col-md-offset-1 col-md-3 col-xs-offset-0 col-xs-2 hidden-sm hidden-xs canvas-sidebar'>
+        <div id='sideBar' data-intro='Este es el sidebar, aqui puedes escoger las imagenes que gustes' data-position='bottom' className='col-md-offset-1 col-md-3 col-xs-offset-0 col-xs-2 hidden-sm hidden-xs canvas-sidebar'>
           <h1 className='title'>{ CONST_SYSTEM_NAME }</h1>
           <p className='description'>
             Quisque vel nisl diam sed consectetur sed magna nec posuere.
@@ -144,7 +146,7 @@ var Sidebar = React.createClass({
       var CategoryNodes = this.renderNodes();
 
       return (
-        <div className='col-md-offset-1 col-md-3 col-xs-offset-0 col-xs-2 hidden-sm hidden-xs canvas-sidebar'>
+        <div id='sideBar' data-intro='Este es el sidebar, aqui puedes escoger las imagenes que gustes' data-position='bottom' className='col-md-offset-1 col-md-3 col-xs-offset-0 col-xs-2 hidden-sm hidden-xs canvas-sidebar'>
           <h1 className='title'>{ CONST_SYSTEM_NAME }</h1>
           <p className='description'>
             Quisque vel nisl diam sed consectetur sed magna nec posuere.
