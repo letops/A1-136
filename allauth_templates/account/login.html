@@ -3,7 +3,6 @@
 {% load i18n %}
 {% load account socialaccount %}
 
-{% load compress %}
 {% load static %}
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
@@ -12,47 +11,43 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static "css/login.css" %}">
-<style>
-.login-Image{
-  background: url("{% static "img/authorpic_bg.jpg" %}")   ;
-  -webkit-background-size: 100%;
-    -moz-background-size: 100%;
-    -o-background-size: 100%;
-    background-size: 100%;
-  -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-repeat: no-repeat;
-
-    /*height: 979px;*/
-}
-@media screen and (max-width: 768px) {
+  <style>
     .login-Image{
-      height: 0px;
-      width: 0px;
-      background-size: 0%;
+      background: url("{% static "img/authorpic_bg.jpg" %}")   ;
+      -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+      -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        /*height: 979px;*/
+    }
+    @media screen and (max-width: 768px) {
+        .login-Image{
+          height: 0px;
+          width: 0px;
+          background-size: 0%;
+        }
+
+        .hotfix2 {
+          height: 0px !important;
+        }
+
+
+    }
+
+    .hotfix {
+      height: 100%;
     }
 
     .hotfix2 {
-      height: 0px !important;
+      height: 100%;
     }
-
-
-}
-
-.hotfix {
-  height: 100%;
-}
-
-.hotfix2 {
-  height: 100%;
-}
-
-
-
-
-</style>
+  </style>
 {% endblock %}
 
 {% block top_cdn_js %}{% endblock %}

@@ -64,6 +64,7 @@ docs/_build/
 # VirtualEnv
 bin/*
 include/*
+include/python3.4m/*
 share/*
 Scripts/*
 
