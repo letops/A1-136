@@ -78,7 +78,7 @@ function loadTypeForm() {
 var Context = React.createClass({
   getInitialState: function () {
     return {
-      questions: '',
+      questions: [],
     };
   },
 

@@ -1,0 +1,86 @@
+{% extends 'base.jinja' %}
+
+
+{% block title %}{{ CONST_SYSTEM_NAME }} Canvas{% endblock %}
+
+{% block extra_cdn_css %}
+<!--Para el Grid-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gridlex/2.0.8/gridlex.min.css">
+    <!---->
+
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ static("css/drag.css") }}">
+  <link rel="stylesheet" href="{{ static("css/hopscotch.min.css") }}">
+  <style>
+
+
+    div.hopscotch-bubble .hopscotch-bubble-close {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  color: #000;
+  background: transparent url("{{ static("img/sprite-orange.png") }}") -192px -92px no-repeat !important;
+  display: block;
+  padding: 8px;
+  position: absolute;
+  text-decoration: none;
+  text-indent: -9999px;
+  width: 8px;
+  height: 8px;
+  top: 0;
+  right: 0;
+}
+div.hopscotch-bubble .hopscotch-bubble-number {
+  background: transparent url("{{ static("img/sprite-orange.png") }}") 0 0 no-repeat !important;
+  color: #fff;
+  display: block;
+  float: left;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 31px;
+  padding: 0 10px 0 0;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+}
+
+  </style>
+}
+{% endblock %}
+
+
+{% block top_js %}{% endblock %}
+
+{% block content %}
+  <div class="container-fluid">
+    <div id="content"></div>
+    <div class="row">
+      <div class="col-sm-12 col-xs-12 hidden-md hidden-lg">
+        <p class="error-message">Utiliza una resolución mas grande para visualizar el contenido</p>
+      </div>
+      <button id="startTourBtn" class="btn btn-large btn-primary col-md-offset-1 col-md-3 col-xs-offset-0 col-xs-2 hidden-sm hidden-xs canvas-sidebar">Take a tour</button>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block bottom_cdn_js %}{% endblock %}
+{% block bottom_js %}
+  <script>
+    var CONST_SYSTEM_NAME = '{{ CONST_SYSTEM_NAME|safe }}';
+    var CONST_IMAGESIZE = '{{ CONST_IMAGESIZE }}';
+    var CONST_GRIDSIZE = {{ CONST_GRIDSIZE }};
+    var CONST_URL_FINISH = '{{ url('canvas-finish')}}';
+  </script>
+  <script type="text/javascript" src="{{ static("js/tools/extra-scripts.js") }}"></script>
+  <script type="text/javascript" src="{{ static("js/tools/hopscotch.js") }}"></script>
+  <script type="text/javascript" src="{{ static("js/canvas/page_tour.js") }}"></script>
+  <!--
+   <script type="text/javascript" src="{{ static("js/tools/chardin_tour.js") }}"></script>
+  <script type="text/javascript" src="{{ static("js/canvas/chardinjs.min.js") }}"></script>
+  -->
+  {{ render_bundle('canvas') }}
+{% endblock %}

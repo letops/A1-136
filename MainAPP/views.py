@@ -219,12 +219,12 @@ def share(request):
         'text': 'Post to fb'
     }
     image_render = queries.Share(user=request.user)
-    # This does not work with images in localhost, but it works with images in web. So
-    #  we will test this functionality after the deployment in a server
+    # This does not work with images in localhost, but it works with images in
+    # web. So we will test this functionality after the deployment in a server
     facebook_share = sharing_tool.post_to_facebook(context, image_render)
     return render(
         request,
-        'share.html',
-        {"image_render": image_render,
-        "fb" : facebook_share}
+        'share.jinja',
+        {'image_render': image_render,
+         'fb': facebook_share}
     )

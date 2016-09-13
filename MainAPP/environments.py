@@ -20,7 +20,7 @@ class Environment:
         if self.section == 'Poll':
             if self.method == 'POST':
                 self.serializer = forms.PollForm
-                self.template = 'poll.html'
+                self.template = 'poll.jinja'
                 self.redirect_urlname = 'canvas'
                 self.permissions = []
                 self.query = None
@@ -43,7 +43,7 @@ class RESTEnvironment(object):
         user = kwargs.get("user", None)
 
         if self.section == 'Canvas':
-            self.template = 'canvas.html'
+            self.template = 'canvas.jinja'
 
             if self.method == 'list':
                 self.permissions = []
@@ -72,7 +72,7 @@ class RESTEnvironment(object):
                 self.query = queries.CanvasFinish(user, time)
 
         if self.section == 'Poll':
-            self.template = 'poll.html'
+            self.template = 'poll.jinja'
 
             if self.method == 'list':
                 self.permissions = []

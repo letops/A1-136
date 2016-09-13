@@ -1,0 +1,75 @@
+{% extends 'base.jinja' %}
+{% block title %}{{ CONST_SYSTEM_NAME }} Share{% endblock %}
+
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ static("css/share.css") }}">
+{% endblock %}
+
+{% block extra_cdn_css %}{% endblock %}
+
+{% block top_js %}
+
+{% endblock %}
+
+
+{% block content %}
+
+  <div class="container-fluid">
+
+    <div class="row">
+	  	<div class="col-xs-offset-1 col-xs-11 title">
+        <div class="row">
+  		    <span>Drag and Drop</span>
+        </div>
+	  	</div>
+    </div>
+  	<div class="row">
+  		<div class="col-xs-3 col-xs-offset-1">
+        <div class="row">
+          <div class="col-xs-4 col-xs-offset-2 share-thanks">
+            <img class="img img-responsive" src="{{ image_render }}">
+          </div>
+          <div class="col-xs-4 share-thanks">
+            <img class="img img-responsive" src="{{ image_render }}">
+          </div>
+        </div>
+  			<div class="row">
+          <div class="col-xs-4 col-xs-offset-2 share-thanks">
+            <img class="img img-responsive" src="{{ image_render }}">
+          </div>
+          <div class="col-xs-4 share-thanks">
+            <img class="img img-responsive" src="{{ image_render }}">
+          </div>
+        </div>
+  			<div class="row subtitle">
+    			<span>¡Gracias!</span>
+  			</div>
+				<div class="row description">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lobortis imperdiet gravida. Nunc hendrerit accumsan nisi, a lacinia lectus pharetra et. Duis iaculis elementum sodales.
+        </div>
+        <div class="row">
+  				<a class="btn btn-block button-download" href="{{image_render}}" download>
+  					DESCARGAR
+  				</a>
+        </div>
+        <div class="row text-center">
+          <span class="or">ó</span>
+        </div>
+        <div class="row">
+  				<a class="btn btn-block button-share" href="#"
+            onclick="wind = window.open('{{fb.facebook_url}}','MyWindow', 'width=600,height=400'); return false;">
+  					COMPARTIR EN FACEBOOK
+  				</a>
+        </div>
+  		</div>
+  		<div class="col-xs-5 col-xs-offset-1">
+  			<img class="img img-responsive" src={{ image_render }}>
+  		</div>
+  	</div>
+  </div>
+{% endblock %}
+
+
+{% block bottom_cdn_js %}{% endblock %}
+{% block bottom_js %}{% endblock %}
