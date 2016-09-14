@@ -12,7 +12,6 @@ from rest_framework.response import Response
 import django_social_share.templatetags.social_share as sharing_tool
 
 
-
 def html404(request):
     pass
 
@@ -193,10 +192,33 @@ class Canvas(apiViews.EmptyAPIView):
             if self.environment.query is not True:
                 return HttpResponseRedirect(
                     urlresolvers.reverse('canvas-list'))
-            return HttpResponseRedirect(urlresolvers.reverse('share'))
+            return HttpResponseRedirect(urlresolvers.reverse('share-list'))
         else:
             return HttpResponseRedirect(
                 urlresolvers.reverse('canvas-list'))
+
+
+class Share(apiViews.EmptyAPIView):
+    environment = RESTEnvironment('Share')
+    authentication_classes = (
+        authentication.SessionAuthentication,
+    )
+    permission_classes = (permissions.IsAuthenticated, )
+
+    def list(self, request, format=None):
+        context = {
+            'text': 'Post to fb'
+        }
+        image_render = queries.Share(user=request.user)
+        # This does not work with images in localhost, but it works with images in
+        # web. So we will test this functionality after the deployment in a server
+        facebook_share = sharing_tool.post_to_facebook(context, image_render)
+        return render(
+            request,
+            'share.jinja',
+            {'image_render': image_render,
+             'fb': facebook_share}
+        )
 
 
 # Create your views here.
@@ -208,9 +230,9 @@ def home(request):
     elif step == hardcode.STEP_CANVAS:
         return HttpResponseRedirect(urlresolvers.reverse('canvas-list'))
     elif step == hardcode.STEP_DONE:
-        return HttpResponseRedirect(urlresolvers.reverse('share'))
+        return HttpResponseRedirect(urlresolvers.reverse('share-list'))
     else:
-        return HttpResponseRedirect(urlresolvers.reverse('share'))
+        return HttpResponseRedirect(urlresolvers.reverse('share-list'))
 
 
 @login_required()
