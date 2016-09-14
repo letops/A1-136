@@ -1,0 +1,166 @@
+
+@include keyframes(grow) {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+
+  1% {
+    @include scale(0);
+    display: block;
+    opacity: 0;
+  }
+
+  100% {
+    @include scale(1);
+    opacity: 1;
+  }
+}
+
+@include keyframes(grow-w-flex) {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+
+  1% {
+    @include flexbox;
+    @include flex-wrap(wrap);
+    @include scale(0);
+    opacity: 0;
+  }
+
+  100% {
+    @include scale(1);
+    opacity: 1;
+  }
+}
+
+@include keyframes(compress) {
+  0% {
+    @include scale(1);
+    display: block;
+    opacity: 1;
+  }
+
+  99% {
+    @include scale(0);
+    display: block;
+    opacity: 0;
+  }
+
+  100% {
+    display: none;
+    opacity: 0;
+  }
+}
+
+@include keyframes(flicker-loop) {
+  0%   { opacity: 0; }
+  50%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@include keyframes(appear-from-right) {
+  0%   { right: -100vw; }
+  100% { right: 0; }
+}
+
+@include keyframes(disappear-to-right) {
+  0%   { right: 0; }
+  100% { right: -100vw; }
+}
+
+@include keyframes(dissolve-animation) {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  99% {
+    opacity: 0;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@include keyframes(solve-animation) {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  1% {
+    opacity: 0;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+// Obtained and edited from:
+// http://goo.gl/d3APx9
+@include keyframes(bounceOut) {
+  20% {
+    @include transform(scale3d(.9, .9, .9));
+  }
+
+  50%,
+  55% {
+    @include transform(scale3d(1.1, 1.1, 1.1));
+    opacity: 1;
+  }
+
+  to {
+    @include transform(scale3d(.3, .3, .3));
+    opacity: 0;
+  }
+}
+
+
+// Obtained and edited from:
+// http://goo.gl/D8qRk2
+@include keyframes(bounceIn) {
+  from,
+  20%,
+  40%,
+  60%,
+  80%,
+  to {
+    animation-timing-function: cubic-bezier(.215, .610, .355, 1.000);
+  }
+
+  0% {
+    @include transform(scale3d(.3, .3, .3));
+    opacity: 0;
+  }
+
+  20% {
+    @include transform(scale3d(1.1, 1.1, 1.1));
+  }
+
+  40% {
+    @include transform(scale3d(.9, .9, .9));
+  }
+
+  60% {
+    @include transform(scale3d(1.03, 1.03, 1.03));
+    opacity: 1;
+  }
+
+  80% {
+    @include transform(scale3d(.97, .97, .97));
+  }
+
+  to {
+    @include transform(scale3d(1, 1, 1));
+    opacity: 1;
+  }
+}

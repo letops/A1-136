@@ -2,6 +2,7 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var GridCell = require('./gridcell.jsx');
 var Csrf = require('../tools/csrf');
+var ExtraScripts = require('../tools/extra-scripts');
 
 var Grid = React.createClass({
   propTypes: {
@@ -49,7 +50,7 @@ var Grid = React.createClass({
         finished: false,
       });
     } else {
-      time = countTime();
+      time = ExtraScripts.countTime();
       document.getElementById('timer').value = time;
     }
   },
@@ -174,7 +175,7 @@ var Grid = React.createClass({
                 type='submit'
                 id='button-submit'
                 className='btn btn-default btn-block hidden-sm hidden-xs'
-                data-intro='Al terminar, presiona este boton para guardar tus cambios' 
+                data-intro='Al terminar, presiona este boton para guardar tus cambios'
                 data-position='left'
                 onClick={this.submitReact}
               >

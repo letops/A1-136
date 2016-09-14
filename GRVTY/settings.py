@@ -22,7 +22,6 @@ SITE_NAME = basename(DJANGO_ROOT)
 
 IN_DEVELOPMENT = True
 USE_LOCAL_DATABASE = True
-COMPRESS_ENABLED = True
 
 MAIN_APP = True
 CMS_APP = False
@@ -59,15 +58,14 @@ INSTALLED_APPS = list(filter(None, [
     'django.contrib.staticfiles',
     'django_social_share',
 
-    'compressor',
+    'contrib',
     'debug_toolbar',
     'rest_framework',
     'easy_thumbnails',
     'django_jinja',
+    'django_jinja.contrib._easy_thumbnails',
 
     'webpack_loader',  # Webpack
-
-    'MainAPP',
 
     'allauth',
     'allauth.account',
@@ -78,6 +76,9 @@ INSTALLED_APPS = list(filter(None, [
 SITE_ID = 1  # Django-allauth
 
 # FIXME: ANTIPATTERN
+if MAIN_APP:
+    from MainAPP.settings import INSTALLED_APPS as MAIN_INSTALLED_APPS
+    INSTALLED_APPS.extend(MAIN_INSTALLED_APPS)
 if CMS_APP:
     from CMS.settings import INSTALLED_APPS as CMS_INSTALLED_APPS
     INSTALLED_APPS.extend(CMS_INSTALLED_APPS)
@@ -98,6 +99,9 @@ MIDDLEWARE_CLASSES = [
 ]
 
 # FIXME: ANTIPATTERN
+if MAIN_APP:
+    from MainAPP.settings import MIDDLEWARE_CLASSES as MAIN_MIDDLEWARE_CLASSES
+    MIDDLEWARE_CLASSES.extend(MAIN_MIDDLEWARE_CLASSES)
 if CMS_APP:
     from CMS.settings import MIDDLEWARE_CLASSES as CMS_MIDDLEWARE_CLASSES
     MIDDLEWARE_CLASSES.extend(CMS_MIDDLEWARE_CLASSES)
@@ -120,7 +124,7 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.request.RequestPanel',
     'debug_toolbar.panels.sql.SQLPanel',
     # 'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-    'debug_toolbar.panels.templates.TemplatesPanel',
+    'contrib.django_debug_toolbar.panels.TemplatesPanel',
     'debug_toolbar.panels.cache.CachePanel',
     # 'debug_toolbar.panels.signals.SignalsPanel',
     'debug_toolbar.panels.logging.LoggingPanel',
@@ -129,6 +133,40 @@ DEBUG_TOOLBAR_PANELS = [
 
 INTERNAL_IPS = ['127.0.0.1', 'localhost', ]
 
+# -------------------- Static files (CSS, JavaScript, Images) -----------------
+# https://docs.djangoproject.com/en/1.8/howto/static-files/
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(DJANGO_ROOT,  'media')
+
+STATIC_URL = '/built/'
+STATIC_ROOT = os.path.join(DJANGO_ROOT, 'built')
+
+STATICFILES_DIRS = [
+    os.path.join(DJANGO_ROOT, 'static'),
+    os.path.join(DJANGO_ROOT, 'contrib/react'),
+    os.path.join(DJANGO_ROOT, 'contrib/django/static'),
+    os.path.join(DJANGO_ROOT, 'contrib/hopscotch/static'),
+    os.path.join(DJANGO_ROOT, 'contrib/treasury/static'),
+    os.path.join(DJANGO_ROOT, 'webpack'),
+]
+
+# FIXME: ANTIPATTERN
+# TODO: NEW APPS - ADD STATIC
+if MAIN_APP:
+    from MainAPP.settings import STATICFILES_DIRS as MAIN_STATICFILES_DIRS
+    STATICFILES_DIRS.extend(MAIN_STATICFILES_DIRS)
+if CMS_APP:
+    from CMS.settings import STATICFILES_DIRS as CMS_STATICFILES_DIRS
+    STATICFILES_DIRS.extend(CMS_STATICFILES_DIRS)
+if BILLING_APP:
+    from Billing.settings import STATICFILES_DIRS as BILLING_STATICFILES_DIRS
+    STATICFILES_DIRS.extend(BILLING_STATICFILES_DIRS)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
 # ----------------------------------- TEMPLATES -------------------------------
 
 from django_jinja.builtins import DEFAULT_EXTENSIONS as DJJINJA_DEFAULT
@@ -136,19 +174,19 @@ TEMPLATES = [
     {
         'BACKEND': 'django_jinja.backend.Jinja2',
         'DIRS': [
-                # NOTE: Not used, thanks to this asshole: django_jinja
+                os.path.join(DJANGO_ROOT, 'contrib/django/templates'),
+                os.path.join(DJANGO_ROOT, 'contrib/google/templates'),
                 os.path.join(DJANGO_ROOT, 'templates'),
-                os.path.join(DJANGO_ROOT, 'MainAPP/templates'),
             ],
         'APP_DIRS': True,
         'OPTIONS': {
-            'match_extension': '.html',
-            'match_regex': r'^(?!debug_toolbar/|admin/|registration/|account/|openid/|socialaccount/).*',
+            'match_extension': '.jinja',
             'app_dirname': 'templates',
             'extensions': DJJINJA_DEFAULT + [
-                'compressor.contrib.jinja2ext.CompressorExtension',
+                'django_jinja.builtins.extensions.DjangoFiltersExtension',
                 'webpack_loader.contrib.jinja2ext.WebpackExtension'
             ],
+            'environment': 'contrib.jinja2.messages.environment',
             'constants': {
                 'CONST_SYSTEM_NAME': 'Drag & Drop',
                 'CONST_GRIDSIZE': 4,
@@ -158,7 +196,9 @@ TEMPLATES = [
     },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(DJANGO_ROOT, 'allauth_templates'), ],
+        'DIRS': [
+            os.path.join(DJANGO_ROOT, 'allauth_templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'debug': IN_DEVELOPMENT,
@@ -179,65 +219,71 @@ TEMPLATES = [
 
 # FIXME: ANTIPATTERN
 # TODO: NEW APPS - ADD TEMPLATES
+if MAIN_APP:
+    from MainAPP.settings import TEMPLATES as MAIN_TEMPLATES
+    TEMPLATES[0]['DIRS'].extend(MAIN_TEMPLATES['DIRS'])
+    TEMPLATES[0]['OPTIONS']['extensions'].extend(MAIN_TEMPLATES['extensions'])
+    TEMPLATES[0]['OPTIONS']['constants'].update(MAIN_TEMPLATES['constants'])
 if CMS_APP:
     from CMS.settings import TEMPLATES as CMS_TEMPLATES
     TEMPLATES[0]['DIRS'].extend(CMS_TEMPLATES['DIRS'])
     TEMPLATES[0]['OPTIONS']['extensions'].extend(CMS_TEMPLATES['extensions'])
+    TEMPLATES[0]['OPTIONS']['constants'].update(CMS_TEMPLATES['constants'])
 if BILLING_APP:
-    from Billing.settings import TEMPLATES as BILLING_TEMPLATES
-    TEMPLATES[0]['DIRS'].extend(BILLING_TEMPLATES['DIRS'])
+    from Billing.settings import TEMPLATES as BILL_TEMPLATES
+    TEMPLATES[0]['DIRS'].extend(BILL_TEMPLATES['DIRS'])
+    TEMPLATES[0]['OPTIONS']['extensions'].extend(BILL_TEMPLATES['extensions'])
+    TEMPLATES[0]['OPTIONS']['constants'].update(BILL_TEMPLATES['constants'])
 
 WSGI_APPLICATION = '{}.wsgi.application'.format(PROJECT_NAME)
-
-# ------------------------- COMPRESSOR configuration --------------------------
-
-BABEL_LOCATION = '{}/node_modules/babel-cli/bin/babel.js'.format(DJANGO_ROOT)
-COMPRESS_PRECOMPILERS = (
-    (
-       'text/jsx',
-       BABEL_LOCATION + ' {infile} --out-file {outfile} --presets react'
-    ),
-    (
-       'text/es6',
-       BABEL_LOCATION + ' {infile} --out-file {outfile} --presets es2015'
-    ),
-    (
-        'text/st1',
-        BABEL_LOCATION + ' {infile} --out-file {outfile} --presets stage-1'
-    ),
-    (
-        'text/st0',
-        BABEL_LOCATION + ' {infile} --out-file {outfile} --presets stage-0'
-    ),
-)
 
 # ------------------------ WEBPACK configuration ------------------------------
 
 WEBPACK_LOADER = {
     'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'bundles/',
-        'STATS_FILE': os.path.join(DJANGO_ROOT, 'webpack-stats.json'),
+        'CACHE': not IN_DEVELOPMENT,
+        'BUNDLE_DIR_NAME': 'bundles/' if IN_DEVELOPMENT else 'production/',
+        'STATS_FILE': os.path.join(
+                        DJANGO_ROOT, 'webpack/dev-stats.json'
+                    ) if IN_DEVELOPMENT else os.path.join(
+                        DJANGO_ROOT, 'webpack/prod-stats.json'
+                    ),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
     }
 }
 
 # ------------------------------------ Database -------------------------------
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-# TODO: Import the DATABASES setting from every other APP
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(DJANGO_ROOT, 'db.sqlite3'),
+if 'RDS_DB_NAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
     }
-} if USE_LOCAL_DATABASE else {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',  # TODO: Change database engine
-        'NAME': '{}'.format(PROJECT_NAME),
-        'USER': 'django_{}'.format(PROJECT_NAME),
-        'PASSWORD': 'NOPE_CHUCK_TESTA',  # TODO: Set new password
-        'HOST': 'localhost'  # TODO: Change from localhost?
+elif USE_LOCAL_DATABASE is False:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': '{}'.format(PROJECT_NAME),
+            'USER': 'django_{}'.format(PROJECT_NAME),
+            'PASSWORD': os.environ.get('DJANGO_PWD_DB', 'NOPE_CHUCK_TESTA'),
+            'HOST': 'localhost'
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(DJANGO_ROOT, 'db.sqlite3'),
+        }
+    }
 
 # ---------------------- Password validation ----------------------------------
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -248,6 +294,9 @@ AUTH_PASSWORD_VALIDATORS = [
   },
   {
     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    'OPTIONS': {
+        'min_length': 9,
+    }
   },
   {
     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -269,38 +318,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-# -------------------- Static files (CSS, JavaScript, Images) -----------------
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
-STATIC_URL = '/built/'
-
-STATIC_ROOT = os.path.join(DJANGO_ROOT, 'built')
-
-STATICFILES_DIRS = [
-    os.path.join(DJANGO_ROOT, 'static'),
-    os.path.join(DJANGO_ROOT, 'MainAPP/static'),
-]
-
-# FIXME: ANTIPATTERN
-# TODO: NEW APPS - ADD STATIC
-if CMS_APP:
-    from CMS.settings import STATICFILES_DIRS as CMS_STATICFILES_DIRS
-    STATICFILES_DIRS.extend(CMS_STATICFILES_DIRS)
-if BILLING_APP:
-    from Billing.settings import STATICFILES_DIRS as BILLING_STATICFILES_DIRS
-    STATICFILES_DIRS.extend(BILLING_STATICFILES_DIRS)
-
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
-)
-
-# --------- Media files (those which can be modified by the end-users) --------
-MEDIA_URL = '/media/'
-
-MEDIA_ROOT = os.path.join(DJANGO_ROOT,  'media')
 
 # -------------------- Custom configuration for login and avatars -------------
 

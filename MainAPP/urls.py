@@ -13,13 +13,14 @@ restpatterns = restRouter.urls
 normalRouter = routers.CustomGenericRouter()
 normalRouter.register(r'poll', views.Poll, base_name='poll')
 normalRouter.register(r'canvas', views.Canvas, base_name='canvas')
+normalRouter.register(r'share', views.Share, base_name='share')
 normalpatterns = normalRouter.urls
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
     # url(r'^poll/$', views.poll, name='poll'),
     # url(r'^canvas/$', views.canvas, name='canvas'),
-    url(r'^share/$', views.share, name='share'),
+    # url(r'^share/$', views.share, name='share'),
     url(r'^rest/', include(restpatterns)),
     url(r'^', include(normalpatterns)),
 ]

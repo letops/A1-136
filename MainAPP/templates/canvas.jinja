@@ -1,0 +1,44 @@
+{% extends 'base.jinja' %}
+
+{% block title %}{{ CONST_SYSTEM_NAME }} Canvas{% endblock %}
+
+{% block extra_css %}
+  {{ super() }}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gridlex/2.0.8/gridlex.min.css">
+  <style>
+    div.hopscotch-bubble .hopscotch-bubble-close {
+      background: transparent url("{{ static("img/sprite-orange.png") }}") -192px -92px no-repeat !important;
+    }
+    div.hopscotch-bubble .hopscotch-bubble-number {
+      background: transparent url("{{ static("img/sprite-orange.png") }}") 0 0 no-repeat !important;
+    }
+  </style>
+{% endblock %}
+{% block top_js %}
+  {{ super() }}
+  {{ render_bundle('canvasCSS') }}
+{% endblock %}
+
+{% block content %}
+  <div class="container-fluid">
+    <div id="content"></div>
+    <div class="row">
+      <div class="col-sm-12 col-xs-12 hidden-md hidden-lg">
+        <p class="error-message">Utiliza una resolución mas grande para visualizar el contenido</p>
+      </div>
+      <button id="startTourBtn" class="btn btn-large btn-primary col-md-offset-1 col-md-3 col-xs-offset-0 col-xs-2 hidden-sm hidden-xs canvas-sidebar">Take a tour</button>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block bottom_js %}
+  {{ super() }}
+  <script>
+    var CONST_SYSTEM_NAME = '{{ CONST_SYSTEM_NAME|safe }}';
+    var CONST_IMAGESIZE = '{{ CONST_IMAGESIZE }}';
+    var CONST_GRIDSIZE = {{ CONST_GRIDSIZE }};
+    var CONST_URL_FINISH = '{{ url('canvas-finish')}}';
+  </script>
+  {{ render_bundle('canvasJS') }}
+{% endblock %}
