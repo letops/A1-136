@@ -10,8 +10,12 @@ var PROD = (process.env.DJANGO_ENV === 'production');
 console.log('PRODUCTION: ' + PROD);
 
 var entries = {
-  canvas: './built/js/canvas/canvas.jsx',
-  poll: './built/js/poll/poll.jsx',
+  canvasCSS: './built/css/canvas.scss',
+  canvasJS: './built/js/canvas/canvas.jsx',
+  pollCSS: './built/css/poll.scss',
+  pollJS: './built/js/poll/poll.jsx',
+  shareCSS: './built/css/share.scss',
+  // shareJS: './built/js/share/share.jsx',
 };
 
 var outputDir = PROD ?
@@ -88,6 +92,10 @@ var webpackConfiguration = {
     chunkFilename:  PROD ? '[name].[id].[chunkhash].min.js' : '[name].[id].[chunkhash].js',
   },
 
+  externals: {
+    jquery: 'jQuery',
+  },
+
   plugins: [
     cleanPlugin,
     new webpack.DefinePlugin({
@@ -131,6 +139,7 @@ var webpackConfiguration = {
     sourceMap: true,
     includePaths: [
       'node_modules/bootstrap-sass',
+      'node_modules/hopscotch',
       'node_modules/breakpoint-sass/stylesheets',
       'node_modules/normalize-scss/sass',
       'node_modules/support-for/sass',

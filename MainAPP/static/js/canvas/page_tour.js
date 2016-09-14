@@ -1,3 +1,4 @@
+var hopscotch = require('hopscotch');
 /* globals hopscotch: false */
 
 /* ============ */
@@ -13,14 +14,13 @@ var tour = {
       placement: 'right',
       arrowOffset: 30,
       yOffset: 200,
-      xOffset: 20
-      
+      xOffset: 20,
     },
     {
       target: 'category-selector',
       placement: 'top',
       title: 'Seleccion de imagenes',
-      content: 'Aqui debes escoger la categoria de las imagenes que te gustes, despues arrastralas al hacia los cuadros vacios'
+      content: 'Aqui debes escoger la categoria de las imagenes que te gustes, despues arrastralas al hacia los cuadros vacios',
     },
     {
       target: 'canvas',
@@ -29,8 +29,7 @@ var tour = {
       content: 'Aquí debes poner las imagenes que te más te gusten',
       arrowOffset: 150,
       yOffset: -400,
-      xOffset: 200
-      
+      xOffset: 200,
     },
     {
       target: 'button-submit',
@@ -39,52 +38,49 @@ var tour = {
       content: 'Cuando termines, haz click en enviar',
       arrowOffset: 50,
       yOffset: -50,
-      xOffset: -30
+      xOffset: -30,
     },
-    
   ],
-   i18n: {
+  i18n: {
     // the title of the done button - next
-    nextBtn: "Siguiente",
-    prevBtn: "Atras",
-    doneBtn: "Terminar"
+    nextBtn: 'Siguiente',
+    prevBtn: 'Atras',
+    doneBtn: 'Terminar',
   },
-  showPrevButton:true,
-  showNextButton:true,
-  showCloseButton:true,
-  scrollTopMargin: 100
+  showPrevButton: true,
+  showNextButton: true,
+  showCloseButton: true,
+  scrollTopMargin: 100,
 };
 
 /* ========== */
 /* TOUR SETUP */
 /* ========== */
-addClickListener = function(el, fn) {
+addClickListener = function (el, fn) {
   if (el.addEventListener) {
     el.addEventListener('click', fn, false);
-  }
-  else {
+  } else {
     el.attachEvent('onclick', fn);
   }
 },
 
-init = function() {
-  var startBtnId = 'startTourBtn',
-      calloutId = 'startTourCallout',
-      mgr = hopscotch.getCalloutManager(),
-      state = hopscotch.getState();
+init = function () {
+  var startBtnId = 'startTourBtn';
+  var calloutId = 'startTourCallout';
+  var mgr = hopscotch.getCalloutManager();
+  var state = hopscotch.getState();
 
   if (state && state.indexOf('hello-hopscotch:') === 0) {
     // Already started the tour at some point!
     hopscotch.startTour(tour);
-  }
-  else {
+  } else {
     // Looking at the page for the first(?) time.
-    setTimeout(function() {
-     ;
+    setTimeout(function () {
+      ;
     }, 100);
   }
 
-  addClickListener(document.getElementById(startBtnId), function() {
+  addClickListener(document.getElementById(startBtnId), function () {
     if (!hopscotch.isActive) {
       mgr.removeAllCallouts();
       hopscotch.startTour(tour);
@@ -94,7 +90,6 @@ init = function() {
 
 init();
 
-window.onload = function() {
-    hopscotch.startTour(tour);
+window.onload = function () {
+  hopscotch.startTour(tour);
 };
-

@@ -145,6 +145,7 @@ STATICFILES_DIRS = [
     os.path.join(DJANGO_ROOT, 'static'),
     os.path.join(DJANGO_ROOT, 'contrib/react'),
     os.path.join(DJANGO_ROOT, 'contrib/django/static'),
+    os.path.join(DJANGO_ROOT, 'contrib/hopscotch/static'),
     os.path.join(DJANGO_ROOT, 'contrib/treasury/static'),
     os.path.join(DJANGO_ROOT, 'webpack'),
 ]

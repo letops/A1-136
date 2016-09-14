@@ -1,0 +1,247 @@
+// Obtained and edited from:
+// http://codepen.io/sawmac/pen/cayhK/
+//
+
+// === Standard layout & styling
+
+@mixin box-sizing($value) {
+  -moz-box-sizing: $value;
+  -o-box-sizing: $value;
+  -webkit-box-sizing: $value;
+  box-sizing: $value;
+}
+@mixin box-shadow($value...) {
+  -moz-box-shadow: $value;
+  -webkit-box-shadow: $value;
+  box-shadow: $value;
+}
+@mixin border-radius($value) {
+  -moz-border-radius: $value;
+  -ms-border-radius: $value;
+  -o-border-radius: $value;
+  -webkit-border-radius: $value;
+  border-radius: $value;
+}
+@mixin background-size($value) {
+  -o-background-size: $value;
+  -webkit-background-size: $value;
+  -moz-background-size: $value;
+  background-size: $value;
+}
+
+@mixin background-clip($value) {
+  -o-background-clip: $value;
+  -webkit-background-clip: $value;
+  -moz-background-clip: $value;
+  @if $value == padding {
+    background-clip: padding-box;
+  }
+  @else {
+    background-clip: $value;
+  }
+}
+
+@mixin linear-gradient($angle, $gradient1, $gradient2) {
+  background-image: -webkit-gradient(linear, $angle, from($gradient1), to($gradient2)); // Saf4+, Chrome */
+  background-image: -webkit-linear-gradient($angle, $gradient1, $gradient2); // Chrome 10+, Saf5.1+, iOS 5+ */
+  background-image:    -moz-linear-gradient($angle, $gradient1, $gradient2); // FF3.6 */
+  background-image:     -ms-linear-gradient($angle, $gradient1, $gradient2); // IE10 */
+  background-image:      -o-linear-gradient($angle, $gradient1, $gradient2); // Opera 11.10+ */
+  background-image:         linear-gradient($angle, $gradient1, $gradient2);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=$angle,StartColorStr='#{$gradient1}', EndColorStr='#{$gradient2}');
+}
+
+@mixin font-smoothing($value: antialiased) {
+  @if $value == antialiased {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @else {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+}
+
+// === Animations
+
+@mixin backface-visibility ($arguments...) {
+  -webkit-backface-visibility: $arguments;
+  -moz-backface-visibility: $arguments;
+  -ms-backface-visibility: $arguments;
+  -o-backface-visibility: $arguments;
+  backface-visibility: $arguments;
+}
+
+@mixin transform($transforms) {
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
+}
+
+// rotate
+@mixin rotate ($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+// scale
+@mixin scale($scale) {
+  @include transform(scale($scale));
+}
+// translate
+@mixin translate ($x, $y) {
+  @include transform(translate($x, $y));
+}
+
+@mixin translateX ($x) {
+  @include transform(translateX($x));
+}
+
+@mixin translateY ($y) {
+  @include transform(translateY($y));
+}
+// skew
+@mixin skew ($x, $y) {
+ @include transform(skew(#{$x}deg, #{$y}deg));
+}
+//transform origin
+@mixin transform-origin ($origin) {
+ -moz-transform-origin: $origin;
+ -o-transform-origin: $origin;
+ -ms-transform-origin: $origin;
+ -webkit-transform-origin: $origin;
+ transform-origin: $origin;
+}
+
+@mixin animation($args...){
+  -moz-animation: $args;
+  -o-animation: $args;
+  -webkit-animation: $args;
+  animation: $args;
+}
+
+@mixin animation-delay($value) {
+  -o-animation-delay: $value;
+  -moz-animation-delay: $value;
+  -webkit-animation-delay: $value;
+  animation-delay: $value;
+}
+
+@mixin animation-duration($value) {
+  -moz-animation-duration: $value;
+  -o-animation-duration: $value;
+  -webkit-animation-duration: $value;
+  animation-duration: $value;
+}
+
+@mixin animation-fill($value) {
+  -moz-animation-fill-mode: $value;
+  -o-animation-fill-mode: $value;
+  -webkit-animation-fill-mode: $value;
+  animation-fill-mode: $value;
+}
+
+@mixin animation-name($value) {
+  -moz-animation-name: $value;
+  -o-animation-name: $value;
+  -webkit-animation-name: $value;
+  animation-name: $value;
+}
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+@mixin transition-property($args...) {
+  -moz-transition-property: $args;
+  -ms-transition-property: $args;
+  -o-transition-property: $args;
+  -webkit-transition-property: $args;
+  transition-property: $args;
+}
+
+@mixin transition-duration($value) {
+  -moz-transition-duration: $value;
+  -ms-transition-duration: $value;
+  -o-transition-duration: $value;
+  -webkit-transition-duration: $value;
+  transition-duration: $value;
+}
+
+@mixin transition-delay($value) {
+  -moz-transition-delay: $value;
+  -ms-transition-delay: $value;
+  -o-transition-delay: $value;
+  -webkit-transition-delay: $value;
+  transition-delay: $value;
+}
+
+@mixin transition-timing-function($timing...) {
+  -moz-transition-timing-function:    $timing;
+  -ms-transition-timing-function:    $timing;
+  -o-transition-timing-function:      $timing;
+  -webkit-transition-timing-function: $timing;
+  transition-timing-function:         $timing;
+}
+
+@mixin keyframes($value) {
+  @-webkit-keyframes #{$value} {
+    @content;
+  }
+  @-moz-keyframes #{$value} {
+    @content;
+  }
+  @-o-keyframes #{$value} {
+    @content;
+  }
+  @keyframes #{$value} {
+    @content;
+  }
+}
+
+
+// === Filters
+
+@mixin filter($value){
+  -o-filter: $value;
+  -ms-filter: $value;
+  -webkit-filter: $value;
+  -moz-filter: $value;
+  filter: $value;
+}
+
+
+// === Browser mods
+
+@mixin appearance($value) {
+  -moz-appearance: $value;
+  -webkit-appearance: $value;
+  appearance: $value;
+}
+@mixin user-select($value) {
+  -webkit-touch-callout: $value;
+  -webkit-user-select: $value;
+  -khtml-user-select: $value;
+  -moz-user-select: $value;
+  -ms-user-select: $value;
+  user-select: $value;
+}
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}
+}
+
+// prefix declarations
+@mixin prefixed($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  -o-#{$property}: #{$value};
+}

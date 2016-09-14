@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var PageTour = require('./page_tour');
 var Context = require('./context');
 
 if (typeof CONST_SYSTEM_NAME == 'undefined' || CONST_SYSTEM_NAME == null) {

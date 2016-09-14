@@ -1,21 +1,18 @@
 {% extends 'base.jinja' %}
 {% block title %}{{ CONST_SYSTEM_NAME }} Poll{% endblock %}
 
-{% block extra_cdn_css %}
-
-
-{% endblock %}
 {% block extra_css %}
-  <link rel="stylesheet" href="{{ static("css/poll.css") }}">
+  {{ super() }}
   <style>
     .imagenFlechaNueva {
       background-image: url("{{ static("img/flechaNueva.svg") }}");
     }
   </style>
 {% endblock %}
-
-{% block top_cdn_js %}{% endblock %}
-{% block top_js %}{% endblock %}
+{% block top_js %}
+  {{ super() }}
+  {{ render_bundle('pollCSS') }}
+{% endblock %}
 
 {% block content %}
   <div class="container-fluid">
@@ -45,12 +42,9 @@
   </div>
 {% endblock %}
 
-
-{% block bottom_cdn_js %}
+{% block bottom_js %}
+  {{ super() }}
   <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.fullpage/2.5.9/jquery.fullPage.min.js"></script>
   <script type="text/javascript" src="{{ static("js/tools/extra-scripts.js") }}"></script>
-{% endblock %}
-
-{% block bottom_js %}
-  {{ render_bundle('poll') }}
+  {{ render_bundle('pollJS') }}
 {% endblock %}
