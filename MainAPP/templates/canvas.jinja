@@ -4,7 +4,7 @@
 
 {% block extra_css %}
   {{ super() }}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gridlex/2.0.8/gridlex.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gridlex/2.0.8/gridlex.min.css"> -->
   <style>
     div.hopscotch-bubble .hopscotch-bubble-close {
       background: transparent url("{{ static("img/sprite-orange.png") }}") -192px -92px no-repeat !important;
@@ -23,10 +23,7 @@
   <div class="container-fluid">
     <div id="content"></div>
     <div class="row">
-      <div class="col-sm-12 col-xs-12 hidden-md hidden-lg">
-        <p class="error-message">Utiliza una resolución mas grande para visualizar el contenido</p>
-      </div>
-      <button id="startTourBtn" class="btn btn-large btn-primary col-md-offset-1 col-md-3 col-xs-offset-0 col-xs-2 hidden-sm hidden-xs canvas-sidebar">Take a tour</button>
+      <button id="startTourBtn" class="btn canvas-sidebar">Take a tour</button>
     </div>
   </div>
 

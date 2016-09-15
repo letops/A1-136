@@ -9,20 +9,17 @@ var Sidebar = React.createClass({
   },
 
   getInitialState: function () {
-    return {
-      categories: '',
-      selected: '',
-    };
+    return { categories: '', selected: '', };
   },
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate() {
     isoimages = document.getElementsByClassName('col sidebar-img');
     for (i = 0; i < isoimages.length; i++) {
       jQuery(isoimages[i]).fadeIn('slow');
     }
   },
 
-  componentWillUpdate(nextProps, nextState) {
+  componentWillUpdate() {
     isoimages = document.getElementsByClassName('col sidebar-img');
     for (i = 0; i < isoimages.length; i++) {
       jQuery(isoimages[i]).fadeIn('slow');
@@ -81,7 +78,7 @@ var Sidebar = React.createClass({
           className='dropdownStyle'
           onChange={this.change}
           value={this.state.selected}
-          data-intro='Este es el seleccionador de categoria, aqui puedes escoger el tipo de imagenes' 
+          data-intro='Este es el seleccionador de categoria, aqui puedes escoger el tipo de imagenes'
           data-position='top'
         >
           {CategoryOptions}
@@ -94,32 +91,33 @@ var Sidebar = React.createClass({
     var imageSize = this.props.imageSize;
     var selected = this.state.selected;
     var CategoryNodes = this.state.categories.map(function (category, catIndex) {
-      var hideCategory = (
-        (selected == category.id  + '-' + category.name) ? '' : 'hidden'
-      );
-      firstImage = 'left';
+      var hideCategory = (selected == category.id  + '-' + category.name)
+        ? ''
+        : 'hidden';
+
+      var firstImage = 'left';
       var ClusterNodes = category.clusters.map(function (cluster, clusIndex) {
-        first = firstImage;
-        firstImage = (firstImage == 'left') ? 'right' : 'left';
-        uni = catIndex + "-" + clusIndex;
+        var first = firstImage;
+        firstImage = (firstImage == 'left')
+          ? 'right'
+          : 'left';
+        var uni = catIndex + '-' + clusIndex;
         return (
-          <Cluster className={first}
-            key={cluster.id}
-            id={cluster.id}
-            name={cluster.name}
-            isometric_images={cluster.isometric_images}
-            firstImage = {first}
-            unique = {uni}
+          <Cluster className={ first }
+            key={ cluster.id }
+            id={ cluster.id }
+            name={ cluster.name }
+            isometric_images={ cluster.isometric_images }
+            firstImage = { first }
+            unique = { uni }
           />
         );
       });
 
       return (
-        <div
-          key={category.id} id={category.id  + '-' + category.name}
-          className={'grid category ' + hideCategory}
-        >
-          {ClusterNodes}
+        <div key={ category.id } id={ category.id  + '-' + category.name }
+          className={ 'category ' + hideCategory }>
+          { ClusterNodes }
         </div>
       );
     });
@@ -128,34 +126,28 @@ var Sidebar = React.createClass({
   },
 
   render: function () {
+    var CategoryOptions = null;
+    var CategoryNodes = null;
+
     if (this.state.categories === null || this.state.categories === '') {
-      return (
-        <div id='sideBar' data-intro='Este es el sidebar, aqui puedes escoger las imagenes que gustes' data-position='bottom' className='col-md-offset-1 col-md-3 col-xs-offset-0 col-xs-2 hidden-sm hidden-xs canvas-sidebar'>
-          <h1 className='title'>{ CONST_SYSTEM_NAME }</h1>
-          <p className='description'>
-            Quisque vel nisl diam sed consectetur sed magna nec posuere.
-          </p>
-
-          <p>
-            Loading
-          </p>
-        </div>
-      );
+      CategoryOptions = <p>Loading</p>;
     } else {
-      var CategoryOptions = this.renderOptions();
-      var CategoryNodes = this.renderNodes();
-
-      return (
-        <div id='sideBar' data-intro='Este es el sidebar, aqui puedes escoger las imagenes que gustes' data-position='bottom' className='col-md-offset-1 col-md-3 col-xs-offset-0 col-xs-2 hidden-sm hidden-xs canvas-sidebar'>
-          <h1 className='title'>{ CONST_SYSTEM_NAME }</h1>
-          <p className='description'>
-            Quisque vel nisl diam sed consectetur sed magna nec posuere.
-          </p>
-          {CategoryOptions}
-          {CategoryNodes}
-        </div>
-      );
+      CategoryOptions = this.renderOptions();
+      CategoryNodes = this.renderNodes();
     }
+
+    return (
+      <div id='sidebar'
+        data-intro='Este es el sidebar, aquí puedes escoger las imágenes que gustes'
+        data-position='bottom' className='sidebar'>
+        <h1 className='title'>{ CONST_SYSTEM_NAME }</h1>
+        <p className='description'
+          >Quisque vel nisl diam sed consectetur sed magna nec posuere.
+        </p>
+        { CategoryOptions }
+        { CategoryNodes }
+      </div>
+    );
   },
 
 });

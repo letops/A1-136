@@ -16,14 +16,18 @@ var Grid = React.createClass({
     };
   },
 
+  componentWillMount: function () {
+    this.updateCache();
+  },
+
   submitCanvas: function (event) {
     event.preventDefault();
-    gridElements = document.getElementsByClassName('canvas-box');
+    gridElements = document.getElementsByClassName('grid-cell');
     var nonImageCounter = 0;
     for (i = 0; i < (CONST_GRIDSIZE * CONST_GRIDSIZE); i++) {
       // console.log(gridElements[i]);
       if (gridElements[i].hasAttribute('data-image-id')) {
-        gridElements[i].className = 'canvas-box col-xs-3';
+        gridElements[i].className = 'grid-cell col-xs-3';
       } else {
         gridElements[i].className += ' grid-error';
         nonImageCounter++;
@@ -57,9 +61,7 @@ var Grid = React.createClass({
 
   updateCache: function () {
     var csrftoken = Csrf.getCookie('csrftoken');
-    var filtersvar = {
-      size: this.props.imageSize,
-    };
+    var filtersvar = { size: this.props.imageSize, };
     this.serverRequest = $.ajax({
       beforeSend: function (xhr, settings) {
         if (!Csrf.csrfSafeMethod(settings.type) && !this.crossDomain) {
@@ -73,9 +75,7 @@ var Grid = React.createClass({
       dataType: 'json',
       data: JSON.stringify({ filters: filtersvar }),
       success: function (result) {
-        this.setState({
-          cached: result,
-        });
+        this.setState({ cached: result, });
       }.bind(this),
       error: function (xhr, status, err) {
         console.error('URL: cached/', status, err.toString());
@@ -83,16 +83,12 @@ var Grid = React.createClass({
     });
   },
 
-  componentWillMount: function () {
-    this.updateCache();
-  },
-
   renderRow: function (i, cells) {
     return (
       <div
         className='row'
-        key={i}>
-          {cells}
+        key={ i }>
+          { cells }
       </div>
     );
   },
@@ -101,17 +97,19 @@ var Grid = React.createClass({
     var column = i % CONST_GRIDSIZE;
     var row = Math.floor(i / CONST_GRIDSIZE);
     var cached = this.state.cached;
-    var redOverlay = (this.state.finished == false) ? true : false;
+    var redOverlay = (this.state.finished == false)
+      ? true
+      : false;
     if (cached != '' && cached != null) {
       for (var j = 0; j < cached.length; j++) {
         if (cached[j].column == column && cached[j].row == row) {
           return (
             <GridCell
-              imageId = {cached[j].isometric_image.id}
-              imageUrl = {cached[j].isometric_image.url}
-              column = {column}
-              row = {row}
-              key={i}
+              imageId = { cached[j].isometric_image.id }
+              imageUrl = { cached[j].isometric_image.url }
+              column = { column }
+              row = { row }
+              key={ i }
             />
           );
         }
@@ -147,43 +145,26 @@ var Grid = React.createClass({
     }
 
     return (
-      <div id='canvas' data-intro='Este es el canvas' data-position='bottom' className='col-md-8 col-xs-10 hidden-sm hidden-xs canvas-draw'>
+      <div id='grid' data-intro='Este es el canvas' data-position='bottom'
+        className='grid'>
         {rows}
-        <div className='row'>
-          <form method='post' id='form-submit' action={CONST_URL_FINISH}>
-            <div className='col-xs-7'>
-              <button
-                type='button'
-                className={'btn btn-danger btn-block disabled ' + warningMessage}>
-                <span className='warning-message'></span> ¡RELLENA TODOS LOS BLOQUES!
-              </button>
-            </div>
-            <div className='col-xs-3'>
-              <input
-                type='hidden'
-                name='csrfmiddlewaretoken'
-                value={csrftoken}
-              />
-              <input
-                type='hidden'
-                name='time'
-                value='0'
-                id='timer'
-              />
 
-              <button
-                type='submit'
-                id='button-submit'
-                className='btn btn-default btn-block hidden-sm hidden-xs'
-                data-intro='Al terminar, presiona este boton para guardar tus cambios'
-                data-position='left'
-                onClick={this.submitReact}
-              >
-                ENVIAR
-              </button>
-            </div>
-          </form>
-        </div>
+        <form method='post' id='form-submit' action={ CONST_URL_FINISH }
+          className='row'>
+          <input type='hidden' name='csrfmiddlewaretoken' value={ csrftoken } />
+          <input type='hidden' name='time' value='0' id='timer' />
+
+          <button type='button' className={'btn btn-danger ' + warningMessage}
+            disabled={ true }>
+            <span className='warning-message'></span> ¡RELLENA TODOS LOS BLOQUES!
+          </button>
+
+          <button type='submit' id='button-submit'
+            className='btn btn-default'
+            data-intro='Al terminar, presiona este boton para guardar tus cambios'
+            data-position='left' onClick={ this.submitReact }
+          >ENVIAR</button>
+        </form>
       </div>
     );
   },

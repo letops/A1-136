@@ -5,7 +5,6 @@ var DropTarget = require('react-dnd').DropTarget;
 var Csrf = require('../tools/csrf');
 
 var gridTarget = {
-
   drop: function (props, monitor, component) {
     var item = monitor.getItem();
     if (item.imageId != component.state.imageId) {
@@ -80,7 +79,7 @@ var GridCell = React.createClass({
   renderOverlay: function (color) {
     return (
       <div
-        className='canvas-box'
+        className='grid-cell'
         style={{
           zIndex: 1,
           opacity: 0.5,
@@ -99,22 +98,25 @@ var GridCell = React.createClass({
     var row = this.props.row;
     var connectDropTarget = this.props.connectDropTarget;
     var isOver = this.props.isOver;
-    var stateUrlEmpty = ((this.state.imageUrl == '' ||
-                          this.state.imageUrl == undefined ||
-                          this.state.imageUrl == null) ? true : false);
-    if (stateUrlEmpty == true) {
-      var errorOverlay = (this.props.errorOverlay == true) ? 'canvas-error' : '';
+    var stateUrlEmpty = this.state.imageUrl == '' ||
+      this.state.imageUrl == undefined || this.state.imageUrl == null;
+
+    if (stateUrlEmpty) {
+      var errorOverlay = (this.props.errorOverlay == true)
+        ? 'gc-error'
+        : '';
       return connectDropTarget(
-        <div className={'canvas-box col-xs-3 ' + errorOverlay}>
+        <div className={'grid-cell ' + errorOverlay}>
           {isOver && this.renderOverlay('green')}
         </div>
       );
+
     } else {
       var imageUrl = this.state.imageUrl;
       var imageId = this.state.imageId;
       return connectDropTarget(
         <div
-          className='canvas-box col-xs-3'
+          className='grid-cell'
           style={{
             backgroundImage: 'url(' + imageUrl + ')',
           }}
