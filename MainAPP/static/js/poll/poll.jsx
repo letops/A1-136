@@ -7,6 +7,7 @@ var Context = React.createClass({
   getInitialState: function () {
     return {
       questions: [],
+      loading: false,
     };
   },
 
@@ -15,15 +16,22 @@ var Context = React.createClass({
   },
 
   getQuestions: function () {
+    this.setState({
+      loading: true,
+    });
     this.serverRequest = $.ajax({
       type: 'GET',
       url: 'questions/',
       success: function (result) {
         this.setState({
           questions: result,
+          loading: false,
         });
       }.bind(this),
       error: function (xhr, status, err) {
+        this.setState({
+          loading: false,
+        });
         console.error('URL: questions/', status, err.toString());
       }.bind(this),
     });
@@ -31,7 +39,7 @@ var Context = React.createClass({
 
   render: function () {
     var questions = this.state.questions;
-    if (questions == '' || questions == null || questions == undefined) {
+    if (this.state.loading) {
       return (
         <div className='row'>
           Loading
@@ -41,24 +49,25 @@ var Context = React.createClass({
       var QuestionNodes = this.state.questions.map(function (question, index) {
         var number = index + 1;
         return (
-          <Question
-            key={number}
-            number={number}
-            id={question.id}
-            text={question.text}
-            description={question.description}
-            style={question.style}
-            answers={question.answers}
+          <Question key={ number } number={ number } id={ question.id }
+            text={ question.text } description={ question.description }
+            style={ question.style } answers={ question.answers }
           />
         );
       });
+
+      QuestionNodes.push(
+        <div key={ this.state.questions.length } className='q-row'>
+          <div className='ty-text'>Gracias</div>
+        </div>
+      );
 
       // window.onscroll = function () { changeProgress(); };
 
       return (
         <TypeForm prevBtnText='ANTERIOR' prevBtnClass='btn prev'
           nextBtnText='SIGUIENTE' nextBtnClass='btn next'
-          submitBtnText='GUARDAR' submitBtnClass='btn btn-primary save'>
+          submitBtnText='GUARDAR' submitBtnClass='btn save'>
           { QuestionNodes }
         </TypeForm>
       );

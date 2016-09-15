@@ -86,10 +86,10 @@ var typeForm = React.createClass({
            >{ this.props.prevBtnText }</button>
         : null;
 
-      var nextOrNullButton = (index == childrenLength - 1)
-        ? null
-        : <button type='submit' onClick={ this.incState } className={ this.props.nextBtnClass }
-           >{ this.props.nextBtnText }</button>;
+      var nextOrNullButton = (index < (childrenLength - 1))
+        ? <button type='submit' onClick={ this.incState } className={ this.props.nextBtnClass }
+          >{ this.props.nextBtnText }</button>
+        : null;
 
       return (
         <form key={ index } className={ 'animated ' + tfClass } action=''

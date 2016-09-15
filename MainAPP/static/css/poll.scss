@@ -21,8 +21,13 @@
 }
 
 .content {
-  margin: gutter($grid-columns / 2) auto calc(30px + 1.5rem + #{gutter($grid-columns / 2.5)});
+  margin: gutter($grid-columns / 2) auto calc(50px + 1.5rem + #{gutter($grid-columns / 2.5)});
   width: span(8);
+
+  @include breakpoint($breakpoint-xs) {
+    margin-left: gutter($grid-columns);
+    width: span($grid-columns) - gutter($grid-columns / 2);
+  }
 
   @include nested(8) {
     .typeform-container {
@@ -55,7 +60,7 @@
         position: fixed;
 
         &-cont {
-          background: $a1-color-4;
+          background: $a1-color-10;
           bottom: 0;
           height: 15px;
           left: 0;
@@ -66,7 +71,7 @@
 
       .btn {
         border: 0 none;
-        font-size: 1rem;
+        font-size: .9rem;
         font-weight: 700;
         letter-spacing: 1px;
         padding: 16px;
@@ -88,9 +93,9 @@
           border-radius: 3px;
           color: $a1-color-7;
           margin-left: span(1) + gutter(8);
-          margin-right: gutter(8);
+          margin-right: 0;
           margin-top: gutter(8);
-          width: span(4);
+          width: span(3);
 
           &:hover {
             background-color: $a1-color-8;
@@ -116,7 +121,7 @@
           &.show {
             @include transition(max-height .8s .8s ease, padding .8s .8s ease);
             max-height: 50vh;
-            padding: 15px;
+            padding: 25px;
           }
 
           &.active,
@@ -137,6 +142,14 @@
         // position: absolute;
         // padding-left: 20%;
         width: span(8);
+
+        .ty-text {
+          @include span(3);
+          font-size: 1.4rem;
+          font-weight: bolder;
+          margin-left: span(1) + gutter(8);
+          text-align: center;
+        }
 
         .q-title {
           @include flexbox;
@@ -176,15 +189,14 @@
           letter-spacing: .9px;
           margin-bottom: gutter(8);
           margin-left: span(1) + gutter(8);
-          margin-top: gutter(8);
+          margin-top: gutter(12);
         }
 
-        .radioAnswers {
-          // font-family: 'Nunito', sans-serif;
+        .qr-answer {
           margin-left: span(1) + gutter(8);
           margin-top: gutter(8);
 
-          .radioLabels {
+          .qr-label {
             font-size: 1.1rem;
             vertical-align: middle;
 
@@ -228,6 +240,27 @@
             }
           }
         }
+
+        .qp-answer {
+          background-color: $a1-color-7;
+          cursor: move;
+          font-size: 1.1rem;
+          font-weight: lighter;
+          margin-left: span(1);
+          padding: gutter(12) gutter(8);
+        }
+
+        .qp-icon {
+          @include font-smoothing;
+          color: $a1-color-3;
+          font: normal normal normal 1.2rem/1 'FontAwesome';
+          margin-right: 10px;
+
+          &::before {
+            content: '\f0c9';
+          }
+        }
+
       }
     }
   }
@@ -235,22 +268,4 @@
 
 .botonIngles {
   visibility: hidden;
-}
-
-// Drag questions
-.draggableAnswer {
-  background-color: $a1-color-7;
-  cursor: move;
-  // font-family: 'Nunito', sans-serif;
-  font-size: 1.3em;
-  font-weight: 100;
-  // margin-bottom: .5em;
-  margin-left: 3.6em;
-  padding: .5em 1em;
-}
-
-.dragIcon {
-  color: $a1-color-3;
-  margin-right: .6em;
-  // margin-left: 1.1em;
 }
