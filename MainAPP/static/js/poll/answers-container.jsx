@@ -102,8 +102,7 @@ var AnswersContainer = React.createClass({
 
     return (
       <div>
-        {AnswerNodes}
-        <button className="btn poll-next" type="button" onClick={saveAnswers}>SIGUIENTE</button>
+        { AnswerNodes }
       </div>
     );
   },

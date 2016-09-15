@@ -13,9 +13,9 @@ var Question = React.createClass({
     answers: PropTypes.array.isRequired,
   },
 
-  scrollDown: function (event) {
-    $.fn.fullpage.moveSectionDown();
-  },
+  // scrollDown: function (event) {
+  //   $.fn.fullpage.moveSectionDown();
+  // },
 
   changeRadio: function (event) {
     var csrftoken = Csrf.getCookie('csrftoken');
@@ -24,7 +24,6 @@ var Question = React.createClass({
         if (!Csrf.csrfSafeMethod(settings.type) && !this.crossDomain) {
           xhr.setRequestHeader('X-CSRFToken', csrftoken);
         }
-
       },
 
       async: 'true',
@@ -39,8 +38,6 @@ var Question = React.createClass({
         }
       ),
     });
-
-    $.fn.fullpage.moveSectionDown();
   },
 
   renderAsRadio: function () {
@@ -55,20 +52,13 @@ var Question = React.createClass({
               name={'question-' + questionId}
               value={answer.id}
               onChange={changeRadio}
-            />{answer.text}:
+            />{answer.text}
           </label>
         </div>
       );
     });
 
-    return (
-      <div>
-        {AnswerNodes}
-        <button className="btn poll-next" type="button" onClick={this.scrollDown}>
-          SIGUIENTE
-        </button>
-      </div>
-    );
+    return AnswerNodes;
   },
 
   renderAsPriority: function () {
@@ -76,9 +66,9 @@ var Question = React.createClass({
     var answers = this.props.answers;
     return (
       <AnswersContainer
-        key={questionId}
-        answers={answers}
-        questionId={questionId}
+        key={ questionId }
+        answers={ answers }
+        questionId={ questionId }
       />
     );
   },
@@ -89,25 +79,18 @@ var Question = React.createClass({
     var id = this.props.id;
 
     return (
-      <div className='section questionRow' id={this.props.id} >
-        <div className='col-xs-offset-2 col-xs-7'>
-          <form action='#'>
-            <div className='row'>
-              <div className='questionText col-xs-12'>
-                <span className='spanID'>{this.props.number}</span>
-                <img src='/built/img/flechaNueva.svg' className='customArrow flechaNueva' />
-                {this.props.text}
-              </div>
-            </div>
-            <div className='row'>
-              <div className='questionDesc col-xs-11'>
-                {this.props.description.toUpperCase()}
-              </div>
-            </div>
-            <div className='row'>
-              {AnswerNodes}
-            </div>
-          </form>
+      <div className='q-row'>
+        <div className='row'>
+          <div className='q-title'>
+            <span className='q-number'>{ this.props.number }</span>
+            <span className='q-text'>{ this.props.text }</span>
+          </div>
+        </div>
+        <div className='row'>
+          <span className='q-desc'>{ this.props.description.toUpperCase() }</span>
+        </div>
+        <div className='row'>
+          { AnswerNodes }
         </div>
       </div>
     );

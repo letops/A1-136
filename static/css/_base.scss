@@ -1,5 +1,103 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,300');
 
+// ---------------------------- SUSY ----------------------------------------
+$grid-columns: 19;
+$grid-gutter-width: 1 / 4;
+
+// ---------------------------- FONTS ---------------------------------------
+$default-font: 'Nunito', sans-serif;
+
+// ---------------------------- COLORS --------------------------------------
+$mask-debug: 	rgb(230, 240, 255);
+
+$a1-color-1: #000;
+$a1-color-2: #a0a0a0;
+$a1-color-3: #ff740c;
+$a1-color-4: #8e8e8e;
+$a1-color-5: #f38630;
+$a1-color-6: #4e4e4e;
+$a1-color-7: #fff;
+$a1-color-8: #333;
+$a1-color-9: #fa6900;
+$a1-color-def: #9b9b9b;
+
+// ---------------------------- BREAKPOINT ----------------------------------
+$breakpoint-xs: max-width 767px;
+$breakpoint-sm: 768px 991px;
+$breakpoint-md: 992px 1199px;
+$breakpoint-lg: 1200px;
+
+// ---------------------------- IMPORTS -------------------------------------
+@import 'breakpoint';
+@import 'normalize';
+@import '~susy/sass/susy';
 @import './flex';
 @import './mixins';
 @import './animations';
+
+// ---------------------------- BASE ----------------------------------------
+$susy: (
+  columns: $grid-columns,
+  gutters: $grid-gutter-width,
+  global-box-sizing: border-box,
+  debug: (
+    image: show,
+    color: $mask-debug,
+    output: background,
+    toggle: top right),
+);
+
+@include border-box-sizing;
+
+body {
+  color: $a1-color-def;
+  font-family: $default-font;
+  font-size: 14px;
+  font-weight: lighter;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.container-fluid {
+  @include container;
+
+  &::before {
+    content: ' ';
+    display: table;
+  }
+
+  &::after {
+    clear: both;
+    content: ' ';
+    display: table;
+  }
+}
+
+.container {
+  @include container;
+
+  &::before {
+    content: ' ';
+    display: table;
+  }
+
+  &::after {
+    content: ' ';
+    display: table;
+  }
+}
+
+.row {
+  padding-bottom: 0;
+
+  &::before {
+    content: ' ';
+    display: table;
+  }
+
+  &::after {
+    clear: both;
+    content: ' ';
+    display: table;
+  }
+}
