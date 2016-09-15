@@ -78,18 +78,7 @@ var GridCell = React.createClass({
 
   renderOverlay: function (color) {
     return (
-      <div
-        className='grid-cell'
-        style={{
-          zIndex: 1,
-          opacity: 0.5,
-          backgroundColor: color,
-          backgroundSize: '100% 100%',
-          position: 'absolute',
-          width: 'inherit',
-          height: 'inherit',
-        }}
-      />
+      <div className='gc-overlay'/>
     );
   },
 
@@ -102,12 +91,10 @@ var GridCell = React.createClass({
       this.state.imageUrl == undefined || this.state.imageUrl == null;
 
     if (stateUrlEmpty) {
-      var errorOverlay = (this.props.errorOverlay == true)
-        ? 'gc-error'
-        : '';
       return connectDropTarget(
-        <div className={'grid-cell ' + errorOverlay}>
-          {isOver && this.renderOverlay('green')}
+        <div className='grid-cell'>
+          <div className='gc-overlay error'/>
+          { isOver && <div className='gc-overlay good'/> }
         </div>
       );
 
@@ -115,14 +102,9 @@ var GridCell = React.createClass({
       var imageUrl = this.state.imageUrl;
       var imageId = this.state.imageId;
       return connectDropTarget(
-        <div
-          className='grid-cell'
-          style={{
-            backgroundImage: 'url(' + imageUrl + ')',
-          }}
-          data-image-id={imageId}
-        >
-          {isOver && this.renderOverlay('green')}
+        <div className='grid-cell' data-image-id={imageId}
+          style={{ backgroundImage: 'url(' + imageUrl + ')', }}>
+          { isOver && <div className='gc-overlay good'/> }
         </div>
       );
     }

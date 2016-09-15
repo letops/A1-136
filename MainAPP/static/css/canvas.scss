@@ -51,12 +51,12 @@
           background-color: $a1-color-11;
           color: $a1-color-7;
 
-          .appear {
+          &.appear {
             @include transition(opacity .5s ease);
             opacity: 1;
           }
 
-          .disappear {
+          &.disappear {
             @include transition(opacity .2s ease);
             opacity: 0;
           }
@@ -67,6 +67,19 @@
             &:focus,
             &:hover {
               background-color: $a1-color-11;
+            }
+          }
+
+          .warning-message {
+            margin-left: 1.2rem;
+            position: relative;
+
+            &::before {
+              @include font-smoothing;
+              content: '\f071';
+              font: normal normal normal 1rem/1 'FontAwesome';
+              margin-left: - 1.2rem;
+              position: absolute;
             }
           }
         }
@@ -84,6 +97,7 @@
           }
         }
       }
+
       .grid-cell {
         background-color: $a1-color-12;
         background-repeat: no-repeat;
@@ -92,13 +106,26 @@
         height: 0;
         margin: 0;
         padding-bottom: 25%;
+        position: relative;
         text-align: center;
         width: 25%;
 
-        &.gc-error {
-          @include transition(opacity .5s ease);
-          background-color: $a1-color-13;
-          opacity: 1;
+        .gc-overlay {
+          background-size: 100% 100%;
+          padding-bottom: 100%;
+          position: absolute;
+          width: 100%;
+          z-index: 1;
+
+          &.error {
+            @include animation(solve-animation .5s ease);
+            background-color: $a1-color-13;
+          }
+
+          &.good {
+            @include animation(solve-animation .5s ease);
+            background-color: $a1-color-14;
+          }
         }
       }
     }
@@ -108,13 +135,14 @@
     @include border-radius(2px);
     border: 0;
     cursor: pointer;
-    font-size: 1.1rem;
+    font-size: .9rem;
+    font-weight: bolder;
     letter-spacing: .3px;
     padding: 16px;
 
     &.disabled,
     &[disabled] {
-      cursor: default !important;
+      cursor: default;
     }
   }
 }
@@ -157,12 +185,12 @@
   width: 90%;
 
   &::after {
+    @include font-smoothing;
     box-sizing: border-box;
     color: #ff740c;
     content: '\f107';
     display: inline-block;
-    font-family: FontAwesome;
-    font-size: 2.2rem;
+    font: normal normal normal 2.2rem/1 'FontAwesome';
     height: 3rem;
     // padding: 12px 8px;
     // padding-top: 0.2em;
@@ -202,12 +230,7 @@
 //   }
 // }
 
-.warning-message {
-  &::after {
-    content: '\f071';
-    font-family: FontAwesome;
-  }
-}
+
 
 .fontText {
   font-family: 'Nunito', sans-serif;
@@ -222,49 +245,6 @@
   font-size: 3em;
   padding-top: 45%;
   text-align: center;
-}
-
-@media screen and (max-width: 1023px) {
-  body {
-    background-color: #ffffff;
-    z-index: 1;
-  }
-
-  .description {
-    visibility: hidden;
-  }
-
-  .dropdownStyle {
-    visibility: hidden;
-  }
-
-  .dropdownText {
-    visibility: hidden;
-  }
-
-  .fontText {
-    visibility: hidden;
-  }
-
-  .grid-cell {
-    visibility: hidden;
-  }
-
-  .gc-error {
-    visibility: hidden;
-  }
-
-  .sidebar-img {
-    visibility: hidden;
-  }
-
-  .title {
-    visibility: hidden;
-  }
-
-  div.hopscotch-bubble {
-    visibility: hidden;
-  }
 }
 
 .not-selected {

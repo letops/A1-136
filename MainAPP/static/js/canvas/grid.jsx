@@ -156,7 +156,7 @@ var Grid = React.createClass({
 
           <button type='button' className={'btn btn-danger ' + warningMessage}
             disabled={ true }>
-            <span className='warning-message'></span> ¡RELLENA TODOS LOS BLOQUES!
+            <span className='warning-message'>¡RELLENA TODOS LOS BLOQUES!</span>
           </button>
 
           <button type='submit' id='button-submit'
