@@ -14,22 +14,110 @@
 
     .title {
       color: $a1-color-1;
-      font-size: 4rem;
+      font-size: 3rem;
       font-weight: 100;
       margin: 0;
     }
 
     .description {
       color: $a1-color-2;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       font-weight: 100;
       margin-bottom: 10%;
       margin-top: 10%;
       width: 100%;
     }
 
-    .category {
-      // width: 100%;
+    .sel-label {
+      @include flexbox;
+      box-shadow: 0 1px 0 0 #ff740c;
+      height: 3rem;
+      margin: .5em;
+      overflow: hidden;
+      position: relative;
+
+      &::after {
+        @include align-self(center);
+        @include font-smoothing;
+        color: #ff740c;
+        content: '\f107';
+        font: normal normal normal 2rem/1 'FontAwesome';
+        margin-right: 3%;
+        pointer-events: none;
+        position: absolute;
+        right: 0;
+        z-index: 1;
+      }
+
+      .sel-drop {
+        @include appearance(none);
+        background: #ffffff;
+        border: aliceblue;
+        border-radius: 0;
+        color: #8e8e8e;
+        cursor: pointer;
+        font-size: 1.2em;
+        font-weight: 100;
+        height: 100%;
+        padding: .2em;
+        width: 100%;
+
+        &::-ms-expand {
+          /* for IE 11 */
+          display: none;
+        }
+
+        &:focus {
+          border: 0;
+          outline: none !important;
+        }
+      }
+    }
+
+    @include nested(5) {
+      .category {
+        min-height: span(5);
+        width: 100%;
+
+        & > .row {
+          @include flexbox;
+          @include flex-dir(row);
+        }
+
+        &.hidden {
+          display: none;
+        }
+
+        .cluster {
+          cursor: pointer;
+          position: relative;
+          width: span(2.5);
+
+          .c-image {
+            background-color: $a1-color-12;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            border: solid 1px $a1-color-7;
+            display: none;
+            margin: gutter($grid-columns);
+            position: absolute;
+
+            &.show {
+              display: block;
+              height: 100%;
+              width: 100%;
+              z-index: 3;
+
+              &.preview {
+                padding-bottom: 100%;
+                position: relative;
+                width: 100%;
+                z-index: 2;
+              }
+            }
+          }
+        }
+      }
     }
   }
 
@@ -147,64 +235,6 @@
   }
 }
 
-.dropdownStyle {
-  @include appearance(none);
-  background: #ffffff;
-  border: aliceblue;
-  border-radius: 0;
-  color: #8e8e8e;
-  font-family: 'Nunito', sans-serif;
-  font-size: 1.2em;
-  font-weight: 100;
-  height: 100%;
-  padding: .2em;
-  width: 100%;
-}
-
-.dropdownStyle {
-  &::-ms-expand {
-    /* for IE 11 */
-    display: none;
-  }
-
-  &:focus {
-    border: 0;
-    outline: none !important;
-  }
-}
-
-.selectLabel {
-  box-shadow: 0 1px 0 0 #ff740c;
-  display: block;
-  // border: 1px solid #ccc;
-  height: 3rem;
-  margin: .5em;
-  overflow: hidden;
-  //padding: 0.2em;
-  position: relative;
-  width: 90%;
-
-  &::after {
-    @include font-smoothing;
-    box-sizing: border-box;
-    color: #ff740c;
-    content: '\f107';
-    display: inline-block;
-    font: normal normal normal 2.2rem/1 'FontAwesome';
-    height: 3rem;
-    // padding: 12px 8px;
-    // padding-top: 0.2em;
-    pointer-events: none;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    top: 0;
-    width: 10%;
-    vertical-align: middle;
-    z-index: 1;
-  }
-}
-
 .dropdownText {
   margin-bottom: -4px;
   margin-left: -10px;
@@ -247,50 +277,44 @@
   text-align: center;
 }
 
-.not-selected {
-
-  div {
-    opacity: .5;
-    transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -webkit-transition: all 1s ease;
-
-    &:hover {
-      opacity: 1;
-      transition: all 1s ease;
-      -moz-transition: all 1s ease;
-      -webkit-transition: all 1s ease;
-    }
-  }
-
-  &.inactive {
-    div {
-      opacity: 0;
-      pointer-events: none;
-      transition: all 1s ease;
-      -moz-transition: all 1s ease;
-      -webkit-transition: all 1s ease;
-    }
-  }
-}
-
-.selected {
-  div {
-    opacity: 1;
-    transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -webkit-transition: all 1s ease;
-  }
-}
+// .not-selected {
+//
+//   div {
+//     opacity: .5;
+//     transition: all 1s ease;
+//     -moz-transition: all 1s ease;
+//     -webkit-transition: all 1s ease;
+//
+//     &:hover {
+//       opacity: 1;
+//       transition: all 1s ease;
+//       -moz-transition: all 1s ease;
+//       -webkit-transition: all 1s ease;
+//     }
+//   }
+//
+//   &.inactive {
+//     div {
+//       opacity: 0;
+//       pointer-events: none;
+//       transition: all 1s ease;
+//       -moz-transition: all 1s ease;
+//       -webkit-transition: all 1s ease;
+//     }
+//   }
+// }
+//
+// .selected {
+//   div {
+//     opacity: 1;
+//     transition: all 1s ease;
+//     -moz-transition: all 1s ease;
+//     -webkit-transition: all 1s ease;
+//   }
+// }
 
 .inactive {
   pointer-events: none;
-}
-
-.cluster-images {
-  span {
-    display: inline-block;
-  }
 }
 
 .sidebar-img {
@@ -334,47 +358,47 @@
   -webkit-transition: all 1s ease;
 }
 
-.back-img {
-  margin-top: 150px;
-  opacity: 0;
-  width: 140px;
-  height: 140px;
-  display: flex;
-  background: #f6f6f6;
-  position: absolute;
-  left: 0;
-  transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -webkit-transition: all 1s ease;
-  visibility: hidden;
-  pointer-events: none;
-
-  & > div {
-    opacity: 1;
-    width: 60%;
-    height: 60%;
-    display: block;
-    margin: 20%;
-    transform: rotate(180deg);
-    border-radius: 100%;
-    border: solid .5em #ff740c;
-    cursor: pointer;
-    transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -webkit-transition: all 1s ease;
-
-    & > div {
-      background: url('/built/img/flechaNueva.svg?2908080c7262') no-repeat center;
-      transition: all 1s ease;
-      -moz-transition: all 1s ease;
-      -webkit-transition: all 1s ease;
-      background-size: contain;
-      height: 60%;
-      margin: 20%;
-      width: 60%;
-    }
-  }
-}
+// .back-img {
+//   margin-top: 150px;
+//   opacity: 0;
+//   width: 140px;
+//   height: 140px;
+//   display: flex;
+//   background: #f6f6f6;
+//   position: absolute;
+//   left: 0;
+//   transition: all 1s ease;
+//   -moz-transition: all 1s ease;
+//   -webkit-transition: all 1s ease;
+//   visibility: hidden;
+//   pointer-events: none;
+//
+//   & > div {
+//     opacity: 1;
+//     width: 60%;
+//     height: 60%;
+//     display: block;
+//     margin: 20%;
+//     transform: rotate(180deg);
+//     border-radius: 100%;
+//     border: solid .5em #ff740c;
+//     cursor: pointer;
+//     transition: all 1s ease;
+//     -moz-transition: all 1s ease;
+//     -webkit-transition: all 1s ease;
+//
+//     & > div {
+//       background: url('/built/img/flechaNueva.svg?2908080c7262') no-repeat center;
+//       transition: all 1s ease;
+//       -moz-transition: all 1s ease;
+//       -webkit-transition: all 1s ease;
+//       background-size: contain;
+//       height: 60%;
+//       margin: 20%;
+//       width: 60%;
+//     }
+//   }
+// }
 
 .right {
   margin-bottom: 10px;

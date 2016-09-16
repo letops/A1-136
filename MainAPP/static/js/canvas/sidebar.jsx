@@ -9,21 +9,7 @@ var Sidebar = React.createClass({
   },
 
   getInitialState: function () {
-    return { categories: '', selected: '', };
-  },
-
-  componentDidUpdate() {
-    isoimages = document.getElementsByClassName('col sidebar-img');
-    for (i = 0; i < isoimages.length; i++) {
-      jQuery(isoimages[i]).fadeIn('slow');
-    }
-  },
-
-  componentWillUpdate() {
-    isoimages = document.getElementsByClassName('col sidebar-img');
-    for (i = 0; i < isoimages.length; i++) {
-      jQuery(isoimages[i]).fadeIn('slow');
-    }
+    return { categories: '', selectedCat: 0, selectedCluster: -1 };
   },
 
   componentWillMount: function () {
@@ -46,7 +32,8 @@ var Sidebar = React.createClass({
       success: function (result) {
         this.setState({
           categories: result,
-          selected: ((result.length > 0) ? result[0].id  + '-' + result[0].name : 'select'),
+          selectedCat: (result.length > 0) ? result[0].id : 0,
+          selectedCluster: -1,
         });
       }.bind(this),
       error: function (xhr, status, err) {
@@ -55,67 +42,64 @@ var Sidebar = React.createClass({
     });
   },
 
-  change: function (event) {
-    this.setState({ selected: event.target.value });
+  handleCategoryChange: function (event) {
+    this.setState({ selectedCat: event.target.value, selectedCluster: -1 });
+  },
+
+  handleSelectCluster: function (id) {
+    console.log(id);
+    this.setState({ selectedCluster: id });
   },
 
   renderOptions: function () {
-    var CategoryOptions = this.state.categories.map(function (category) {
+    var CategoryOptions = this.state.categories.map(function (category, index) {
       return (
-        <option key={category.id} value={category.id  + '-' + category.name}>
-          {category.name}
+        <option key={ index } value={ category.id }>
+          { category.name }
         </option>
       );
     });
 
-    // Bootstrap won't work with a combo, because it reads the DOM and overwrites
-    // the section with its own JS. The render overwrites this section after the initial
-    // load, so Bootstrap will flunk.
     return (
-      <label className='selectLabel'>
-        <select
-          id='category-selector'
-          className='dropdownStyle'
-          onChange={this.change}
-          value={this.state.selected}
+      <label className='sel-label'>
+        <select id='category-selector' className='sel-drop'
+          onChange={ this.handleCategoryChange } value={ this.state.selectedCat }
           data-intro='Este es el seleccionador de categoria, aqui puedes escoger el tipo de imagenes'
-          data-position='top'
-        >
-          {CategoryOptions}
+          data-position='top'> { CategoryOptions }
         </select>
       </label>
     );
   },
 
-  renderNodes: function () {
+  renderCategories: function () {
     var imageSize = this.props.imageSize;
-    var selected = this.state.selected;
+    var selectedCat = this.state.selectedCat;
+    var selectedCluster = this.state.selectedCluster;
+    var handleSelectCluster = this.handleSelectCluster;
+    var rowSize = 2;
     var CategoryNodes = this.state.categories.map(function (category, catIndex) {
-      var hideCategory = (selected == category.id  + '-' + category.name)
+      var hideCategory = (selectedCat == category.id)
         ? ''
         : 'hidden';
 
-      var firstImage = 'left';
-      var ClusterNodes = category.clusters.map(function (cluster, clusIndex) {
-        var first = firstImage;
-        firstImage = (firstImage == 'left')
-          ? 'right'
-          : 'left';
-        var uni = catIndex + '-' + clusIndex;
+      var ClusterNodes = category.clusters.map(function (cluster, index) {
+        var selected = selectedCluster == cluster.id;
         return (
-          <Cluster className={ first }
-            key={ cluster.id }
-            id={ cluster.id }
-            name={ cluster.name }
-            isometric_images={ cluster.isometric_images }
-            firstImage = { first }
-            unique = { uni }
+          <Cluster key={ cluster.id } id={ cluster.id } index={ index + 1 }
+            name={ cluster.name } isometricImages={ cluster.isometric_images }
+            selected={ selected } selectCluster={ handleSelectCluster }
           />
         );
+      }).reduce(function (r, element, index) {
+        index % rowSize === 0 && r.push([]);
+        r[r.length - 1].push(element);
+        return r;
+      }, []).map(function (rowContent, index) {
+        return <div className="row" key={ index }>{ rowContent }</div>;
       });
 
       return (
-        <div key={ category.id } id={ category.id  + '-' + category.name }
+        <div key={ category.id } id={ category.id }
           className={ 'category ' + hideCategory }>
           { ClusterNodes }
         </div>
@@ -133,7 +117,7 @@ var Sidebar = React.createClass({
       CategoryOptions = <p>Loading</p>;
     } else {
       CategoryOptions = this.renderOptions();
-      CategoryNodes = this.renderNodes();
+      CategoryNodes = this.renderCategories();
     }
 
     return (

@@ -1,6 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var PageTour = require('./page_tour');
+// var PageTour = require('./page_tour');
 var DragDropContext = require('react-dnd').DragDropContext;
 var Backend = null;
 var Sidebar = require('./sidebar');
