@@ -72,8 +72,12 @@ var Cluster = React.createClass({
       IsometricNodes = <span>Loading</span>;
     }
 
+    var clusterSide = (this.props.index % 2 !== 0)
+      ? ' left'
+      : ' right';
+
     return (
-        <div key={this.props.id} className='cluster'
+        <div key={ this.props.id } className={ 'cluster' + clusterSide }
           onClick={ this.props.selectCluster.bind(null, this.props.id) }>
           { IsometricNodes }
         </div>

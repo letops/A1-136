@@ -91,7 +91,11 @@
         .cluster {
           cursor: pointer;
           position: relative;
-          width: span(2.5);
+          width: span(2);
+
+          &.left {
+            margin-right: gutter(5);
+          }
 
           .c-image {
             background-color: $a1-color-12;
