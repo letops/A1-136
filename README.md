@@ -6,7 +6,7 @@ Developed by
 
 [![StackShare][stack-shield]][stack-tech]
 
-[![GRVTYlabs][logo]](https://www.grvtylabs.com)
+[![GRVTYlabs][logo]](http://www.grvtylabs.com)
 
 
 [logo]: https://github.com/grvty-labs/A1-136/blob/master/logo.png?raw=true "GRVTYlabs"
