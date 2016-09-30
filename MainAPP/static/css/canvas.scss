@@ -11,75 +11,74 @@
     // padding-left: 10%;
     // max-height: calc(90vh);
     // box-sizing: border-box;
-
-    .title {
-      color: $a1-color-1;
-      font-size: 3rem;
-      font-weight: 100;
-      margin: 0;
-    }
-
-    .description {
-      color: $a1-color-2;
-      font-size: 1.2rem;
-      font-weight: 100;
-      margin-bottom: 10%;
-      margin-top: 10%;
-      width: 100%;
-    }
-
-    .sel-label {
-      @include flexbox;
-      box-shadow: 0 1px 0 0 #ff740c;
-      height: 3rem;
-      margin: .5em;
-      overflow: hidden;
-      position: relative;
-
-      &::after {
-        @include align-self(center);
-        @include font-smoothing;
-        color: #ff740c;
-        content: '\f107';
-        font: normal normal normal 2rem/1 'FontAwesome';
-        margin-right: 3%;
-        pointer-events: none;
-        position: absolute;
-        right: 0;
-        z-index: 1;
-      }
-
-      .sel-drop {
-        @include appearance(none);
-        background: #ffffff;
-        border: aliceblue;
-        border-radius: 0;
-        color: #8e8e8e;
-        cursor: pointer;
-        font-size: 1.2em;
-        font-weight: 100;
-        height: 100%;
-        padding: .2em;
-        width: 100%;
-
-        &::-ms-expand {
-          /* for IE 11 */
-          display: none;
-        }
-
-        &:focus {
-          border: 0;
-          outline: none !important;
-        }
-      }
-    }
-
     @include nested(5) {
+      .title {
+        color: $a1-color-1;
+        font-size: 3rem;
+        font-weight: 100;
+        margin: 0;
+      }
+
+      .description {
+        color: $a1-color-2;
+        font-size: 1.2rem;
+        font-weight: 100;
+        margin-bottom: 10%;
+        margin-top: 10%;
+        width: 100%;
+      }
+
+      .sel-label {
+        @include flexbox;
+        box-shadow: 0 1px 0 0 #ff740c;
+        height: 3rem;
+        margin: .5em;
+        overflow: hidden;
+        position: relative;
+
+        &::after {
+          @include align-self(center);
+          @include font-smoothing;
+          color: #ff740c;
+          content: '\f107';
+          font: normal normal normal 2rem/1 'FontAwesome';
+          margin-right: 3%;
+          pointer-events: none;
+          position: absolute;
+          right: 0;
+          z-index: 1;
+        }
+
+        .sel-drop {
+          @include appearance(none);
+          background: #ffffff;
+          border: #f0f8ff;
+          border-radius: 0;
+          color: #8e8e8e;
+          cursor: pointer;
+          font-size: 1.2em;
+          font-weight: 100;
+          height: 100%;
+          padding: .2em;
+          width: 100%;
+
+          &::-ms-expand {
+            // for IE 11
+            display: none;
+          }
+
+          &:focus {
+            border: 0;
+            outline: none;
+          }
+        }
+      }
+
       .category {
         min-height: span(5);
         width: 100%;
 
-        & > .row {
+        > .row {
           @include flexbox;
           @include flex-dir(row);
         }
@@ -130,12 +129,6 @@
     margin-left: span(1) + gutter($grid-columns);
     padding: span(1) 0;
 
-    & > .row {
-      @include flexbox;
-      @include flex-wrap(wrap);
-      @include flex-dir(row);
-    }
-
     @include nested(10) {
       .btn {
         &.btn-danger {
@@ -153,8 +146,8 @@
             opacity: 0;
           }
 
-          &[disabled],
-          &.disabled {
+          &.disabled,
+          &[disabled] {
             &.focus,
             &:focus,
             &:hover {
@@ -221,6 +214,12 @@
         }
       }
     }
+
+    > .row {
+      @include flexbox;
+      @include flex-wrap(wrap);
+      @include flex-dir(row);
+    }
   }
 
   .btn {
@@ -239,12 +238,12 @@
   }
 }
 
-.dropdownText {
+.dropdown-text {
   margin-bottom: -4px;
   margin-left: -10px;
 }
 
-#form-submit {
+.form-submit {
   padding-top: 2%;
 }
 
@@ -264,19 +263,15 @@
 //   }
 // }
 
-
-
-.fontText {
+.font-text {
   font-family: 'Nunito', sans-serif;
   font-weight: 100;
 }
 
-/*****/
-
 .error-message {
   font-family: 'Nunito', sans-serif;
-  font-weight: 100;
   font-size: 3em;
+  font-weight: 100;
   padding-top: 45%;
   text-align: center;
 }
@@ -324,16 +319,16 @@
 .sidebar-img {
   background-color: #f6f6f6;
   border: solid 2px #ffffff;
-  flex: inherit !important;
+  flex: inherit;
   height: 140px;
   // padding-bottom: 13.5%;
   opacity: 0;
   padding-bottom: 25%;
   text-align: center;
-  width: 140px;
   transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -webkit-transition: all 1s ease;
+  width: 140px;
+  // -moz-transition: all 1s ease;
+  // -webkit-transition: all 1s ease;
 
   &.not-selected {
     cursor: pointer;
@@ -343,14 +338,13 @@
     cursor: move;
     opacity: 1;
     transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -webkit-transition: all 1s ease;
-
+    // -moz-transition: all 1s ease;
+    // -webkit-transition: all 1s ease;
     &:hover {
       opacity: 1;
       transition: all 1s ease;
-      -moz-transition: all 1s ease;
-      -webkit-transition: all 1s ease;
+      // -moz-transition: all 1s ease;
+      // -webkit-transition: all 1s ease;
     }
   }
 }
@@ -358,8 +352,8 @@
 .absolute-image {
   position: absolute;
   transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -webkit-transition: all 1s ease;
+  // -moz-transition: all 1s ease;
+  // -webkit-transition: all 1s ease;
 }
 
 // .back-img {
@@ -414,23 +408,27 @@
   margin-right: 10px;
 }
 
-
-#startTourBtn {
+.start-tour-btn {
   visibility: hidden;
 }
 
-/*Tour*/
-div.hopscotch-bubble .hopscotch-nav-button.next {
-  background-color: #ff740c !important;
-  background-image: none !important;
-  border-radius: 1px;
-  color: #ffffff !important;
-  font-family: 'Nunito', sans-serif;
-  letter-spacing: .3px;
-}
+div {
+  &.hopscotch-bubble {
+    .hopscotch-nav-button {
+      .next {
+        background-color: #ff740c;
+        background-image: none;
+        border-radius: 1px;
+        color: #ffffff;
+        font-family: 'Nunito', sans-serif;
+        letter-spacing: .3px;
+      }
 
-div.hopscotch-bubble .hopscotch-nav-button.prev {
-  border-radius: 1px;
-  font-family: 'Nunito', sans-serif;
-  letter-spacing: .3px;
+      .prev {
+        border-radius: 1px;
+        font-family: 'Nunito', sans-serif;
+        letter-spacing: .3px;
+      }
+    }
+  }
 }

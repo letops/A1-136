@@ -150,7 +150,7 @@ var Grid = React.createClass({
         {rows}
 
         <form method='post' id='form-submit' action={ CONST_URL_FINISH }
-          className='row'>
+          className='row form-submit'>
           <input type='hidden' name='csrfmiddlewaretoken' value={ csrftoken } />
           <input type='hidden' name='time' value='0' id='timer' />
 

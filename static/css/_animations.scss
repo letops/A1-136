@@ -110,6 +110,7 @@
     @include translateY(50px);
     opacity: 0;
   }
+
   100% {
     @include translateY(0);
     opacity: 1;
@@ -121,6 +122,7 @@
     @include translateY(0);
     opacity: 1;
   }
+
   100% {
     @include translateY(0 - 50px);
     opacity: 0;

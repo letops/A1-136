@@ -87,8 +87,8 @@
           outline: 0 none;
         }
 
-        &.prev,
-        &.next  {
+        &.next,
+        &.prev {
           background-color: $a1-color-6;
           border-radius: 3px;
           color: $a1-color-7;
@@ -126,7 +126,7 @@
 
           &.active,
           &:active {
-            background: $a1-color-9 !important;
+            background: $a1-color-9;
             box-shadow: none;
           }
 
@@ -266,6 +266,6 @@
   }
 }
 
-.botonIngles {
+.boton-ingles {
   visibility: hidden;
 }
