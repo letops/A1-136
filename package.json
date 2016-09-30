@@ -27,6 +27,7 @@
     "hopscotch": "^0.2.6",
     "jquery": "^3.1.0",
     "node-sass": "^3.9.3",
+    "normalize-scss": "^5.0.3",
     "react": "^15.3.1",
     "react-addons-css-transition-group": "^15.3.1",
     "react-dnd": "^2.1.4",
