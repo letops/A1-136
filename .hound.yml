@@ -3,6 +3,6 @@ python:
 # Uses FLAKE8, wait por Pep8
 
 scss:
-  config_file: .sass-lint.yml
+  config_file: .hound-scss.yml
 
 fail_on_violations: true
