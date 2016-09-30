@@ -74,7 +74,7 @@ function collectTarget(connect) {
   };
 }
 
-var DragAnswer = React.createClass({
+var DraggableAnswer = React.createClass({
   propTypes: {
     connectDragSource: PropTypes.func.isRequired,
     connectDropTarget: PropTypes.func.isRequired,
@@ -92,14 +92,14 @@ var DragAnswer = React.createClass({
     };
 
     return this.props.connectDragSource(this.props.connectDropTarget(
-      <div style={style} className='draggableAnswer'>
-        <i className="fa fa-bars dragIcon" aria-hidden="true"></i>
-        {text}
+      <div style={ style } className='qp-answer'>
+        <span className="qp-icon" aria-hidden="true"></span>
+        <span>{ text }</span>
       </div>
     ));
   },
 });
 
-var DragSourceDecorator = DragSource(ItemTypes.DRAGANSWER, answerSource, collectSource);
-var DropTargetDecorator = DropTarget(ItemTypes.DRAGANSWER, answerTarget, collectTarget);
-module.exports = DropTargetDecorator(DragSourceDecorator(DragAnswer));
+var DragSourceDecorator = DragSource(ItemTypes.DRAGGABLEANSWER, answerSource, collectSource);
+var DropTargetDecorator = DropTarget(ItemTypes.DRAGGABLEANSWER, answerTarget, collectTarget);
+module.exports = DropTargetDecorator(DragSourceDecorator(DraggableAnswer));

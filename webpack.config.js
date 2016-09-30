@@ -1,3 +1,6 @@
+// Explore https://goo.gl/qoLZP3
+// to get a better understanding of the following code
+
 var path = require('path');
 var webpack = require('webpack');
 var BundleTracker = require('webpack-bundle-tracker');
