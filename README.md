@@ -4,6 +4,11 @@
 Developed by
 ------------
 
-[![GRVTYlabs][logo]](www.grvtylabs.com)
+[![StackShare][stack-shield]][stack-tech]
 
-[logo]: https://github.com/letops/A1-136/blob/master/logo.png?raw=true "GRVTYlabs"
+[![GRVTYlabs][logo]](http://www.grvtylabs.com)
+
+
+[logo]: https://github.com/grvty-labs/A1-136/blob/master/logo.png?raw=true "GRVTYlabs"
+[stack-shield]: http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat
+[stack-tech]: http://stackshare.io/letops/grvtylabs

@@ -8,7 +8,7 @@ var tour = {
   id: 'hello-hopscotch',
   steps: [
     {
-      target: 'sideBar',
+      target: 'sidebar',
       title: 'Bienvenido a A1-136',
       content: 'Para saber como usar esta aplicacion, por favor haz click en Siguiente ',
       placement: 'right',
@@ -23,10 +23,10 @@ var tour = {
       content: 'Aqui debes escoger la categoria de las imagenes que te gustes, despues arrastralas al hacia los cuadros vacios',
     },
     {
-      target: 'canvas',
+      target: 'grid',
       placement: 'bottom',
       title: 'Creación de la imagen',
-      content: 'Aquí debes poner las imagenes que te más te gusten',
+      content: 'Aquí debes poner las imágenes que te más te gusten',
       arrowOffset: 150,
       yOffset: -400,
       xOffset: 200,
