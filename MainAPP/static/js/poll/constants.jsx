@@ -1,3 +1,3 @@
 exports.ItemTypes = {
-  DRAGANSWER: 'draganswer',
+  DRAGGABLEANSWER: 'draggableanswer',
 };
