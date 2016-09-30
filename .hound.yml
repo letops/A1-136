@@ -1,0 +1,8 @@
+python:
+  enabled: true
+# Uses FLAKE8, wait por Pep8
+
+scss:
+  config_file: .hound-scss.yml
+
+fail_on_violations: true

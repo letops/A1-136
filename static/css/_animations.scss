@@ -105,6 +105,30 @@
   }
 }
 
+@include keyframes(fadeInUp) {
+  0% {
+    @include translateY(50px);
+    opacity: 0;
+  }
+
+  100% {
+    @include translateY(0);
+    opacity: 1;
+  }
+}
+
+@include keyframes(fadeOutUp) {
+  0% {
+    @include translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    @include translateY(0 - 50px);
+    opacity: 0;
+  }
+}
+
 // Obtained and edited from:
 // http://goo.gl/d3APx9
 @include keyframes(bounceOut) {
@@ -123,7 +147,6 @@
     opacity: 0;
   }
 }
-
 
 // Obtained and edited from:
 // http://goo.gl/D8qRk2
