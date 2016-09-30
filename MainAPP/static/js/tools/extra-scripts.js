@@ -11,6 +11,11 @@ function submission() {
   document.getElementById('timer').value = time;
 }
 
+module.exports = {
+  countTime: countTime,
+  submission: submission,
+};
+
 // function getTotalQuestions(){
 //   questions = document.getElementsByClassName("questionRow");
 //   return questions.length;
@@ -113,8 +118,3 @@ function submission() {
 
 
 // window.onkeypress = checkKeyboard;
-
-module.exports = {
-  countTime: countTime,
-  submission: submission,
-};

@@ -27,10 +27,9 @@ var Isometric = React.createClass({
     isDragging: PropTypes.bool.isRequired,
     imageId: PropTypes.number.isRequired,
     imageUrl: PropTypes.string.isRequired,
+    preview: PropTypes.bool.isRequired,
     hide: PropTypes.bool.isRequired,
-    selected: PropTypes.bool.isRequired,
-    listNumber: PropTypes.number.isRequired,
-    imageLoc: PropTypes.string.isRequired,
+    position: PropTypes.any.isRequired,
   },
 
   componentDidMount: function () {
@@ -48,23 +47,18 @@ var Isometric = React.createClass({
     var imageUrl = this.props.imageUrl;
     var imageId = this.props.imageId;
     var hide = this.props.hide;
-    var selected = this.props.selected;
-    var listNumber = this.props.listNumber;
-    var imageLoc = this.props.imageLoc;
+    var showClass = !this.props.hide
+      ? ' show'
+      : '';
+    var previewClass = this.props.preview
+      ? ' preview'
+      : '';
+    var style = this.props.position;
+    style.backgroundImage = 'url(' + imageUrl + ')';
+
     return connectDragSource(
-      <div
-        className={'col sidebar-img ' + ((hide == true) ? 'hidden' : '')
-                   + ((selected == true && hide != true) ? ' selected' : ' not-selected')
-                   + ((listNumber == 0) ? ' ' : ' absolute-image image ')
-                   +  imageLoc}
-        key={imageId}
-        style={{
-          backgroundImage: 'url(' + imageUrl + ')',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: '100%',
-          left: ((imageLoc == 'right') ? 1 : 0) * 150 + 'px',
-          marginTop: ((listNumber == 1) ? '-150px' : ''),
-        }}
+      <div className={ 'c-image' + showClass + previewClass }  key={ imageId }
+        style={ style }
       ></div>
     );
   },
