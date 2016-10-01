@@ -19,6 +19,11 @@
   "homepage": "https://github.com/letops/A1-136#readme",
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
+    "babel-core": "^6.16.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-es2016": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
     "breakpoint-sass": "^2.7.0",
     "clean-webpack-plugin": "^0.1.10",
     "css-loader": "^0.25.0",
