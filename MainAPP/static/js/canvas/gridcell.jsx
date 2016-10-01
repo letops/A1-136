@@ -5,7 +5,6 @@ var DropTarget = require('react-dnd').DropTarget;
 var Csrf = require('../tools/csrf');
 
 var gridTarget = {
-
   drop: function (props, monitor, component) {
     var item = monitor.getItem();
     if (item.imageId != component.state.imageId) {
@@ -79,18 +78,7 @@ var GridCell = React.createClass({
 
   renderOverlay: function (color) {
     return (
-      <div
-        className='canvas-box'
-        style={{
-          zIndex: 1,
-          opacity: 0.5,
-          backgroundColor: color,
-          backgroundSize: '100% 100%',
-          position: 'absolute',
-          width: 'inherit',
-          height: 'inherit',
-        }}
-      />
+      <div className='gc-overlay'/>
     );
   },
 
@@ -99,28 +87,24 @@ var GridCell = React.createClass({
     var row = this.props.row;
     var connectDropTarget = this.props.connectDropTarget;
     var isOver = this.props.isOver;
-    var stateUrlEmpty = ((this.state.imageUrl == '' ||
-                          this.state.imageUrl == undefined ||
-                          this.state.imageUrl == null) ? true : false);
-    if (stateUrlEmpty == true) {
-      var errorOverlay = (this.props.errorOverlay == true) ? 'canvas-error' : '';
+    var stateUrlEmpty = this.state.imageUrl == '' ||
+      this.state.imageUrl == undefined || this.state.imageUrl == null;
+
+    if (stateUrlEmpty) {
       return connectDropTarget(
-        <div className={'canvas-box col-xs-3 ' + errorOverlay}>
-          {isOver && this.renderOverlay('green')}
+        <div className='grid-cell'>
+          <div className='gc-overlay error'/>
+          { isOver && <div className='gc-overlay good'/> }
         </div>
       );
+
     } else {
       var imageUrl = this.state.imageUrl;
       var imageId = this.state.imageId;
       return connectDropTarget(
-        <div
-          className='canvas-box col-xs-3'
-          style={{
-            backgroundImage: 'url(' + imageUrl + ')',
-          }}
-          data-image-id={imageId}
-        >
-          {isOver && this.renderOverlay('green')}
+        <div className='grid-cell' data-image-id={imageId}
+          style={{ backgroundImage: 'url(' + imageUrl + ')', }}>
+          { isOver && <div className='gc-overlay good'/> }
         </div>
       );
     }

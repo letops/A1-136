@@ -1,4 +1,3 @@
-{% load compress %}
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -24,15 +23,10 @@
     {% block extra_head %}
     {% endblock %}
     {% block extra_cdn_css %}{% endblock %}
-    {% compress css %}
-      {% block extra_css %}{% endblock %}
-    {% endcompress %}
+    {% block extra_css %}{% endblock %}
 
     {% block top_cdn_js %}{% endblock %}
-
-    {% compress js %}
-      {% block top_js %}{% endblock %}
-    {% endcompress %}
+    {% block top_js %}{% endblock %}
   </head>
   <body>
     {% block body %}
@@ -47,8 +41,6 @@
     {% endblock %}
 
     {% block bottom_cdn_js %}{% endblock %}
-    {% compress js %}
-      {% block bottom_js %}{% endblock %}
-    {% endcompress %}
+    {% block bottom_js %}{% endblock %}
   </body>
 </html>

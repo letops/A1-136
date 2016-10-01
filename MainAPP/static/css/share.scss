@@ -1,0 +1,63 @@
+@import './base';
+
+// .resize{
+// 	width: 100vh;
+// 	height: 80vh;
+// 	text-align: center;
+// }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 100;
+}
+
+.title {
+  color: $a1-color-1;
+  font-size: 4.5em;
+  padding-bottom: 1.5%;
+}
+
+.subtitle {
+  color: $a1-color-3;
+  // font-family: 'Nunito', sans-serif;*/
+  font-size: 2em;
+  // font-weight: 100;*/
+  margin-bottom: 5%;
+  margin-top: 3%;
+}
+
+.description {
+  color: $a1-color-2;
+  // font-family: 'Nunito', sans-serif;
+  // font-weight: 100;*/
+}
+
+.share-thanks {
+  padding: 1%;
+}
+
+.or {
+  color: $a1-color-2;
+}
+
+.button-download,
+.button-share {
+  border-radius: 1px;
+  color: $a1-color-7;
+  cursor: pointer;
+  font-size: .8em;
+  font-weight: normal;
+  letter-spacing: .4px;
+  margin-bottom: 6%;
+  margin-top: 6%;
+  padding: 3.5%;
+  text-align: center;
+}
+
+.button-download {
+  background-color: $a1-color-6;
+}
+
+.button-share {
+  background-color: $a1-color-16;
+}

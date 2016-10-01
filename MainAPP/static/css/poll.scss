@@ -1,0 +1,271 @@
+@import './base';
+
+.title {
+  @include span(15);
+  color: $a1-color-1;
+  // font-family: 'Nunito', sans-serif;
+  font-size: 4rem;
+  font-weight: lighter;
+  margin-left: span(2 wide);
+  margin-top: gutter($grid-columns / 2);
+}
+
+.subtitle {
+  @include span(8);
+  color: $a1-color-2;
+  // font-family: 'Nunito', sans-serif;
+  font-size: 1.1rem;
+  font-weight: lighter;
+  margin-left: span(2 wide);
+  margin-top: gutter($grid-columns);
+}
+
+.content {
+  margin: gutter($grid-columns / 2) auto calc(50px + 1.5rem + #{gutter($grid-columns / 2.5)});
+  width: span(8);
+
+  @include breakpoint($breakpoint-xs) {
+    margin-left: gutter($grid-columns);
+    width: span($grid-columns) - gutter($grid-columns / 2);
+  }
+
+  @include nested(8) {
+    .typeform-container {
+      position: relative;
+      width: span(8);
+
+      .animated {
+        @include animation-fill(both);
+        @include animation-duration(1s);
+
+        &.fade-in-up {
+          @include animation-name(fadeInUp);
+          height: auto;
+        }
+
+        &.fade-out-up {
+          @include animation-name(fadeOutUp);
+          max-height: 0;
+          overflow: hidden;
+        }
+      }
+
+      .progress {
+        @include transition(width .8s ease);
+        background: $a1-color-5;
+        bottom: 0;
+        height: 15px;
+        left: 0;
+        margin-bottom: 0;
+        position: fixed;
+
+        &-cont {
+          background: $a1-color-10;
+          bottom: 0;
+          height: 15px;
+          left: 0;
+          position: fixed;
+          width: 100%;
+        }
+      }
+
+      .btn {
+        border: 0 none;
+        font-size: .9rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        padding: 16px;
+
+        &.active,
+        &:active {
+          &:focus {
+            outline: 0 none;
+          }
+        }
+
+        &:focus {
+          outline: 0 none;
+        }
+
+        &.next,
+        &.prev {
+          background-color: $a1-color-6;
+          border-radius: 3px;
+          color: $a1-color-7;
+          margin-left: span(1) + gutter(8);
+          margin-right: 0;
+          margin-top: gutter(8);
+          width: span(3);
+
+          &:hover {
+            background-color: $a1-color-8;
+            color: $a1-color-7;
+          }
+        }
+
+        &.save {
+          background: $a1-color-3;
+          bottom: 0;
+          color: $a1-color-7;
+          font-size: 1.5rem;
+          left: 0;
+          position: fixed;
+          width: 100%;
+
+          &.hide {
+            @include transition(max-height .2s ease, padding .2s ease);
+            max-height: 0;
+            padding: 0;
+          }
+
+          &.show {
+            @include transition(max-height .8s .8s ease, padding .8s .8s ease);
+            max-height: 50vh;
+            padding: 25px;
+          }
+
+          &.active,
+          &:active {
+            background: $a1-color-9;
+            box-shadow: none;
+          }
+
+          &:focus,
+          &:hover {
+            background: $a1-color-5;
+          }
+        }
+      }
+
+      .q-row {
+        @extend .row;
+        // position: absolute;
+        // padding-left: 20%;
+        width: span(8);
+
+        .ty-text {
+          @include span(3);
+          font-size: 1.4rem;
+          font-weight: bolder;
+          margin-left: span(1) + gutter(8);
+          text-align: center;
+        }
+
+        .q-title {
+          @include flexbox;
+          font-size: 1.3rem;
+          font-weight: lighter;
+          width: 100%;
+
+          .q-number {
+            @include span(1);
+            color: $a1-color-3;
+            position: relative;
+
+            &::after {
+              background: url('/built/img/flechaNueva.svg') center center no-repeat;
+              background-size: 1em;
+              bottom: 0;
+              content: '';
+              height: 1em;
+              margin: auto 0;
+              position: absolute;
+              right: 0;
+              top: 0;
+              width: 1em;
+            }
+          }
+
+          .q-text {
+            @include span(7);
+          }
+        }
+
+        .q-desc {
+          @include span(7);
+          color: $a1-color-4;
+          font-size: .7rem;
+          font-weight: 700;
+          letter-spacing: .9px;
+          margin-bottom: gutter(8);
+          margin-left: span(1) + gutter(8);
+          margin-top: gutter(12);
+        }
+
+        .qr-answer {
+          margin-left: span(1) + gutter(8);
+          margin-top: gutter(8);
+
+          .qr-label {
+            font-size: 1.1rem;
+            vertical-align: middle;
+
+            input {
+              &[type='radio'] {
+                cursor: pointer;
+                margin: 0 0 0 1rem;
+                position: relative;
+                visibility: hidden;
+
+                &::before {
+                  @include border-radius(10px);
+                  background-color: $a1-color-7;
+                  border-color: $a1-color-3;
+                  // border-radius: 1em;
+                  border-style: solid;
+                  content: ' ';
+                  cursor: pointer;
+                  display: inline-block;
+                  height: 1.3em;
+                  left: -1em;
+                  position: absolute;
+                  top: 0 - .25em;
+                  visibility: visible;
+                  width: 1.3em;
+                }
+
+                &:checked {
+                  &::before {
+                    background-color: $a1-color-3;
+                    color: $a1-color-7;
+                    content: ' ';
+                    display: inline-block;
+                    height: 1.3em;
+                    text-align: center;
+                    vertical-align: middle;
+                    width: 1.3em;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .qp-answer {
+          background-color: $a1-color-7;
+          cursor: move;
+          font-size: 1.1rem;
+          font-weight: lighter;
+          margin-left: span(1);
+          padding: gutter(12) gutter(8);
+        }
+
+        .qp-icon {
+          @include font-smoothing;
+          color: $a1-color-3;
+          font: normal normal normal 1.2rem/1 'FontAwesome';
+          margin-right: 10px;
+
+          &::before {
+            content: '\f0c9';
+          }
+        }
+
+      }
+    }
+  }
+}
+
+.boton-ingles {
+  visibility: hidden;
+}

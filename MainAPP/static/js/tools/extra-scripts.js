@@ -1,15 +1,20 @@
 var startTime = new Date().getTime();
 
-function countTime(){
+function countTime() {
   var currentTime = new Date().getTime();
   var time = currentTime - startTime;
-  return time/(60*60);
+  return time / (60 * 60);
 }
 
-function submission(){
+function submission() {
   time = countTime();
-  document.getElementById("timer").value = time;
+  document.getElementById('timer').value = time;
 }
+
+module.exports = {
+  countTime: countTime,
+  submission: submission,
+};
 
 // function getTotalQuestions(){
 //   questions = document.getElementsByClassName("questionRow");
@@ -57,13 +62,13 @@ function submission(){
 //   startTime = new Date().getTime();
 
 //   changeProgress();
-  
+
 //   var observer = new MutationObserver(function(mutations) {
 //       mutations.forEach(function(mutationRecord) {
-          
+
 //          var q = changeProgress();
 //           console.log('scrolled');
-//       });    
+//       });
 //   });
 
 //   var target = document.getElementById('fullpage');
@@ -78,13 +83,13 @@ function submission(){
 //             startTime = new Date().getTime();
 
 //             changeProgress();
-            
+
 //             var observer = new MutationObserver(function(mutations) {
 //                 mutations.forEach(function(mutationRecord) {
-                    
+
 //                    var q = changeProgress();
 //                     console.log('scrolled');
-//                 });    
+//                 });
 //             });
 
 //             var target = document.getElementById('fullpage');
@@ -106,9 +111,9 @@ function submission(){
 //    if(checkKeyboard(e))
 //    {
 //     alert(checkKeyboard);
-//     alert(e.keyCode); 
+//     alert(e.keyCode);
 //    }
-   
+
 // });
 
 
