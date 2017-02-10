@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/letops/A1-136.git"
+    "url": "git+https://github.com/grvty-labs/A1-136.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/letops/A1-136/issues"
+    "url": "https://github.com/grvty-labs/A1-136/issues"
   },
-  "homepage": "https://github.com/letops/A1-136#readme",
+  "homepage": "https://github.com/grvty-labs/A1-136#readme",
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
     "babel-core": "^6.16.0",
